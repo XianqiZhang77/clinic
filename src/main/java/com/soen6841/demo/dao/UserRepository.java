@@ -10,8 +10,8 @@ public interface UserRepository extends CrudRepository<User,String> {
     @Override
     Iterable<User> findAll();
     
-    User findOneByUserName(String userName);
+    User findOneByUserID(String userID);
     
-    boolean existsByUserName(String userName);
+    boolean existsByUserID(String userID);
 
 }

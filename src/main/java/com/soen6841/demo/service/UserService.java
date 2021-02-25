@@ -16,20 +16,20 @@ public class UserService {
     }
 
     public User createUser(User user) {
-    	if(userRepository.existsByUserName(user.getUserName())) {
+    	if(userRepository.existsByUserID(user.getUserID())) {
     		return new User();
     	}
         return userRepository.save(user);
     }
     
-    public User login(User user) {
-    	if(userRepository.existsByUserName(user.getUserName())) {
-    		User get = userRepository.findOneByUserName(user.getUserName());
-    		if(get.getPassword().equals(user.getPassword())) {
-    			return get;
+    public boolean login(User user) {
+    	if(userRepository.existsByUserID(user.getUserID())) {
+    		User login = userRepository.findOneByUserID(user.getUserID());
+    		if(login.getPassword().equals(user.getPassword())) {
+    			return true;
     		}
     	}
-        return new User();
+        return false;
     }
     
     

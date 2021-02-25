@@ -6,19 +6,21 @@ import javax.persistence.*;
 public class User {
 
 	@Id
-    @Column(name = "userName")
-    private String userName;
+    @Column(name = "userID")
+    private String userID;
     @Column(name = "password")
     private String password;
     @Column(name = "userType")
     private String userType;
+    @Column(name = "registerStatus")
+    private int registerStatus;
 
-    public String getUserName() {
-        return userName;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getPassword() {
@@ -36,5 +38,12 @@ public class User {
     public void setUserType(String userType) {
         this.userType = userType;
     }
+    
+    public int getRegisterStatus() {
+        return registerStatus;
+    }
 
+    public void setRegisterStatus(int registerStatus) {
+        this.registerStatus = registerStatus;
+    }
 }

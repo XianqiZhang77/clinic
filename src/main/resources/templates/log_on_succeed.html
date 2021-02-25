@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+
+    <title>Successfully Register</title>
+
+    <style type="text/css">
+        body {
+            background: url("pictures/main_1.jpg") no-repeat;
+            background-size: 100%;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+
+        .container {
+            margin-top: 150px;
+            width: 600px;
+            height: 330px;
+            background-color: rgba(255, 255, 255, 0.5);
+
+        }
+
+        img{
+            width: 200px;
+            height: 180px;
+            margin-top: 70px;
+        }
+
+        #timer{
+          margin-top: 300px;
+        }
+
+        #turn{
+            margin-left: 205px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var time = 4;
+        function Redirect() {
+            window.location = "log_in_page.html";
+        }
+        var i = 0;
+        function dis() {
+            document.all.timer.innerHTML = "After " + (time - i) + " seconds, it will turn to log in page.";
+            i++;
+        }
+        timer = setInterval('dis()', 1000);
+        timer = setTimeout('Redirect()', time * 1000);
+    </script>
+
+</head>
+<body>
+
+<div class="container" >
+
+    <img src="pictures/success.png">
+
+    <span id="timer">After 5 seconds, it will turn to log in page.
+
+    </span>
+
+
+    <span id="turn">
+    <a href="log_in_page.html"> Turn to the log in page right now </a>
+</span>
+
+
+
+</div>
+
+</body>
+</html>
