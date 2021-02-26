@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+    <title>Register Successfully</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../static/pictures/favicon.ico" type="image/x-icon"/>
 
     <title>Successfully Register</title>
 
     <style type="text/css">
         body {
-            background: url("pictures/main_1.jpg") no-repeat;
+            background: url("../static/pictures/main_1.jpg") no-repeat;
             background-size: 100%;
             font-size: 18px;
             margin-top: 20px;
@@ -29,22 +29,29 @@
         img{
             width: 200px;
             height: 180px;
-            margin-top: 70px;
+            margin-top: 20px;
         }
 
         #timer{
-          margin-top: 300px;
+            margin-top: 300px;
         }
 
         #turn{
             margin-left: 205px;
         }
+
+        #claim{
+            margin-top: 30px;
+            margin-left: 10px;
+            color: black;
+            font-style: italic;
+        }
     </style>
 
     <script type="text/javascript">
-        var time = 4;
+        var time = 10;
         function Redirect() {
-            window.location = "log_in_page.html";
+            window.location = "index.html";
         }
         var i = 0;
         function dis() {
@@ -59,16 +66,17 @@
 <body>
 
 <div class="container" >
+<div id="claim">
+    <span  >Your information was submitted, please waiting for the result of check. </span>
+</div>
+    <img src="../static/pictures/success.png">
 
-    <img src="pictures/success.png">
+    <span id="timer">After 10 seconds, it will turn to log in page.</span>
 
-    <span id="timer">After 5 seconds, it will turn to log in page.
-
-    </span>
 
 
     <span id="turn">
-    <a href="log_in_page.html"> Turn to the log in page right now </a>
+    <a href="index.html"> Turn to the log in page right now </a>
 </span>
 
 
