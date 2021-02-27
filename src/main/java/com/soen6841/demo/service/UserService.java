@@ -14,12 +14,20 @@ public class UserService {
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
-
-    public User createUser(User user) {
+    
+    public boolean checkExsit(User user) {
     	if(userRepository.existsByUserID(user.getUserID())) {
-    		return new User();
+    		return true;
     	}
-        return userRepository.save(user);
+    	return false;
+    }
+
+    public boolean createAccount(User user) {
+    	if(userRepository.existsByUserID(user.getUserID())) {
+    		return false;
+    	}
+    	userRepository.save(user);
+        return true;
     }
     
     public boolean login(User user) {
@@ -32,5 +40,34 @@ public class UserService {
         return false;
     }
     
+    public String getJumpPage(User user) {
+    	User check = userRepository.findOneByUserID(user.getUserID());
+    	
+    	switch(check.getRegisterStatus()) {
+    		case 0:
+    			return "type";
+    		case 1:
+    			return "type";
+    		case 2:
+    			break;
+    		case 3:
+    			break;
+    		default:
+    			return "type";
+    	}
+    	
+    	switch(check.getUserType()) {
+    	  case "manager":
+    		  return "manager";
+    	  case "doctor":
+    		  return "doctor";
+    	  case "nurse":
+    		  return "nurse";
+    	  case "patient":
+    		  return "patient";
+    	  default:
+    		  return "type";
+    	}
+    }   
     
 }
