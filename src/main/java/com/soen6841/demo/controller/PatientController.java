@@ -1,15 +1,17 @@
 package com.soen6841.demo.controller;
 
 import com.soen6841.demo.domain.Patient;
+import com.soen6841.demo.domain.Status;
 import com.soen6841.demo.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 
-@RestController
-@RequestMapping("/example")
+
+@Controller
 public class PatientController {
 
     @Autowired
@@ -20,9 +22,20 @@ public class PatientController {
         return patientService.getAllPatients();
     }
 
-    @PostMapping("")
-    public ResponseEntity<Patient> createNewProject(@RequestBody Patient patient) {
-        Patient patient_1 = patientService.savePatient(patient);
-        return new ResponseEntity<Patient>(patient_1, HttpStatus.CREATED);
+    @PostMapping("/patient/registration")
+    public String patientRegister(Patient patient, Model model, HttpSession httpSession) {
+        if (patient == null) {
+            model.addAttribute("wrongInfo", "register fails");
+            return "patient_register";
+        }
+        patient.setRegisterStatus(Status.wating);
+        patient.setUserID((String) httpSession.getAttribute("userID"));
+        patientService.savePatient(patient);
+        return "redirect:/index";
+    }
+    @RequestMapping("/allpp")
+    @ResponseBody
+    public Iterable<Patient> test() {
+        return patientService.getAllPatients();
     }
 }

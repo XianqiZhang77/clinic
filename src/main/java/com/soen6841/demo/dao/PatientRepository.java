@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface PatientRepository extends CrudRepository<Patient,Long> {
     @Override
     Iterable<Patient> findAll();
+
+    Patient findOneById(Long id);
+
 }

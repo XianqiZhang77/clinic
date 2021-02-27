@@ -1,12 +1,13 @@
 package com.soen6841.demo.domain;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Patient {
+public class Nurse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,19 +23,19 @@ public class Patient {
     @Column(name = "phoneNumber")
     private String phoneNumber;
     @Column(name = "birthDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "YYYY-MM-dd")
     private Date birthDate;
+    @Column(name = "nurseNumber")
+    private String nurseNumber;
     @Column(name = "registerStatus")
     private Status registerStatus;
 
-    public Patient(Long id, String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus) {
-        this.id = id;
-        this.userID = userID;
-        this.fullName = fullName;
-        this.email = email;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
+
+    public Status getRegisterStatus() {
+        return registerStatus;
+    }
+
+    public void setRegisterStatus(Status registerStatus) {
         this.registerStatus = registerStatus;
     }
 
@@ -46,11 +47,19 @@ public class Patient {
         this.userID = userID;
     }
 
-    public Status getRegisterStatus() {
-        return registerStatus;
+
+    public Nurse() {
     }
 
-    public void setRegisterStatus(Status registerStatus) {
+    public Nurse(Long id, String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String nurseNumber, Status registerStatus) {
+        this.id = id;
+        this.userID = userID;
+        this.fullName = fullName;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.nurseNumber = nurseNumber;
         this.registerStatus = registerStatus;
     }
 
@@ -102,6 +111,11 @@ public class Patient {
         this.birthDate = birthDate;
     }
 
-    public Patient() {
+    public String getNurseNumber() {
+        return nurseNumber;
+    }
+
+    public void setNurseNumber(String nurseNumber) {
+        this.nurseNumber = nurseNumber;
     }
 }
