@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/patient")
+@RequestMapping("/example")
 public class PatientController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class PatientController {
 
     @PostMapping("")
     public ResponseEntity<Patient> createNewProject(@RequestBody Patient patient) {
-        Patient patient1 = patientService.savePatient(patient);
-        return new ResponseEntity<Patient>(patient, HttpStatus.CREATED);
+        Patient patient_1 = patientService.savePatient(patient);
+        return new ResponseEntity<Patient>(patient_1, HttpStatus.CREATED);
     }
 }

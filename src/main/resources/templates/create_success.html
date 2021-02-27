@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Successfully</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+
+    <title>Your account was successfully created</title>
+
+    <style type="text/css">
+        body {
+            background: url("pictures/main_1.jpg") no-repeat;
+            background-size: 100%;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+
+        .container {
+            margin-top: 150px;
+            width: 600px;
+            height: 330px;
+            background-color: rgba(255, 255, 255, 0.5);
+
+        }
+
+        img{
+            width: 200px;
+            height: 180px;
+            margin-top: 0px;
+        }
+
+        #timer{
+            margin-top: 300px;
+        }
+
+        #turn{
+            margin-left: 205px;
+        }
+
+        #claim{
+            margin-top: 30px;
+            color: black;
+            margin-left: 250px;
+            font-size: 25px;
+            font-style: italic;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var time = 8;
+        function Redirect() {
+            window.location = "type";
+        }
+        var i = 0;
+        function dis() {
+            document.all.timer.innerHTML = "After " + (time - i) + " seconds, it will turn to log in page.";
+            i++;
+        }
+        timer = setInterval('dis()', 1000);
+        timer = setTimeout('Redirect()', time * 1000);
+    </script>
+
+</head>
+<body>
+
+<div class="container" >
+    <div id="claim">
+        <span>Create Successfully!</span>
+    </div>
+    <img src="pictures/success.png">
+
+    <span id="timer">After 10 seconds, you will turn to register page.</span>
+
+
+
+    <span id="turn">
+    <a href="type"> Turn to the register page right now </a>
+</span>
+
+
+
+</div>
+
+</body>
+</html>

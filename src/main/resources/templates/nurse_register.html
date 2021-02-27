@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+
+    <style type="text/css">
+
+        body{
+            background: url("pictures/main_3.jpg" ) no-repeat ;
+            background-size: 100%;
+        }
+        #logo{
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #title{
+            font-size: 20px;
+            color: #122b40;
+        }
+
+        .container{
+            margin-top: 50px;
+            width: 800px;
+            height: 606px;
+            background-color: rgba(255,255,255,0.5);
+
+        }
+
+        #heading {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            text-align: left;
+            font-style: normal;
+
+        }
+
+        .col-xs-12 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            height: 40px;
+            width: 90px;
+            margin-top: 10px;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+    </style>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<div class="container-fluid">
+    <img id="logo" src="pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+</div>
+
+<div class="container" >
+
+    <div class="login-title text-center">
+        <h1 id="heading"><small>Register</small></h1>
+    </div>
+
+    <div class="col-xs-12  ">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Full Name">
+        </div>
+    </div>
+
+    <div class="col-xs-12  ">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            <input type="text" id="birthday" name="birthday" class="form-control" placeholder="Date of Birth (yyyy-mm-dd : eg.1996-03-26)">
+        </div>
+    </div>
+
+    <div class="col-xs-12  ">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+            <input type="text" id="address" name="address" class="form-control" placeholder="Home Address">
+        </div>
+    </div>
+
+    <div class="col-xs-12  ">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
+            <input type="text" id="eMail" name="eMail" class="form-control" placeholder="E-mail">
+        </div>
+    </div>
+
+    <div class="col-xs-12  ">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone Number">
+        </div>
+    </div>
+
+
+    <div class="col-xs-12  ">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-file"></span></span>
+            <input type="text" id="nurseNumber" name="nurseNumber" class="form-control" placeholder="Nurse Number">
+        </div>
+    </div>
+
+    <div class="form-group form-actions">
+        <div class="col-xs-4 col-xs-offset-4 ">
+            <button id="back" type="button" class="btn  btn-info" onClick="">
+                Back
+            </button>
+
+            <button id="info" type="submit" class="btn  btn-info">
+                Submit
+            </button>
+        </div>
+    </div>
+
+
+
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#back').click(function(){
+            window.location.href="type";
+        });
+    });
+</script>
+
+</body>
+</html>

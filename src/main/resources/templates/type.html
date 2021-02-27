@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+
+    <style type="text/css">
+
+        body{
+            background: url("pictures/main_3.jpg" ) no-repeat ;
+            background-size: 100%;
+        }
+        #logo{
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #title{
+            font-size: 20px;
+            color: #122b40;
+        }
+
+        .container{
+            margin-top: 150px;
+            width: 800px;
+            height: 360px;
+            background-color: rgba(255,255,255,0.5);
+
+        }
+
+        #heading {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            text-align: left;
+            font-style: normal;
+
+        }
+
+        .col-xs-12 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            height: 40px;
+            width: 90px;
+            margin-top: 20px;
+            margin-left: 220px;
+            font-size: 14px;
+        }
+
+        .logo{
+            height: 100px;
+            width: 100px;
+            margin-left: 110px;
+            margin-top: 20px;
+        }
+        .input-group{
+            margin-left: 120px;
+            margin-top: 20px;
+        }
+        #nurse{
+            margin-left: 145px;
+        }
+        #doctor{
+            margin-left: 153px;
+        }
+        #back{
+            margin-left: 130px;
+        }
+
+    </style>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<div class="container-fluid">
+    <img id="logo" src="pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+</div>
+
+<div class="container" >
+
+    <div class="login-title text-center">
+        <h1 id="heading"><small>Please choose your account type:</small></h1>
+    </div>
+
+<div>
+    <img class="logo" src="pictures/patient_logo.png">
+    <img class="logo" src="pictures/nurse_logo.png">
+    <img class="logo" src="pictures/doctor_logo.png">
+</div>
+    <div class="col-xs-12  ">
+        <div class="input-group">
+            <form>
+                <input id="patient" type="radio" name="type" value="1"> Patient
+
+                <input id="nurse" type="radio" name="type" value="2"> Nurse
+
+                <input id="doctor" type="radio" name="type" value="3"> Doctor
+            </form>
+        </div>
+    </div>
+
+
+
+<!--    <div class="form-group form-actions">
+        <div class="col-xs-4  ">-->
+            <button id="info" type="submit" class="btn  btn-info" onclick="fun()">
+                Submit
+            </button>
+
+            <button id="back" type="button" class="btn  btn-info" >
+                Back
+            </button>
+<!--
+        </div>
+    </div>
+-->
+
+
+
+
+</div>
+
+
+<script>
+
+    $(document).ready(function(){
+        $('#back').click(function(){
+            window.location.href="index";
+        });
+    });
+
+
+    function fun() {
+        var a = $('input:radio:checked').val();
+        if (a == 1) {
+            location.href = 'patient_register';
+        }
+        if (a == 2) {
+            location.href = 'nurse_register';
+        }
+        if (a == 3) {
+            location.href = 'doctor_register';
+        }
+
+    }
+    </script>
+
+</body>
+</html>
