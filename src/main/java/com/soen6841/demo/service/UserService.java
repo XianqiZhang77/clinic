@@ -1,15 +1,32 @@
 package com.soen6841.demo.service;
 
+import com.soen6841.demo.dao.DoctorRepository;
+import com.soen6841.demo.dao.NurseRepository;
+import com.soen6841.demo.dao.PatientRepository;
 import com.soen6841.demo.dao.UserRepository;
+import com.soen6841.demo.domain.Doctor;
+import com.soen6841.demo.domain.Nurse;
+import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.User;
+import com.soen6841.demo.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    NurseRepository nurseRepository;
+    
+    @Autowired
+    DoctorRepository doctorRepository;
+    
+    @Autowired
+    PatientRepository patientRepository;
 
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
@@ -20,6 +37,14 @@ public class UserService {
     		return true;
     	}
     	return false;
+    }
+    
+    public User getUserByUserID(String userID) {
+    	return userRepository.findOneByUserID(userID);
+    }
+    
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
     public boolean createAccount(User user) {
@@ -40,34 +65,84 @@ public class UserService {
         return false;
     }
     
-    public String getJumpPage(User user) {
+    public String getJumpPage(User user, Model model) {
     	User check = userRepository.findOneByUserID(user.getUserID());
-    	
-    	switch(check.getRegisterStatus()) {
-    		case 0:
-    			return "type";
-    		case 1:
-    			return "type";
-    		case 2:
-    			break;
-    		case 3:
-    			break;
-    		default:
-    			return "type";
+    	String type = check.getUserType();
+    	if(type == null) {
+    		return "type";
     	}
     	
     	switch(check.getUserType()) {
     	  case "manager":
     		  return "manager";
-    	  case "doctor":
-    		  return "doctor";
+    		  
+    	  case "doctor":	  
+    		  return doctorHandler(check, model);
+    		  
     	  case "nurse":
-    		  return "nurse";
+    		  return nurseHandler(check, model);
+    		  
     	  case "patient":
-    		  return "patient";
+    		  return patientHandler(check, model);
+    		  
     	  default:
     		  return "type";
     	}
-    }   
+    }
+    
+    public String doctorHandler(User user, Model model) {
+    	Doctor doctor = doctorRepository.findOneById(user.getRegisterID());
+    	Status status = doctor.getRegisterStatus();
+    	if(status == Status.accepted) {
+    		return "doctor";
+    	}else if(status == Status.wating) {
+    		model.addAttribute("msg", "Your register is pending, please wait.");
+    		return "index";
+    	}else if(status == Status.rejected) {
+    		user.setUserType(null);
+    		user.setRegisterID(null);
+    		userRepository.save(user);
+    		model.addAttribute("msg", "Your register was rejected, please register again.");
+    		return "type";
+    	}
+    	return "type";
+    }
+    
+    public String nurseHandler(User user, Model model) {
+    	Nurse nurse = nurseRepository.findOneById(user.getRegisterID());
+    	System.out.print(nurse.getFullName());
+    	Status status = nurse.getRegisterStatus();
+    	if(status == Status.accepted) {
+    		return "nurse";
+    	}else if(status == Status.wating) {
+    		model.addAttribute("msg", "Your register is pending, please wait.");
+    		return "index";
+    	}else if(status == Status.rejected) {
+    		user.setUserType(null);
+    		user.setRegisterID(null);
+    		userRepository.save(user);
+    		model.addAttribute("msg", "Your register was rejected, please register again.");
+    		return "type";
+    	}
+    	return "type";
+    }  
+    
+    public String patientHandler(User user, Model model) {
+    	Patient patient = patientRepository.findOneById(user.getRegisterID());
+    	Status status = patient.getRegisterStatus();
+    	if(status == Status.accepted) {
+    		return "patient";
+    	}else if(status == Status.wating) {
+    		model.addAttribute("msg", "Your register is pending, please wait.");
+    		return "index";
+    	}else if(status == Status.rejected) {
+    		user.setUserType(null);
+    		user.setRegisterID(null);
+    		userRepository.save(user);
+    		model.addAttribute("msg", "Your register was rejected, please register again.");
+    		return "type";
+    	}
+    	return "type";
+    }  
     
 }

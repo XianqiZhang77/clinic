@@ -11,6 +11,8 @@ public interface DoctorRepository extends CrudRepository<Doctor, Long> {
     Iterable<Doctor> findAll();
 
     Doctor findOneById(Long id);
+    
+    Doctor findOneByUserID(String userID);
 
     Iterable<Doctor> findDoctorByRegisterStatus(Status registerStatus);
 

@@ -12,5 +12,7 @@ public interface NurseRepository extends CrudRepository<Nurse, Long> {
 
     Iterable<Nurse> findNurseByRegisterStatus(Status registerStatus);
 
-    Nurse findOneById(Long valueOf);
+    Nurse findOneById(Long id);
+    
+    Nurse findOneByUserID(String userID);
 }

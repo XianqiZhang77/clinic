@@ -3,6 +3,7 @@ package com.soen6841.demo.service;
 import com.soen6841.demo.dao.DoctorRepository;
 import com.soen6841.demo.dao.NurseRepository;
 import com.soen6841.demo.dao.PatientRepository;
+import com.soen6841.demo.dao.UserRepository;
 import com.soen6841.demo.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class ManagerService {
 
     @Autowired
     private PatientRepository patientRepository;
+    
 
     public Iterable<Doctor> getDoctorByRegisterStatus(Status registerStatus) {
         return doctorRepository.findDoctorByRegisterStatus(registerStatus);

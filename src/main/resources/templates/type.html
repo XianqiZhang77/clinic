@@ -91,6 +91,7 @@
 
     <div class="login-title text-center">
         <h1 id="heading"><small>Please choose your account type:</small></h1>
+        <p th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
     </div>
 
 <div>
@@ -114,12 +115,13 @@
 
 <!--    <div class="form-group form-actions">
         <div class="col-xs-4  ">-->
-            <button id="info" type="submit" class="btn  btn-info" onclick="fun()">
-                Submit
-            </button>
 
             <button id="back" type="button" class="btn  btn-info" >
                 Back
+            </button>
+
+            <button id="info" type="submit" class="btn  btn-info" onclick="fun()">
+                Submit
             </button>
 <!--
         </div>

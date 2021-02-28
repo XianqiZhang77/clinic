@@ -21,13 +21,20 @@ public class UserController {
      */
     @RequestMapping("/create_account_submit")
     public String signUpSubmit(User user, Model model, HttpSession httpSession) {
+        if(user.getUserID().length() < 1 || user.getPassword().length() < 1) {
+        	model.addAttribute("msg", "User ID and password can't be empty.");
+        	return "create_account";
+        }
+        
         if(userService.createAccount(user)) {
             httpSession.setAttribute("userID", user.getUserID());
             return "create_success";
         }
+        
         model.addAttribute("msg", "This User ID already exsit.");
         return "create_account";
     }
+    
     /*
      * 
      */
@@ -36,7 +43,7 @@ public class UserController {
         if(userService.checkExsit(user)) {
             if(userService.login(user)) {
                 httpSession.setAttribute("userID", user.getUserID());
-                return userService.getJumpPage(user);
+                return userService.getJumpPage(user, model);
             }
             model.addAttribute("msg", "Incorrect ID or password. Please try again.");
             return "index";

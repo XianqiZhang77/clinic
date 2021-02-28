@@ -5,15 +5,22 @@ import javax.persistence.*;
 @Entity
 public class User {
 
-	@Id
+    @Id
     @Column(name = "userID")
     private String userID;
     @Column(name = "password")
     private String password;
     @Column(name = "userType")
     private String userType;
-    @Column(name = "registerStatus")
-    private int registerStatus;
+    @Column(name = "register_id")
+    private Long register_id;
+    
+    public User(String userID, String password, String userType, Long registerID) {
+        this.userID = userID;
+        this.password = password;
+        this.userType = userType;
+        this.register_id = registerID;
+    }
 
     public String getUserID() {
         return userID;
@@ -39,11 +46,15 @@ public class User {
         this.userType = userType;
     }
     
-    public int getRegisterStatus() {
-        return registerStatus;
+    public Long getRegisterID() {
+        return register_id;
     }
-
-    public void setRegisterStatus(int registerStatus) {
-        this.registerStatus = registerStatus;
+    
+    public void setRegisterID(Long registerID) {
+        this.register_id = registerID;
     }
+    
+    public User() {
+    }
+    
 }

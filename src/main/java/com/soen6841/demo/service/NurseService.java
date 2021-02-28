@@ -18,5 +18,12 @@ public class NurseService {
     public Nurse saveNurse(Nurse nurse) {
         return nurseRepository.save(nurse);
     }
+    
+    public Nurse getNurseById(Long id) {
+        return nurseRepository.findOneById(id);
+    }
 
+    public Nurse getNurseByUserID(String userID) {
+        return nurseRepository.findOneByUserID(userID);
+    }
 }
