@@ -27,8 +27,7 @@ public class Patient {
     @Column(name = "registerStatus")
     private Status registerStatus;
 
-    public Patient(Long id, String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus) {
-        this.id = id;
+    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;

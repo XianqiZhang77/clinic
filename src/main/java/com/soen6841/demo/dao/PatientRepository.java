@@ -1,6 +1,7 @@
 package com.soen6841.demo.dao;
 
 import com.soen6841.demo.domain.Patient;
+import com.soen6841.demo.domain.Status;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +12,5 @@ public interface PatientRepository extends CrudRepository<Patient,Long> {
 
     Patient findOneById(Long id);
 
+    Iterable<Patient> findPatientByRegisterStatus(Status registerStatus);
 }

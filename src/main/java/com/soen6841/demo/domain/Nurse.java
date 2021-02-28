@@ -51,8 +51,7 @@ public class Nurse {
     public Nurse() {
     }
 
-    public Nurse(Long id, String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String nurseNumber, Status registerStatus) {
-        this.id = id;
+    public Nurse(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String nurseNumber, Status registerStatus) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;
