@@ -56,8 +56,18 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         List<User> userList = new ArrayList<>();
         User manager = new User("admin","admin","manager",null);
         userList.add(manager);
+        User doctor1 = new User("Bob","Bob","doctor", (long) 1);
+        userList.add(doctor1);
+        User doctor2 = new User("Mike","Mike","doctor", (long) 2);
+        userList.add(doctor2);
+        User doctor3 = new User("Lucy","Lucy","doctor", (long) 3);
+        userList.add(doctor3);
         User nurse1 = new User("Linda","Linda","nurse", (long) 1);
         userList.add(nurse1);
+        User nurse2 = new User("Bill","Bill","nurse", (long) 2);
+        userList.add(nurse2);
+        User patient1 = new User("Will","Will","patient", (long) 1);
+        userList.add(patient1);
         return userList;
     }
 
