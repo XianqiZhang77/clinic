@@ -8,6 +8,8 @@
     <link rel="shortcut icon" href="../static/pictures/favicon.ico" type="image/x-icon"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/com.css"/>
     <title>Nurses</title>
 
     <style>
@@ -71,17 +73,26 @@
             <table id="doctor_table">
                 <thead>
                 <tr>
-                    <th width="80px">Name</th>
+                    <th width="80px">User ID</th>
                     <th width="100px">Full name</th>
+                    <th width="100px">Email</th>
                     <th width="100px">Address</th>
-                    <th width="100px">Date of birth</th>
                     <th width="120px">Phone number</th>
-                    <th width="100px">E-mail</th>
-                    <th width="100px">Password</th>
-                    <th width="100px">User Type</th>
-                    <th width="100px">User Status</th>
+                    <th width="100px">Date of birth</th>
                     <th width="100px">Doctor Number</th>
+                    <th width="100px">Approve</th>
                     <th width="100px">Delete</th>
+                </tr>
+                <tr th:each="doctor:${doctors}">
+                    <td th:text="${doctor.userID}">User ID</td>
+                    <td th:text="${doctor.fullName}">Full Name</td>
+                    <td th:text="${doctor.email}">Email</td>
+                    <td th:text="${doctor.address}">Address</td>
+                    <td th:text="${doctor.phoneNumber}">Phone Number</td>
+                    <td th:text="${doctor.birthDate}">Birth Date</td>
+                    <td th:text="${doctor.doctorNumber}">Doctor Number</td>
+                    <td><a th:href="@{'/approveDoctor/'+${doctor.id}}" >approve</a></td>
+                    <td><a th:href="@{'/rejectDoctor/'+${doctor.id}}" >reject</a></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -112,7 +123,10 @@
 </div>
 
 <!--Functions-->
+<script src="/js/jquery.slim.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
+
     window.onload = function () {
         $("btnAdd").onclick = function () {
 
@@ -177,6 +191,7 @@
     function $(id) {
         return document.getElementById(id);
     }
+
 </script>
 
 </body>

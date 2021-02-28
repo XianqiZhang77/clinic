@@ -7,10 +7,12 @@ import com.soen6841.demo.domain.Status;
 import com.soen6841.demo.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ManagerController {
@@ -40,7 +42,7 @@ public class ManagerController {
     }
 
 
-    @PostMapping("/approveDoctor/{doctorId}")
+    @RequestMapping("/approveDoctor/{doctorId}")
     public String approveDoctor(@PathVariable String doctorId, Model model){
         Doctor doctor = managerService.findDoctorById(doctorId);
         if(doctor==null){
@@ -53,7 +55,7 @@ public class ManagerController {
         return "manager_doctor";
     }
 
-    @PostMapping("/rejectDoctor/{doctorId}")
+    @RequestMapping("/rejectDoctor/{doctorId}")
     public String rejectDoctor(@PathVariable String doctorId, Model model){
         Doctor doctor = managerService.findDoctorById(doctorId);
         if(doctor==null){
@@ -66,7 +68,7 @@ public class ManagerController {
         return "manager_doctor";
     }
 
-    @PostMapping("/approveNurse/{nurseId}")
+    @RequestMapping("/approveNurse/{nurseId}")
     public String approveNurse(@PathVariable String nurseId, Model model){
         Nurse nurse = managerService.findNurseById(nurseId);
         if(nurse==null){
@@ -79,7 +81,7 @@ public class ManagerController {
         return "manager_nurse";
     }
 
-    @PostMapping("/rejectNurse/{nurseId}")
+    @RequestMapping("/rejectNurse/{nurseId}")
     public String rejectNurse(@PathVariable String nurseId, Model model){
         Nurse nurse = managerService.findNurseById(nurseId);
         if(nurse==null){
@@ -92,7 +94,7 @@ public class ManagerController {
         return "manager_nurse";
     }
 
-    @PostMapping("/approvePatient/{patientId}")
+    @RequestMapping("/approvePatient/{patientId}")
     public String approvePatient(@PathVariable String patientId, Model model){
         Patient patient = managerService.findPatientById(patientId);
         if(patient==null){
@@ -105,7 +107,7 @@ public class ManagerController {
         return "manager_patient";
     }
 
-    @PostMapping("/rejectPatient/{patientId}")
+    @RequestMapping("/rejectPatient/{patientId}")
     public String rejectPatient(@PathVariable String patientId, Model model){
         Patient patient = managerService.findPatientById(patientId);
         if(patient==null){
