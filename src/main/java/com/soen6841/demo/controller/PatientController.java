@@ -18,24 +18,17 @@ public class PatientController {
     private PatientService patientService;
 
     @GetMapping("/all")
+    @ResponseBody
     public Iterable<Patient> getAllProjects() {
         return patientService.getAllPatients();
     }
 
     @PostMapping("/patient/registration")
     public String patientRegister(Patient patient, Model model, HttpSession httpSession) {
-        if (patient == null) {
-            model.addAttribute("wrongInfo", "register fails");
-            return "patient_register";
-        }
         patient.setRegisterStatus(Status.wating);
         patient.setUserID((String) httpSession.getAttribute("userID"));
         patientService.savePatient(patient);
         return "redirect:/index";
     }
-    @RequestMapping("/allpp")
-    @ResponseBody
-    public Iterable<Patient> test() {
-        return patientService.getAllPatients();
-    }
+
 }

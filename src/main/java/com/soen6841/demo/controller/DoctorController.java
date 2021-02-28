@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.print.Doc;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -21,10 +20,6 @@ public class DoctorController {
 
     @PostMapping("/doctor/registration")
     public String doctorRegister(Doctor doctor, Model model, HttpSession httpSession) {
-        if (doctor == null) {
-            model.addAttribute("wrongInfo", "register fails");
-            return "doctor_register";
-        }
         doctor.setRegisterStatus(Status.wating);
         doctor.setUserID((String) httpSession.getAttribute("userID"));
         doctorService.saveDoctor(doctor);

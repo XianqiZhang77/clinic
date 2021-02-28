@@ -20,10 +20,7 @@ public class NurseController {
 
     @PostMapping("/nurse/registration")
     public String nurseRegister(Nurse nurse, Model model, HttpSession httpSession) {
-        if (nurse == null) {
-            model.addAttribute("wrongInfo", "register fails");
-            return "nurse_register";
-        }
+
         nurse.setRegisterStatus(Status.wating);
         nurse.setUserID((String) httpSession.getAttribute("userID"));
         nurseService.saveNurse(nurse);
