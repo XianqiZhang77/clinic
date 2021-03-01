@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/doctorStyles.css">
-    <link rel="shortcut icon" href="../static/pictures/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/doctorStyles.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/com.css"/>
-    <title>Nurses</title>
+    <title>Check Doctor Status</title>
 
     <style>
         body {
-            background: url("../static/pictures/manager.png") no-repeat;
+            background: url("pictures/manager.png") no-repeat;
             background-size: 100%;
         }
 
@@ -26,13 +24,12 @@
         #doctor_table {
             mso-cellspacing: 30px;
             border: 1px solid #ccc;
-
         }
 
-        #add_user {
-            margin-left: 1400px;
-            margin-top: -20px;
-        }
+        /*        #add_user {
+                    margin-left: 1400px;
+                    margin-top: -20px;
+                }*/
     </style>
 
 </head>
@@ -40,7 +37,7 @@
 
 <!--logo and name-->
 <div class="container-fluid">
-    <img id="logo" src="../static/pictures/logo.png">
+    <img id="logo" src="pictures/logo.png">
     <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
 </div>
 
@@ -70,18 +67,18 @@
 
         <!--Table-->
         <div id="container">
-            <table id="doctor_table">
+            <table id="doctor_table" style="text-align: center" border="1px">
                 <thead>
                 <tr>
-                    <th width="80px">User ID</th>
-                    <th width="100px">Full name</th>
-                    <th width="100px">Email</th>
-                    <th width="100px">Address</th>
-                    <th width="120px">Phone number</th>
-                    <th width="100px">Date of birth</th>
-                    <th width="100px">Doctor Number</th>
-                    <th width="100px">Approve</th>
-                    <th width="100px">Delete</th>
+                    <th width="120px" style="text-align: center">User ID</th>
+                    <th width="120px" style="text-align: center">Full name</th>
+                    <th width="200px" style="text-align: center">Email</th>
+                    <th width="300px" style="text-align: center">Address</th>
+                    <th width="120px" style="text-align: center">Phone number</th>
+                    <th width="100px" style="text-align: center">Date of birth</th>
+                    <th width="150px" style="text-align: center">Doctor Number</th>
+                    <th width="100px" style="text-align: center">Approve</th>
+                    <th width="100px" style="text-align: center">Delete</th>
                 </tr>
                 <tr th:each="doctor:${doctors}">
                     <td th:text="${doctor.userID}">User ID</td>
@@ -91,8 +88,8 @@
                     <td th:text="${doctor.phoneNumber}">Phone Number</td>
                     <td th:text="${doctor.birthDate}">Birth Date</td>
                     <td th:text="${doctor.doctorNumber}">Doctor Number</td>
-                    <td><a th:href="@{'/approveDoctor/'+${doctor.id}}" >approve</a></td>
-                    <td><a th:href="@{'/rejectDoctor/'+${doctor.id}}" >reject</a></td>
+                    <td><a th:href="@{'/approveDoctor/'+${doctor.id}}" >Approve</a></td>
+                    <td><a th:href="@{'/rejectDoctor/'+${doctor.id}}" >Reject</a></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -100,23 +97,23 @@
             </table>
         </div>
 
-        <!--Add a user-->
-        <div id="add_user">
-            <form action="" id="myfrm">
-                Name：<input type="text" id="name"> <br> <br>
-                Full name: <input type="text" id="full_name"> <br> <br>
-                Address: <input type="text" id="address"> <br> <br>
-                Birthday: <input type="text" id="date_of_birth"> <br> <br>
-                Phone Number: <input type="text" id="phone_number"> <br> <br>
-                E-mail: <input type="text" id="email"> <br> <br>
-                Password：<input type="text" id="password"> <br> <br>
-                User Type：<input type="radio" name="register_type" id="register_type" value="doctor" checked> Doctor
-                <br> <br>
-                User Status：<input type="text" id="register_status"> <br> <br>
-                Doctor Number: <input type="text" id="doctor_number"> <br> <br>
-                <input class="btn-info btn" type="button" value="Add" id="btnAdd">
-            </form>
-        </div>
+        <!--        &lt;!&ndash;Add a user&ndash;&gt;
+                <div id="add_user">
+                    <form action="" id="myfrm">
+                        Name：<input type="text" id="name"> <br> <br>
+                        Full name: <input type="text" id="full_name"> <br> <br>
+                        Address: <input type="text" id="address"> <br> <br>
+                        Birthday: <input type="text" id="date_of_birth"> <br> <br>
+                        Phone Number: <input type="text" id="phone_number"> <br> <br>
+                        E-mail: <input type="text" id="email"> <br> <br>
+                        Password：<input type="text" id="password"> <br> <br>
+                        User Type：<input type="radio" name="register_type" id="register_type" value="doctor" checked> Doctor
+                        <br> <br>
+                        User Status：<input type="text" id="register_status"> <br> <br>
+                        Doctor Number: <input type="text" id="doctor_number"> <br> <br>
+                        <input class="btn-info btn" type="button" value="Add" id="btnAdd">
+                    </form>
+                </div>-->
 
     </div>
 
@@ -125,6 +122,9 @@
 <!--Functions-->
 <script src="/js/jquery.slim.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
 
     window.onload = function () {

@@ -52,7 +52,7 @@ public class ManagerController {
         }
         Iterable<Doctor> doctors = managerService.getDoctorByRegisterStatus(Status.wating);
         model.addAttribute("doctors",doctors);
-        return "manager_doctor";
+        return "redirect:/getAllDoctorUnderReview";
     }
 
     @RequestMapping("/rejectDoctor/{doctorId}")
@@ -63,9 +63,7 @@ public class ManagerController {
         }else {
             managerService.rejectDoctor(doctor);
         }
-        Iterable<Doctor> doctors = managerService.getDoctorByRegisterStatus(Status.wating);
-        model.addAttribute("doctors",doctors);
-        return "manager_doctor";
+        return "redirect:/getAllDoctorUnderReview";
     }
 
     @RequestMapping("/approveNurse/{nurseId}")
@@ -76,9 +74,7 @@ public class ManagerController {
         }else {
             managerService.approveNurse(nurse);
         }
-        Iterable<Nurse> nurses =  managerService.getNurseByRegisterStatus(Status.wating);
-        model.addAttribute("nurses",nurses);
-        return "manager_nurse";
+        return "redirect:/getAllNurseUnderReview";
     }
 
     @RequestMapping("/rejectNurse/{nurseId}")
@@ -91,7 +87,7 @@ public class ManagerController {
         }
         Iterable<Nurse> nurses =  managerService.getNurseByRegisterStatus(Status.wating);
         model.addAttribute("nurses",nurses);
-        return "manager_nurse";
+        return "redirect:/getAllNurseUnderReview";
     }
 
     @RequestMapping("/approvePatient/{patientId}")
@@ -104,7 +100,7 @@ public class ManagerController {
         }
         Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.wating);
         model.addAttribute("patients",patients);
-        return "manager_patient";
+        return "redirect:/getAllPatientUnderReview";
     }
 
     @RequestMapping("/rejectPatient/{patientId}")
@@ -117,6 +113,6 @@ public class ManagerController {
         }
         Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.wating);
         model.addAttribute("patients",patients);
-        return "manager_patient";
+        return "redirect:/getAllPatientUnderReview";
     }
 }
