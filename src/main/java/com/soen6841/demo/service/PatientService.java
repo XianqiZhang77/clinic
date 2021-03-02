@@ -26,4 +26,15 @@ public class PatientService {
     public Patient getPatientByUserID(String userID) {
         return patientRepository.findOneByUserID(userID);
     }
+
+    public Patient saveQuestionAnswers(String patientId, String[] answer) {
+        if(patientRepository.existsByUserID(patientId)){
+            patientRepository.findOneByUserID(patientId).setAnswerOne(answer[0]);
+            patientRepository.findOneByUserID(patientId).setAnswerTwo(answer[1]);
+            patientRepository.findOneByUserID(patientId).setAnswerThree(answer[2]);
+            patientRepository.findOneByUserID(patientId).setAnswerFour(answer[3]);
+        }
+        return patientRepository.findOneByUserID(patientId);
+    }
+
 }

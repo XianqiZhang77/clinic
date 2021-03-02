@@ -131,7 +131,7 @@ public class UserService {
     	Patient patient = patientRepository.findOneById(user.getRegisterID());
     	Status status = patient.getRegisterStatus();
     	if(status == Status.accepted) {
-    		return "patient";
+    		return "enter_assessment";
     	}else if(status == Status.wating) {
     		model.addAttribute("msg", "Your register is pending, please wait.");
     		return "index";

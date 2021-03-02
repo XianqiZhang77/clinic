@@ -26,6 +26,14 @@ public class Patient {
     private Date birthDate;
     @Column(name = "registerStatus")
     private Status registerStatus;
+    @Column(name = "answerOne")
+    private String answerOne;
+    @Column(name = "answerTwo")
+    private String answerTwo;
+    @Column(name = "answerThree")
+    private String answerThree;
+    @Column(name = "answerFour")
+    private String answerFour;
 
     public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus) {
         this.userID = userID;
@@ -100,6 +108,22 @@ public class Patient {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
+
+    public String getAnswerOne() { return answerOne; }
+
+    public void setAnswerOne(String answerOne) { this.answerOne = answerOne; }
+
+    public String getAnswerTwo() { return answerTwo; }
+
+    public void setAnswerTwo(String answerTwo) { this.answerTwo = answerTwo; }
+
+    public String getAnswerThree() { return answerThree; }
+
+    public void setAnswerThree(String answerThree) { this.answerThree = answerThree; }
+
+    public String getAnswerFour() { return answerFour; }
+
+    public void setAnswerFour(String answerFour) { this.answerFour = answerFour; }
 
     public Patient() {
     }
