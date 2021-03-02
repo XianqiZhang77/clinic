@@ -46,10 +46,10 @@ public class PatientController {
         return "redirect:/index";
     }
 
-    @RequestMapping("/assessment")
+    @RequestMapping("/selfAssessment")
     public String selfAssessment( @RequestParam String params, HttpSession httpSession)  {
         String patientId = (String) httpSession.getAttribute("userID");
-        System.out.println((String) httpSession.getAttribute("userID"));
+
         JSONArray jsonArray = JSON.parseArray(params);
         String[] result = new String[jsonArray.size()];
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -59,7 +59,7 @@ public class PatientController {
         Patient p1 = patientService.saveQuestionAnswers(patientId,result);
         patientService.savePatient(p1);
 
-        return "enter_assessment";
+        return "redirect:/assessment";
     }
 
 }

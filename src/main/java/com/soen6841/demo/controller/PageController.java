@@ -99,7 +99,7 @@ public class PageController {
     }
 
 
-    @RequestMapping("/assessmentPage")
+    @RequestMapping("/assessment")
     public String assessmentPage() {
         return "assessment";
     }

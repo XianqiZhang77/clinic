@@ -422,15 +422,13 @@
         result.push(result_4[result_4.length-1]);
 
         $.ajax({
-            url: "/assessment",
+            url: "/selfAssessment",
             type:"POST",
             data:{params:JSON.stringify(result)},
-            success:function(resp){
-                alert(resp);
+            success:function(){
+                $(window).attr("location","assessment")
             }
         });
-
-        window.location.href="assessmentPage";
 
     });
 
