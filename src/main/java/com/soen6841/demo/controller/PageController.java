@@ -75,14 +75,6 @@ public class PageController {
     }
     
     /*
-     * 管理员用户登录后主页
-     */
-    @RequestMapping("/manager")
-    public String managerPage() {
-        return "manager";
-    }
-    
-    /*
      * 已批准为患者用户登录后主页
      */
     @RequestMapping("/patient")

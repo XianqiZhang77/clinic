@@ -51,16 +51,16 @@
             <nav class="navbar navbar-inverse" id="sidebar-wrapper" role="navigation">
                 <ul class="nav sidebar-nav">
                     <li>
-                        <a href="manager_patient.html"> Patients</a>
+                        <a href="/getAllPatientUnderReview"> Patients</a>
                     </li>
                     <li>
-                        <a href="manager_nurse.html" style="color: darkgray"> Nurses</a>
+                        <a href="/getAllNurseUnderReview" style="color: darkgray"> Nurses</a>
                     </li>
                     <li>
-                        <a href="manager_doctor.html"> Doctors</a>
+                        <a href="/getAllDoctorUnderReview"> Doctors</a>
                     </li>
                     <li>
-                        <a href="#"> Log out</a>
+                        <a href="index"> Log out</a>
                     </li>
                 </ul>
             </nav>
@@ -81,7 +81,7 @@
                     <th width="100px" style="text-align: center">Approve</th>
                     <th width="100px" style="text-align: center">Delete</th>
                 </tr>
-                <tr th:each="nurse:${doctors}">
+                <tr th:each="nurse:${nurses}">
                     <td th:text="${nurse.userID}">User ID</td>
                     <td th:text="${nurse.fullName}">Full Name</td>
                     <td th:text="${nurse.email}">Email</td>
