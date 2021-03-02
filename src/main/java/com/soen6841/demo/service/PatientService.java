@@ -18,4 +18,12 @@ public class PatientService {
     public Patient savePatient(Patient patient) {
         return patientRepository.save(patient);
     }
+
+    public Patient getPatientById(Long id) {
+        return patientRepository.findOneById(id);
+    }
+    
+    public Patient getPatientByUserID(String userID) {
+        return patientRepository.findOneByUserID(userID);
+    }
 }

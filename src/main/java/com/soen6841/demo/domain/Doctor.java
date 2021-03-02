@@ -6,8 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Patient {
-
+public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,18 +21,37 @@ public class Patient {
     @Column(name = "phoneNumber")
     private String phoneNumber;
     @Column(name = "birthDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "YYYY-MM-dd")
     private Date birthDate;
+    @Column(name = "doctorNumber")
+    private String doctorNumber;
     @Column(name = "registerStatus")
     private Status registerStatus;
 
-    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus) {
+    public Doctor(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String doctorNumber, Status registerStatus) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
+        this.doctorNumber = doctorNumber;
+        this.registerStatus = registerStatus;
+    }
+
+    public String getDoctorNumber() {
+        return doctorNumber;
+    }
+
+    public void setDoctorNumber(String doctorNumber) {
+        this.doctorNumber = doctorNumber;
+    }
+
+    public Status getRegisterStatus() {
+        return registerStatus;
+    }
+
+    public void setRegisterStatus(Status registerStatus) {
         this.registerStatus = registerStatus;
     }
 
@@ -45,13 +63,9 @@ public class Patient {
         this.userID = userID;
     }
 
-    public Status getRegisterStatus() {
-        return registerStatus;
+    public Doctor() {
     }
 
-    public void setRegisterStatus(Status registerStatus) {
-        this.registerStatus = registerStatus;
-    }
 
     public Long getId() {
         return id;
@@ -101,6 +115,4 @@ public class Patient {
         this.birthDate = birthDate;
     }
 
-    public Patient() {
-    }
 }
