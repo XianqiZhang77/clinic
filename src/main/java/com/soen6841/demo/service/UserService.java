@@ -74,7 +74,7 @@ public class UserService {
     	
     	switch(check.getUserType()) {
     	  case "manager":
-    		  return "manager";
+    		  return "manager_success";
     		  
     	  case "doctor":	  
     		  return doctorHandler(check, model);

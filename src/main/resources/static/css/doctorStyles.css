@@ -1,0 +1,46 @@
+body {
+    background: url("../pictures/doctor.png") no-repeat;
+    background-size: 100%;
+}
+
+#logo {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+}
+
+#title {
+    font-size: 20px;
+    color: #122b40;
+}
+
+.dashboard {
+    margin-top: 5%;
+    width: 90%;
+}
+
+#sidebar-wrapper {
+    font-family: 'Montserrat', sans-serif;
+    background: transparent;
+    font-size: 2.5rem;
+    border: 0px;
+}
+
+.patient-card {
+    background: #c4d6da;
+    border: 1px black;
+    margin: 0 3% 2% 3%;
+    height: 150px;
+    position: relative;
+
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.card-body {
+    margin-left: 3%;
+    font-family: 'Montserrat', sans-serif;
+}
