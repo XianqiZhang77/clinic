@@ -2,7 +2,6 @@ package com.soen6841.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
 import com.soen6841.demo.domain.User;
@@ -34,6 +33,7 @@ public class PatientController {
     @PostMapping("/patient/registration")
     public String patientRegister(Patient patient, Model model, HttpSession httpSession) {
         patient.setRegisterStatus(Status.wating);
+        patient.setAppointmentStatus(Status.unfinished);
         patient.setUserID((String) httpSession.getAttribute("userID"));
         patientService.savePatient(patient);
         

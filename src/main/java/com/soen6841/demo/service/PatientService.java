@@ -2,6 +2,8 @@ package com.soen6841.demo.service;
 
 import com.soen6841.demo.dao.PatientRepository;
 import com.soen6841.demo.domain.Patient;
+import com.soen6841.demo.domain.Status;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,7 @@ public class PatientService {
             patientRepository.findOneByUserID(patientId).setAnswerTwo(answer[1]);
             patientRepository.findOneByUserID(patientId).setAnswerThree(answer[2]);
             patientRepository.findOneByUserID(patientId).setAnswerFour(answer[3]);
+            patientRepository.findOneByUserID(patientId).setAppointmentStatus(Status.wating);
         }
         return patientRepository.findOneByUserID(patientId);
     }

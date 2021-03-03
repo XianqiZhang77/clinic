@@ -14,6 +14,8 @@ public interface PatientRepository extends CrudRepository<Patient,Long> {
 
     Iterable<Patient> findPatientByRegisterStatus(Status registerStatus);
     
+    Iterable<Patient> findPatientByAppointmentStatus(Status appointmentStatus);
+    
     Patient findOneByUserID(String userID);
 
     boolean existsByUserID(String userID);
