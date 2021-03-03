@@ -3,6 +3,8 @@ package com.soen6841.demo.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -24,6 +26,8 @@ public class Nurse {
     private String phoneNumber;
     @Column(name = "birthDate")
     @DateTimeFormat(pattern = "YYYY-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     @Column(name = "nurseNumber")
     private String nurseNumber;
