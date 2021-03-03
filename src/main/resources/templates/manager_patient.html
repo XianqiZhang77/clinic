@@ -86,7 +86,7 @@
                     <td th:text="${patient.email}">Email</td>
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
-                    <td th:text="${patient.birthDate}">Birth Date</td>
+                    <td th:text="${#strings.substring(patient.birthDate,0,10)}">Birth Date</td>
                     <td><a th:href="@{'/approvePatient/'+${patient.id}}" >Approve</a></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.id}}" >Reject</a></td>
                 </tr>
