@@ -93,7 +93,7 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
 
     private List<Patient> getPatientList(){
         List<Patient> patientList = new ArrayList<>();
-        Patient patient1 = new Patient("Will","Will","ww@gamil.com","WWD St,","19999",new Date(19999999), Status.wating);
+        Patient patient1 = new Patient("Will","Will","ww@gamil.com","WWD St,","19999",new Date(19999999), Status.wating, Status.unfinished);
         patientList.add(patient1);
         return patientList;
     }

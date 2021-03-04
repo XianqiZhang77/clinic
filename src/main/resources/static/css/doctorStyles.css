@@ -44,3 +44,15 @@ body {
     margin-left: 3%;
     font-family: 'Montserrat', sans-serif;
 }
+
+#container {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+#patient_table {
+    mso-cellspacing: 30px;
+    border: 1px solid #ccc;
+    margin-left: 50px;
+}
+

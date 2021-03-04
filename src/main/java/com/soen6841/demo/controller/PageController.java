@@ -95,7 +95,7 @@ public class PageController {
      */
     @RequestMapping("/nurse")
     public String nursePage() {
-        return "nurse";
+        return "nurse_profile";
     }
 
 

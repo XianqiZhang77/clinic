@@ -21,7 +21,8 @@ public class Doctor {
     @Column(name = "phoneNumber")
     private String phoneNumber;
     @Column(name = "birthDate")
-    @DateTimeFormat(pattern = "YYYY-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     @Column(name = "doctorNumber")
     private String doctorNumber;

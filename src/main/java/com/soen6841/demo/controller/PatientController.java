@@ -2,7 +2,6 @@ package com.soen6841.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
 import com.soen6841.demo.domain.User;
@@ -34,6 +33,7 @@ public class PatientController {
     @PostMapping("/patient/registration")
     public String patientRegister(Patient patient, Model model, HttpSession httpSession) {
         patient.setRegisterStatus(Status.wating);
+        patient.setAppointmentStatus(Status.unfinished);
         patient.setUserID((String) httpSession.getAttribute("userID"));
         patientService.savePatient(patient);
         
@@ -47,7 +47,7 @@ public class PatientController {
     }
 
     @RequestMapping("/selfAssessment")
-    public String selfAssessment( @RequestParam String params, HttpSession httpSession)  {
+    public String selfAssessment( @RequestParam String params, HttpSession httpSession) {
         String patientId = (String) httpSession.getAttribute("userID");
 
         JSONArray jsonArray = JSON.parseArray(params);
@@ -58,8 +58,18 @@ public class PatientController {
 
         Patient p1 = patientService.saveQuestionAnswers(patientId,result);
         patientService.savePatient(p1);
-
         return "redirect:/assessment";
+    }
+
+    @RequestMapping("/assessmentResult")
+    public String assessmentResult( Model model, HttpSession httpSession) {
+        String patientId = (String) httpSession.getAttribute("userID");
+        String[] results = patientService.getQuestionAnswers(patientId);
+        model.addAttribute("resultOne",results[0]);
+        model.addAttribute("resultTwo",results[1]);
+        model.addAttribute("resultThree",results[2]);
+        model.addAttribute("resultFour",results[3]);
+        return "assessment_result";
     }
 
 }
