@@ -53,47 +53,22 @@
             margin-top: 4%;
         }
 
-        #result_table {
-            mso-cellspacing: 30px;
-            border: 1px solid #ccc;
-            margin-left: 100px;
-            color: #2b542c;
+        #content{
+            margin-left: 20px;
+            overflow: auto;
+            height: 700px;
+            font-size: 16px;
         }
 
-        thead {
-            float: left;
+        .result{
+            color: #ff0000;
+            font-weight: bold;
         }
 
-        tbody tr {
-            display: inline-block;
-        }
-
-        th {
-            height: 220px;
-            display: block;
-            width:450px;
-            text-align: left;
-
-        }
-
-        td {
-            height: 30px;
-            display: block;
-            width:450px;
-            text-align: left;
-        }
-
-        #t1{
-            height: 27px;
-        }
-        #t2{
-            height: 205px;
-        }
-        #t3{
-            height: 249px;
-        }
-        #t4{
-            height: 188px;
+        #top{
+            font-size: 25px;
+            text-align: center;
+            margin-top: -10px;
         }
 
 
@@ -118,7 +93,7 @@
                 <a href="assessment" > Self-Assessment</a>
             </li>
             <li>
-                <a href="/assessmentResult" disabled="" style="color: darkgray"> Self-Assessment Results</a>
+                <a href="assessment_result" disabled="" style="color: darkgray"> Self-Assessment Results</a>
             </li>
             <li>
                 <a href="" > My Appointments</a>
@@ -133,58 +108,46 @@
 
 <!--Body Page-->
 <div id="container">
-    <br>
-    <table id="result_table" style="text-align: center" border="1px">
-        <thead>
-        <tr>
-            <th id="t1" >Age Range</th>
-            <td th:text="${resultOne}">t1</td>
-        </tr>
-        <tr>
-            <th id="t2"   >
-                Any of the following symptoms?<br><br>
-                - High Fever <br>
-                - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
-                - Recent cough or worsening of a chronic cough<br>
-                - Shortness of breath<br>
-                - Trouble breathing<br>
-                - Sore throat<br>
-                - Runny nose or congestion (of unknown cause)
-            </th>
-            <td th:text="${resultTwo}">t2</td>
-        </tr>
-        <tr>
-            <th id="t3"   >
-                One of the situations below?<br><br>
-                - Is 0 to 3 months old<br>
-                - Is experiencing an obstruction of nasal passages other than normal congestion<br>
-                - Is currently having a nosebleed episode<br>
-                - Has had a nosebleed episode in the past week<br>
-                - Has undergone any of the following types of surgery:<br>
-                - Mouth surgery in the past week?<br>
-                - Nose surgery in the past month (adult) OR<br>
-                - Nose surgery in the past 3 weeks (child)<br>
-                - Is currently wheezing
-            </th>
-            <td th:text="${resultThree}">t3</td>
-        </tr>
-        <tr>
-            <th id="t4"   >
-                Any 2 of the following symptoms?<br><br>
-                - Stomach aches<br>
-                - Nausea or vomiting<br>
-                - Diarrhea<br>
-                - Major fatigue<br>
-                - Significant loss of appetite<br>
-                - Generalized muscle pain (not related to physical exertion)<br>
-                - Headache
-            </th>
-            <td th:text="${resultFour}">t4</td>
-        </tr>
-        </thead>
-        <tbody id="tb">
-        </tbody>
-    </table>
+
+    <div id="content">
+        <br>
+        <br> <div id="top" >My Self-Assessment Result</div><br>
+        <br>
+    1. Age Range：<span class="result" th:text="${resultOne}"> t1 </span> <br> <br><br>
+
+    2. Any of the following symptoms?   &nbsp;&nbsp; <span class="result" th:text="${resultTwo}"> t2 </span> <br> <br>
+    - High Fever <br>
+    - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
+    - Recent cough or worsening of a chronic cough<br>
+    - Shortness of breath<br>
+    - Trouble breathing<br>
+    - Sore throat<br>
+    - Runny nose or congestion (of unknown cause) <br> <br> <br>
+
+
+    3. One of the situations below? &nbsp;&nbsp;  <span class="result" th:text="${resultThree}"> t3 </span> <br><br>
+    - Is 0 to 3 months old<br>
+    - Is experiencing an obstruction of nasal passages other than normal congestion<br>
+    - Is currently having a nosebleed episode<br>
+    - Has had a nosebleed episode in the past week<br>
+    - Has undergone any of the following types of surgery:<br>
+    - Mouth surgery in the past week?<br>
+    - Nose surgery in the past month (adult) OR<br>
+    - Nose surgery in the past 3 weeks (child)<br>
+    - Is currently wheezing <br> <br> <br>
+
+
+    4. Any 2 of the following symptoms? &nbsp;&nbsp;  <span class="result" th:text="${resultFour}"> t4 </span><br><br>
+    - Stomach aches<br>
+    - Nausea or vomiting<br>
+    - Diarrhea<br>
+    - Major fatigue<br>
+    - Significant loss of appetite<br>
+    - Generalized muscle pain (not related to physical exertion)<br>
+    - Headache <br>
+
+
+    </div>
 </div>
 
 
