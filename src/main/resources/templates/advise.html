@@ -47,11 +47,11 @@
         }
 
         .btn{
-            width: 190px;
+            width: 230px;
             height: 40px;
             font-size: 18px;
             margin-left: 250px;
-            margin-top: 60px;
+            margin-top: 30px;
         }
 
 
@@ -76,11 +76,12 @@
     </div>
 
     <div class="info">
-        Please inform the paramedics if you have been in contact with someone who has COVID-19 or is waiting for the results of a COVID-19 test.
+        Please inform the paramedics if you have been in contact with someone who has COVID-19 or is waiting for the results of a COVID-19 test.<br> <br>
+        You also can do the assessment:
     </div>
 
     <button class="btn btn-info" id="back_to_patient" >
-        Back to main page
+        Back to assessment page
     </button>
 
 </div>
@@ -89,7 +90,7 @@
 <script>
     $(document).ready(function(){
         $('#back_to_patient').click(function(){
-            window.location.href="patient";
+            window.location.href="assessment";
         });
     });
 </script>

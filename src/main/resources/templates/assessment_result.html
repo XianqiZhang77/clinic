@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Self-Assessment Results </title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" )>
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style type="text/css">
+
+        body {
+            background: url("pictures/patient.png") no-repeat;
+            background-size: 100%;
+        }
+
+        #logo {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #container {
+            margin-top: 20px;
+            width: 800px;
+            height: 710px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        #title {
+            font-size: 20px;
+            color: #122b40;
+        }
+
+        #sidebar-wrapper {
+            font-family: 'Montserrat', sans-serif;
+            background: transparent;
+            font-size: 2.5rem;
+            border: 0px;
+            margin-left: 70px;
+            margin-top: 50px;
+            width: 400px;
+        }
+
+        .container-fluid {
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+
+        #container {
+            margin-left: 30%;
+            margin-top: 4%;
+        }
+
+        #result_table {
+            mso-cellspacing: 30px;
+            border: 1px solid #ccc;
+            margin-left: 100px;
+            color: #2b542c;
+        }
+
+        thead {
+            float: left;
+        }
+
+        tbody tr {
+            display: inline-block;
+        }
+
+        th {
+            height: 220px;
+            display: block;
+            width:450px;
+            text-align: left;
+
+        }
+
+        td {
+            height: 30px;
+            display: block;
+            width:450px;
+            text-align: left;
+        }
+
+        #t1{
+            height: 27px;
+        }
+        #t2{
+            height: 205px;
+        }
+        #t3{
+            height: 249px;
+        }
+        #t4{
+            height: 188px;
+        }
+
+
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<!--logo and name-->
+<div class="container-fluid">
+    <img id="logo" src="pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+</div>
+
+<!--Nav bar-->
+<div class="col-lg-2 container-fluid dashboard">
+    <nav class="navbar navbar-inverse" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li>
+                <a href="assessment" > Self-Assessment</a>
+            </li>
+            <li>
+                <a href="/assessmentResult" disabled="" style="color: darkgray"> Self-Assessment Results</a>
+            </li>
+            <li>
+                <a href="" > My Appointments</a>
+            </li>
+            <li>
+                <a href="index"> Log out</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<!--Body Page-->
+<div id="container">
+    <br>
+    <table id="result_table" style="text-align: center" border="1px">
+        <thead>
+        <tr>
+            <th id="t1" >Age Range</th>
+            <td th:text="${resultOne}">t1</td>
+        </tr>
+        <tr>
+            <th id="t2"   >
+                Any of the following symptoms?<br><br>
+                - High Fever <br>
+                - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
+                - Recent cough or worsening of a chronic cough<br>
+                - Shortness of breath<br>
+                - Trouble breathing<br>
+                - Sore throat<br>
+                - Runny nose or congestion (of unknown cause)
+            </th>
+            <td th:text="${resultTwo}">t2</td>
+        </tr>
+        <tr>
+            <th id="t3"   >
+                One of the situations below?<br><br>
+                - Is 0 to 3 months old<br>
+                - Is experiencing an obstruction of nasal passages other than normal congestion<br>
+                - Is currently having a nosebleed episode<br>
+                - Has had a nosebleed episode in the past week<br>
+                - Has undergone any of the following types of surgery:<br>
+                - Mouth surgery in the past week?<br>
+                - Nose surgery in the past month (adult) OR<br>
+                - Nose surgery in the past 3 weeks (child)<br>
+                - Is currently wheezing
+            </th>
+            <td th:text="${resultThree}">t3</td>
+        </tr>
+        <tr>
+            <th id="t4"   >
+                Any 2 of the following symptoms?<br><br>
+                - Stomach aches<br>
+                - Nausea or vomiting<br>
+                - Diarrhea<br>
+                - Major fatigue<br>
+                - Significant loss of appetite<br>
+                - Generalized muscle pain (not related to physical exertion)<br>
+                - Headache
+            </th>
+            <td th:text="${resultFour}">t4</td>
+        </tr>
+        </thead>
+        <tbody id="tb">
+        </tbody>
+    </table>
+</div>
+
+
+
+<!--Functions-->
+<script>
+
+
+
+
+</script>
+
+</body>
+
+</html>

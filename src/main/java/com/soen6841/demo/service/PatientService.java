@@ -1,11 +1,14 @@
 package com.soen6841.demo.service;
 
-import com.soen6841.demo.dao.PatientRepository;
-import com.soen6841.demo.domain.Patient;
-import com.soen6841.demo.domain.Status;
+        import com.soen6841.demo.dao.PatientRepository;
+        import com.soen6841.demo.domain.Patient;
+        import com.soen6841.demo.domain.Status;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.stereotype.Service;
+
+        import javax.swing.*;
+        import java.util.Iterator;
 
 @Service
 public class PatientService {
@@ -24,7 +27,7 @@ public class PatientService {
     public Patient getPatientById(Long id) {
         return patientRepository.findOneById(id);
     }
-    
+
     public Patient getPatientByUserID(String userID) {
         return patientRepository.findOneByUserID(userID);
     }
@@ -39,5 +42,18 @@ public class PatientService {
         }
         return patientRepository.findOneByUserID(patientId);
     }
+
+    public String[] getQuestionAnswers(String patientId) {
+        String[] results = new String[4];
+        if(patientRepository.existsByUserID(patientId)){
+            Patient check = patientRepository.findOneByUserID(patientId);
+            results[0] = check.getAnswerOne();
+            results[1] = check.getAnswerTwo();
+            results[2] = check.getAnswerThree();
+            results[3] = check.getAnswerFour();
+        }
+        return results;
+    }
+
 
 }
