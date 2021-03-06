@@ -110,7 +110,6 @@ public class UserService {
     
     public String nurseHandler(User user, Model model) {
     	Nurse nurse = nurseRepository.findOneById(user.getRegisterID());
-    	System.out.print(nurse.getFullName());
     	Status status = nurse.getRegisterStatus();
     	if(status == Status.accepted) {
     		return "nurse_success";

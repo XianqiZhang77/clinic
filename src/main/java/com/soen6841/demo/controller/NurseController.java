@@ -5,12 +5,14 @@ import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
 import com.soen6841.demo.domain.User;
 import com.soen6841.demo.service.NurseService;
+import com.soen6841.demo.service.PatientService;
 import com.soen6841.demo.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,9 @@ public class NurseController {
     
     @Autowired
     UserService userService;
+    
+    @Autowired
+    private PatientService patientService;
 
     @PostMapping("/nurse/registration")
     public String nurseRegister(Nurse nurse, Model model, HttpSession httpSession) {
@@ -54,6 +59,18 @@ public class NurseController {
         //model.addAttribute("patients",patients);
         return "nurse_profile";
     }
+    
+    /*
+    @RequestMapping("/getAssessmentResult/{patientId}")
+    public String assessmentResult(@PathVariable String patientId, Model model) {
+        String[] results = patientService.getQuestionAnswers(patientId);
+        model.addAttribute("resultOne",results[0]);
+        model.addAttribute("resultTwo",results[1]);
+        model.addAttribute("resultThree",results[2]);
+        model.addAttribute("resultFour",results[3]);
+        return "";
+    }
+    */
 
     @RequestMapping("/allnn")
     @ResponseBody

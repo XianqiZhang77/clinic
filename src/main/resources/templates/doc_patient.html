@@ -10,6 +10,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
     <title>Patients</title>
 
+    <style>
+        .self_re {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 38%;
+            height: 50%;
+            border: 16px solid lightblue;
+            background-color: lightcyan;
+            z-index:1002;
+            overflow: auto;
+            font-size: 15px;
+        }
+
+        .result{
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        #content{
+            margin-left: 5%;
+        }
+
+        #close{
+            margin-left: 45%;
+            margin-bottom: 2%;
+        }
+    </style>
+
+
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -58,6 +91,19 @@
                     <th width="100px" style="text-align: center">Appointment</th>
                     <th width="100px" style="text-align: center">Delete</th>
                 </tr>
+
+                <tr th:each="">
+                    <td th:text="${}">User ID</td>
+                    <td th:text="${}">Full name</td>
+                    <td th:text="${}">E-mail</td>
+                    <td th:text="${}">Address</td>
+                    <td th:text="${}">Phone Number</td>
+                    <td th:text="${}">Date of Birth</td>
+                    <td> <a th:text="{}" id="result" onclick="openRe()"> Results </a> </td>
+                    <td> <a th:text="{}" id="appointment"> Appointment </a> </td>
+                    <td> <a th:text="{}"> Delete </a> </td>
+                </tr>
+
                 </thead>
                 <tbody id="tb">
                 </tbody>
@@ -67,5 +113,65 @@
 
 </div>
 </div>
+
+<div id="self_re" class="self_re" style="display: none">
+    <div id="content">
+    <br> User ID: &nbsp; <span class="result" th:text="${}"> User ID </span> <br> <br> <br>
+
+    1. Age Range：<span class="result" th:text="${}"> q1 </span> <br> <br><br>
+
+    2. Any of the following symptoms?   &nbsp;&nbsp; <span class="result" th:text="${}"> q2 </span> <br> <br>
+    - High Fever <br>
+    - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
+    - Recent cough or worsening of a chronic cough<br>
+    - Shortness of breath<br>
+    - Trouble breathing<br>
+    - Sore throat<br>
+    - Runny nose or congestion (of unknown cause) <br> <br> <br>
+
+
+    3. One of the situations below? &nbsp;&nbsp;  <span class="result" th:text="${}"> q3 </span> <br><br>
+    - Is 0 to 3 months old<br>
+    - Is experiencing an obstruction of nasal passages other than normal congestion<br>
+    - Is currently having a nosebleed episode<br>
+    - Has had a nosebleed episode in the past week<br>
+    - Has undergone any of the following types of surgery:<br>
+    - Mouth surgery in the past week?<br>
+    - Nose surgery in the past month (adult) OR<br>
+    - Nose surgery in the past 3 weeks (child)<br>
+    - Is currently wheezing <br> <br> <br>
+
+
+    4. Any 2 of the following symptoms? &nbsp;&nbsp;  <span class="result" th:text="${}"> q4 </span><br><br>
+    - Stomach aches<br>
+    - Nausea or vomiting<br>
+    - Diarrhea<br>
+    - Major fatigue<br>
+    - Significant loss of appetite<br>
+    - Generalized muscle pain (not related to physical exertion)<br>
+    - Headache <br> <br> <br>
+    </div>
+    <button class="btn btn-info " id="close" type="button" > Close </button>
+</div>
+
+
+
+<script>
+
+    function openRe() {
+        const self_re = document.getElementById('self_re');
+        self_re.style.display = 'block';
+
+    }
+
+    $('#close').click(function(){
+        const self_re = document.getElementById('self_re');
+        self_re.style.display='none';
+    });
+
+
+
+    </script>
+
 </body>
 </html>
