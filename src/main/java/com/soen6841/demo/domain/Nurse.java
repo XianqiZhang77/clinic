@@ -23,7 +23,8 @@ public class Nurse {
     @Column(name = "phoneNumber")
     private String phoneNumber;
     @Column(name = "birthDate")
-    @DateTimeFormat(pattern = "YYYY-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     @Column(name = "nurseNumber")
     private String nurseNumber;

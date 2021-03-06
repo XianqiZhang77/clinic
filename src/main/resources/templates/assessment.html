@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Self-Assessment </title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" )>
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style type="text/css">
+
+        body {
+            background: url("pictures/patient.png") no-repeat;
+            background-size: 100%;
+        }
+
+        #logo {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #title {
+            font-size: 20px;
+            color: #122b40;
+        }
+
+        #sidebar-wrapper {
+            font-family: 'Montserrat', sans-serif;
+            background: transparent;
+            font-size: 2.5rem;
+            border: 0px;
+            margin-left: 70px;
+            margin-top: 50px;
+            width: 400px;
+        }
+
+        .container {
+            margin-top: 20px;
+            width: 940px;
+            height: 800px;
+            background-color: rgba(255, 255, 255, 0.5);
+            font-size: 20px;
+
+        }
+
+        .container-fluid {
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+
+
+        .btn {
+            width: 200px;
+            height: 40px;
+            font-size: 18px;
+            margin-left: 50px;
+        }
+
+        .question1_choice{
+            margin-top: 30px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .question2_choice{
+            margin-top: 30px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .question3_choice{
+            margin-top: 30px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .question4_choice{
+            margin-top: 30px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        #submit{
+            margin-top: 40px;
+            margin-left: 600px;
+            margin-bottom: 20px;
+        }
+        .question{
+            margin-left: 30px;
+        }
+        #top{
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .notice {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 35%;
+            height: 40%;
+            border: 16px solid lightblue;
+            background-color: lightcyan;
+            z-index:1002;
+            overflow: auto;
+            font-size: 20px;
+        }
+
+        #success{
+            margin-left: 10%;
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .notice_content{
+            margin-left: 10%;
+        }
+
+        #closeNotice{
+            margin-left: 30%;
+        }
+
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<!--logo and name-->
+<div class="container-fluid">
+    <img id="logo" src="pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+</div>
+
+<!--Nav bar-->
+<div class="col-lg-2 container-fluid dashboard">
+    <nav class="navbar navbar-inverse" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li>
+                <a href="assessment" disabled="" style="color: darkgray"> Self-Assessment</a>
+            </li>
+            <li>
+                <a href="/assessmentResult"> Self-Assessment Results</a>
+            </li>
+            <li>
+                <a href="" > My Appointments</a>
+            </li>
+            <li>
+                <a href="index"> Log out</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<!--Body Page-->
+<div class="container" style="overflow: auto" >
+
+   <br> <div id="top" >COVID-19 Symptom Self-Assessment</div><br>
+
+    <!-- Question 1 -->
+    <div class="question1 question">
+        <br>
+        Please choose your age range:<br>
+        <div class="question1_choice" style="margin-top: 30px">
+        <button class="btn btn-info" id="under5" type="button" onclick="switchItem2_1('question2_under5')"> 6 months - 5 years</button>
+        <button class="btn btn-info" id="above6" type="button" onclick="switchItem2_2('question2_above6')"> 6 - 17 years</button>
+        <button class="btn btn-info" id="above18" type="button" onclick="switchItem2_3('question2_above18')"> 18 years+</button>
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question2 question" style="display: none" id="question2_under5">
+        <br>
+        Is your child experiencing ANY of the following symptoms?<br><br>
+        - Fever (38.5°C rectal temperature (101.3 °F) or higher)<br>
+        - Cough (new or worse), shortness of breath, or difficulty breathing<br>
+        - Runny nose or nasal congestion or sore throat<br>
+        AND<br>
+        fever (38.1°C rectal temperature (100.6°F) or higher)<br>
+        - Abdominal pain, vomiting, or diarrhea<br>
+        AND<br>
+        fever (38.1°C rectal temperature (100.6°F) or higher)
+    </div>
+
+    <div class="question2 question" style="display: none" id="question2_above6">
+        <br>
+        Does your child have ANY of the following symptoms?<br><br>
+        - Fever (oral temperature 38.1°C (100.6°F) or higher)<br>
+        - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
+        - Recent cough or worsening of a chronic cough<br>
+        - Shortness of breath<br>
+        - Trouble breathing<br>
+        - Sore throat<br>
+        - Runny nose or congestion (of unknown cause)
+    </div>
+
+    <div class="question2 question" style="display: none" id="question2_above18">
+        <br>
+        Are you experiencing ANY of the following symptoms?<br><br>
+        - Fever (oral temperature 38.1°C (100.6°F) or higher)<br>
+        - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
+        - Recent cough or worsening of a chronic cough<br>
+        - Shortness of breath<br>
+        - Trouble breathing<br>
+        - Sore throat<br>
+        - Runny nose or congestion (of unknown cause)
+    </div>
+
+    <div class="question2_choice" style="display: none" id="question2_answer">
+        <button class="btn btn-info" id="yes_question2" type="button" onclick="switchItem3_1('question3_1')" > Yes
+        </button>
+        <button class="btn btn-info" id="no_question2" type="button" onclick="switchItem3_2('question3_2')"> No</button>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question3 question" style="display: none" id="question3_1">
+        <br>
+        Are you or the person who is going to get tested in one of the situations below?<br><br>
+        - Is 0 to 3 months old<br>
+        - Is experiencing an obstruction of nasal passages other than normal congestion<br>
+        - Is currently having a nosebleed episode<br>
+        - Has had a nosebleed episode in the past week<br>
+        - Has undergone any of the following types of surgery:<br>
+        - Mouth surgery in the past week?<br>
+        - Nose surgery in the past month (adult) OR<br>
+        - Nose surgery in the past 3 weeks (child)<br>
+        - Is currently wheezing
+    </div>
+
+    <div class="question3 question" style="display: none" id="question3_2">
+        <br>
+        Are you or the person who is going to get tested in one of the situations below?<br><br>
+        - Is 0 to 3 months old<br>
+        - Is experiencing an obstruction of nasal passages other than normal congestion<br>
+        - Is currently having a nosebleed episode<br>
+        - Has had a nosebleed episode in the past week<br>
+        - Has undergone any of the following types of surgery:<br>
+        - Mouth surgery in the past week?<br>
+        - Nose surgery in the past month (adult) OR<br>
+        - Nose surgery in the past 3 weeks (child)<br>
+        - Is currently wheezing
+    </div>
+
+    <div class="question3_choice" style="display: none" id="question3_answer">
+        <button class="btn btn-info" id="yes_question3" type="button" onclick="switchItem4_1('question4_1')"> Yes</button>
+
+        <button class="btn btn-info" id="no_question3" type="button" onclick="switchItem4_2('question4_2')"> No</button>
+    </div>
+
+    <!-- Question 4-->
+
+    <div class="question4 question" style="display: none" id="question4">
+        <br>
+        Does your child have any 2 of the following symptoms?<br><br>
+        - Stomach aches<br>
+        - Nausea or vomiting<br>
+        - Diarrhea<br>
+        - Major fatigue<br>
+        - Significant loss of appetite<br>
+        - Generalized muscle pain (not related to physical exertion)<br>
+        - Headache
+    </div>
+
+    <div class="question4_choice" style="display: none" id="end">
+        <button class="btn btn-info" id="yes_question4" type="button" onclick="open_submit1('question4_1')"> Yes</button>
+        <button class="btn btn-info" id="no_question4" type="button" onclick="open_submit2('question4_2')"> No</button>
+    </div>
+
+    <!-- Submit -->
+    <button class="btn btn-info" id="submit" type="button" style="display: none" > Submit</button>
+
+</div>
+
+<div id="notice" class="notice" style="display: none">
+    <br> <span style="text-align: center" id="success" > Assessment result submitted Successfully </span> <br> <br> <br>
+    <span class="notice_content"> Please notice: <br> <br></span>
+    <span class="notice_content">1. The system only record your latest result. <br> <br></span>
+     <span class="notice_content"> 2. You can re-submit your assessment questions.  <br> <br> </span>
+    <button class="btn btn-info " id="closeNotice" type="button" > Close </button>
+</div>
+
+
+
+<!--Functions-->
+<script>
+
+    let result = [];
+    let result_1 = [];
+    let result_2 = [];
+    let result_3 = [];
+    let result_4 = [];
+
+    function switchItem2_1(tag) {
+        const question2_under5 = document.getElementById('question2_under5');
+        const question2_above6 = document.getElementById('question2_above6');
+        const question2_above18 = document.getElementById('question2_above18');
+        const question2_answer = document.getElementById('question2_answer');
+        if (tag == 'question2_under5') {
+            question2_under5.style.display = '';
+            question2_above6.style.display = 'none';
+            question2_above18.style.display = 'none';
+            question2_answer.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "under5"){
+                result_1.push('under 5 years');
+            }
+        }
+    }
+
+    function switchItem2_2(tag) {
+        const question2_under5 = document.getElementById('question2_under5');
+        const question2_above6 = document.getElementById('question2_above6');
+        const question2_above18 = document.getElementById('question2_above18');
+        const question2_answer = document.getElementById('question2_answer');
+        if (tag == 'question2_above6') {
+            question2_under5.style.display = 'none';
+            question2_above6.style.display = '';
+            question2_above18.style.display = 'none';
+            question2_answer.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "above6"){
+                result_1.push('Between 6- 17 years');
+            }
+        }
+    }
+
+    function switchItem2_3(tag) {
+        const question2_under5 = document.getElementById('question2_under5');
+        const question2_above6 = document.getElementById('question2_above6');
+        const question2_above18 = document.getElementById('question2_above18');
+        const question2_answer = document.getElementById('question2_answer');
+        if (tag == 'question2_above18') {
+            question2_under5.style.display = 'none';
+            question2_above6.style.display = 'none';
+            question2_above18.style.display = '';
+            question2_answer.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "above18"){
+                result_1.push('Above 18 years');
+            }
+        }
+    }
+
+    function switchItem3_1(tag) {
+        const question3_answer = document.getElementById('question3_answer');
+        const question3_1 = document.getElementById('question3_1');
+        const question3_2 = document.getElementById('question3_2');
+        if (tag == 'question3_1') {
+            question3_1.style.display = '';
+            question3_2.style.display = 'none';
+            question3_answer.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "yes_question2"){
+                result_2.push('Yes');
+            }
+        }
+    }
+
+    function switchItem3_2(tag) {
+        const question3_answer = document.getElementById('question3_answer');
+        const question3_2 = document.getElementById('question3_2');
+        const question3_1 = document.getElementById('question3_1');
+        if (tag == 'question3_2') {
+            question3_2.style.display = 'none';
+            question3_1.style.display = '';
+            question3_answer.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "no_question2"){
+                result_2.push('No');
+            }
+        }
+    }
+
+    function switchItem4_1(tag) {
+        const question4 = document.getElementById('question4');
+        const end = document.getElementById('end');
+        if (tag == 'question4_1') {
+            question4.style.display = '';
+            end.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "yes_question3"){
+                result_3.push('Yes');
+            }
+        }
+    }
+
+    function switchItem4_2(tag) {
+        const question4 = document.getElementById('question4');
+        const end = document.getElementById('end');
+        if (tag == 'question4_2') {
+            question4.style.display = '';
+            end.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "no_question3"){
+                result_3.push('No');
+            }
+        }
+    }
+
+    function open_submit1(tag) {
+        const submit = document.getElementById('submit');
+        if (tag == 'question4_1' ) {
+            submit.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "yes_question4"){
+                result_4.push('Yes');
+            }
+        }
+    }
+
+    function open_submit2(tag) {
+        const submit = document.getElementById('submit');
+        if (tag == 'question4_2' ) {
+            submit.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "no_question4"){
+                result_4.push('No');
+            }
+        }
+    }
+
+    $('#submit').click(function(){
+        result.push(result_1[result_1.length-1]);
+        result.push(result_2[result_2.length-1]);
+        result.push(result_3[result_3.length-1]);
+        result.push(result_4[result_4.length-1]);
+
+        $.ajax({
+            url: "/selfAssessment",
+            type:"POST",
+            data:{params:JSON.stringify(result)},
+            success:function(){
+                $(window).attr("location","assessment")
+            }
+        });
+
+        const notice = document.getElementById('notice');
+        notice.style.display='block';
+
+    });
+
+    $('#closeNotice').click(function(){
+        const notice = document.getElementById('notice');
+        notice.style.display='none';
+    });
+
+
+
+    $(".question1_choice button").click(
+        function() {
+            $(".question1_choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+        })
+    $(".question2_choice button").click(
+        function() {
+            $(".question2_choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+        })
+    $(".question3_choice button").click(
+        function() {
+            $(".question3_choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+        })
+    $(".question4_choice button").click(
+        function() {
+            $(".question4_choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+        })
+
+
+
+
+</script>
+
+</body>
+
+</html>

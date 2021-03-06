@@ -95,6 +95,23 @@ public class PageController {
      */
     @RequestMapping("/nurse")
     public String nursePage() {
-        return "nurse";
+        return "nurse_profile";
     }
+
+
+    @RequestMapping("/assessment")
+    public String assessmentPage() {
+        return "assessment";
+    }
+
+    @RequestMapping("/enter_assessment")
+    public String enterAssessmentPage() {
+        return "enter_assessment";
+    }
+
+    @RequestMapping("/advise")
+    public String advisePage() {
+        return "advise";
+    }
+
 }

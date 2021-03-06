@@ -23,11 +23,26 @@ public class Patient {
     private String phoneNumber;
     @Column(name = "birthDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     @Column(name = "registerStatus")
-    private Status registerStatus;
+    private Status registerStatus;   
+    @Column(name = "reviewer")
+    private String reviewer;
+    @Column(name = "appointmentStatus")
+    private Status appointmentStatus;
+    @Column(name = "assignee")
+    private String assignee; 
+    @Column(name = "answerOne")
+    private String answerOne;
+    @Column(name = "answerTwo")
+    private String answerTwo;
+    @Column(name = "answerThree")
+    private String answerThree;
+    @Column(name = "answerFour")
+    private String answerFour;
 
-    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus) {
+    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus, Status appointmentStatus) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;
@@ -35,6 +50,7 @@ public class Patient {
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.registerStatus = registerStatus;
+        this.appointmentStatus = appointmentStatus;
     }
 
     public String getUserID() {
@@ -100,6 +116,46 @@ public class Patient {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
+    
+    public String getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(String reviewer) {
+        this.reviewer = reviewer;
+    }
+    
+    public Status getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(Status appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
+    }
+    
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public String getAnswerOne() { return answerOne; }
+
+    public void setAnswerOne(String answerOne) { this.answerOne = answerOne; }
+
+    public String getAnswerTwo() { return answerTwo; }
+
+    public void setAnswerTwo(String answerTwo) { this.answerTwo = answerTwo; }
+
+    public String getAnswerThree() { return answerThree; }
+
+    public void setAnswerThree(String answerThree) { this.answerThree = answerThree; }
+
+    public String getAnswerFour() { return answerFour; }
+
+    public void setAnswerFour(String answerFour) { this.answerFour = answerFour; }
 
     public Patient() {
     }

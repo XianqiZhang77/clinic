@@ -73,11 +73,11 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
 
     private List<Doctor> getDoctorList(){
         List<Doctor> doctorList = new ArrayList<>();
-        Doctor doctor1 = new Doctor("doctor1","Bob","a@gamil.com","A St,","111222333",new Date(19999999),"889", Status.wating);
+        Doctor doctor1 = new Doctor("Bob","Bob","a@gamil.com","A St,","111222333",new Date(19999999),"889", Status.wating);
         doctorList.add(doctor1);
-        Doctor doctor2 = new Doctor("doctor2","Mike","b@gamil.com","B St,","888866666",new Date(19999999),"123", Status.accepted);
+        Doctor doctor2 = new Doctor("Mike","Mike","b@gamil.com","B St,","888866666",new Date(19999999),"123", Status.accepted);
         doctorList.add(doctor2);
-        Doctor doctor3 = new Doctor("doctor3","Lucy","c@gamil.com","C St,","768676678678",new Date(19999999),"188", Status.wating);
+        Doctor doctor3 = new Doctor("Lucy","Lucy","c@gamil.com","C St,","768676678678",new Date(19999999),"188", Status.wating);
         doctorList.add(doctor3);
         return doctorList;
     }
@@ -93,7 +93,7 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
 
     private List<Patient> getPatientList(){
         List<Patient> patientList = new ArrayList<>();
-        Patient patient1 = new Patient("patient1","Will","ww@gamil.com","WWD St,","19999",new Date(19999999), Status.wating);
+        Patient patient1 = new Patient("Will","Will","ww@gamil.com","WWD St,","19999",new Date(19999999), Status.wating, Status.unfinished);
         patientList.add(patient1);
         return patientList;
     }
