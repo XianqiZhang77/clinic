@@ -26,6 +26,10 @@
             color: #122b40;
         }
 
+        #ntc{
+            margin-left: 2%;
+        }
+
         #sidebar-wrapper {
             font-family: 'Montserrat', sans-serif;
             background: transparent;
@@ -61,25 +65,25 @@
         .question1_choice{
             margin-top: 30px;
             margin-left: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .question2_choice{
             margin-top: 30px;
             margin-left: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .question3_choice{
             margin-top: 30px;
             margin-left: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .question4_choice{
             margin-top: 30px;
             margin-left: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         #submit{
-            margin-top: 40px;
+            margin-top: 0px;
             margin-left: 600px;
             margin-bottom: 20px;
         }
@@ -140,7 +144,7 @@
                 <a href="assessment" disabled="" style="color: darkgray"> Self-Assessment</a>
             </li>
             <li>
-                <a href="/assessmentResult"> Self-Assessment Results</a>
+                <a href="assessmentResult"> Self-Assessment Results</a>
             </li>
             <li>
                 <a href="" > My Appointments</a>
@@ -268,12 +272,13 @@
     </div>
 
     <!-- Submit -->
+    <a id="ntc" onclick="open_notice()" > * Notice </a>
     <button class="btn btn-info" id="submit" type="button" style="display: none" > Submit</button>
 
 </div>
 
 <div id="notice" class="notice" style="display: none">
-    <br> <span style="text-align: center" id="success" > Assessment result submitted Successfully </span> <br> <br> <br>
+    <br> <span style="text-align: center" id="success" > Self-assessment Notice </span> <br> <br> <br>
     <span class="notice_content"> Please notice: <br> <br></span>
     <span class="notice_content">1. The system only record your latest result. <br> <br></span>
      <span class="notice_content"> 2. You can re-submit your assessment questions.  <br> <br> </span>
@@ -453,9 +458,6 @@
             }
         });
 
-        const notice = document.getElementById('notice');
-        notice.style.display='block';
-
     });
 
     $('#closeNotice').click(function(){
@@ -463,7 +465,10 @@
         notice.style.display='none';
     });
 
-
+    function open_notice(){
+        const notice = document.getElementById('notice');
+        notice.style.display='block';
+    }
 
     $(".question1_choice button").click(
         function() {

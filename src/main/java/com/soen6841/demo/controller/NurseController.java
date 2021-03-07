@@ -60,17 +60,18 @@ public class NurseController {
         return "nurse_profile";
     }
     
-    /*
+
     @RequestMapping("/getAssessmentResult/{patientId}")
     public String assessmentResult(@PathVariable String patientId, Model model) {
         String[] results = patientService.getQuestionAnswers(patientId);
+        model.addAttribute("userID",patientId);
         model.addAttribute("resultOne",results[0]);
         model.addAttribute("resultTwo",results[1]);
         model.addAttribute("resultThree",results[2]);
         model.addAttribute("resultFour",results[3]);
-        return "";
+        return "patient_result";
     }
-    */
+
 
     @RequestMapping("/allnn")
     @ResponseBody

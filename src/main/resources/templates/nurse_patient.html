@@ -104,7 +104,7 @@
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><a th:href="@{'/getAssessmentResult/'+${patient.userID}}" id="result" onclick="openRe(patient.userID)"> Results</a></td>
+                    <td><a id="result" th:href="@{'/getAssessmentResult/'+${patient.userID}}" onclick="openRe()">Results</a></td>
                     <td><a th:href="@{'/assignToDoctor/'+${patient.userID}}" >Assign</a></td>
                     <td><a th:href="@{'/approvePatient/'+${patient.userID}}" >Appointment</a></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
@@ -156,7 +156,7 @@
         - Generalized muscle pain (not related to physical exertion)<br>
         - Headache <br> <br> <br>
     </div>
-    <button class="btn btn-info " id="close" type="button" onclick="closeRe()" > Close </button>
+    <button class="btn btn-info " id="close" type="button"> Close </button>
 </div>
 
 </html>
@@ -215,36 +215,12 @@
 
     }
 
-    /*
     $('#close').click(function(){
         const self_re = document.getElementById('self_re');
         self_re.style.display='none';
     });
-    */
 
-    function $(id) {
-        return document.getElementById(id);
-    }
-
-    function closeRe() {
-        const self_re = document.getElementById('self_re');
-        self_re.style.display = 'none';
-    }
-
-    function openRe(id) {
-        $.ajax({
-            url:"/getAssessmentResult/" + id,
-            type:"get",
-            dataType:"json",
-            success: function(data) {
-                console.log(data);    
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert(XMLHttpRequest.status);
-                alert(XMLHttpRequest.readyState);
-                alert(textStatus);
-            },
-        })
+    function openRe() {
         const self_re = document.getElementById('self_re');
         self_re.style.display = 'block';
     }
