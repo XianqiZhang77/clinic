@@ -8,6 +8,7 @@ import com.soen6841.demo.domain.Doctor;
 import com.soen6841.demo.domain.Nurse;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.User;
+import com.soen6841.demo.util.PasswordUtil;
 import com.soen6841.demo.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,7 @@ public class UserService {
     	if(userRepository.existsByUserID(user.getUserID())) {
     		return false;
     	}
+    	user.setPassword(PasswordUtil.encrypt(user.getPassword()));
     	userRepository.save(user);
         return true;
     }
@@ -58,7 +60,8 @@ public class UserService {
     public boolean login(User user) {
     	if(userRepository.existsByUserID(user.getUserID())) {
     		User login = userRepository.findOneByUserID(user.getUserID());
-    		if(login.getPassword().equals(user.getPassword())) {
+    		String md5Password = PasswordUtil.encrypt(user.getPassword());
+    		if(login.getPassword().equals(md5Password)) {
     			return true;
     		}
     	}

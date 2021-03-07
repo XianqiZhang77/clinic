@@ -104,7 +104,7 @@
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><a id="result" th:href="@{'/getAssessmentResult/'+${patient.userID}}" onclick="openRe()">Results</a></td>
+                    <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
                     <td><a th:href="@{'/assignToDoctor/'+${patient.userID}}" >Assign</a></td>
                     <td><a th:href="@{'/approvePatient/'+${patient.userID}}" >Appointment</a></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
@@ -216,13 +216,13 @@
     }
 
     $('#close').click(function(){
-        const self_re = document.getElementById('self_re');
-        self_re.style.display='none';
+        //const self_re = document.getElementById('self_re');
+        //self_re.style.display='none';
     });
 
-    function openRe() {
-        const self_re = document.getElementById('self_re');
-        self_re.style.display = 'block';
+    function openRe(patient) {
+        console.log(patient.innerText)
+        window.open("/getAssessmentResult/" + patient.innerText,"_blank");
     }
 
 </script>

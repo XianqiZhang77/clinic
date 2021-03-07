@@ -54,19 +54,19 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
     
     private List<User> getUserList(){
         List<User> userList = new ArrayList<>();
-        User manager = new User("admin","admin","manager",null);
+        User manager = new User("admin",PasswordUtil.encrypt("admin"),"manager",null);
         userList.add(manager);
-        User doctor1 = new User("Bob","Bob","doctor", (long) 1);
+        User doctor1 = new User("Bob",PasswordUtil.encrypt("Bob"),"doctor", (long) 1);
         userList.add(doctor1);
-        User doctor2 = new User("Mike","Mike","doctor", (long) 2);
+        User doctor2 = new User("Mike",PasswordUtil.encrypt("Mike"),"doctor", (long) 2);
         userList.add(doctor2);
-        User doctor3 = new User("Lucy","Lucy","doctor", (long) 3);
+        User doctor3 = new User("Lucy",PasswordUtil.encrypt("Lucy"),"doctor", (long) 3);
         userList.add(doctor3);
-        User nurse1 = new User("Linda","Linda","nurse", (long) 1);
+        User nurse1 = new User("Linda",PasswordUtil.encrypt("Linda"),"nurse", (long) 1);
         userList.add(nurse1);
-        User nurse2 = new User("Bill","Bill","nurse", (long) 2);
+        User nurse2 = new User("Bill",PasswordUtil.encrypt("Bill"),"nurse", (long) 2);
         userList.add(nurse2);
-        User patient1 = new User("Will","Will","patient", (long) 1);
+        User patient1 = new User("Will",PasswordUtil.encrypt("Will"),"patient", (long) 1);
         userList.add(patient1);
         return userList;
     }
