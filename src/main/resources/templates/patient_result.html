@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Self-Assessment Results </title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" )>
+    <link rel="shortcut icon" href="../pictures/favicon.ico" type="image/x-icon"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style type="text/css">
+
+        body {
+            background: url("../pictures/patient.png") no-repeat;
+            background-size: 100%;
+        }
+
+        #logo {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #container {
+            margin-top: 3%;
+            margin-left: 10%;
+            width: 800px;
+            height: 710px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        #title {
+            font-size: 20px;
+            color: #122b40;
+        }
+
+        #content{
+            margin-left: 20px;
+            overflow: auto;
+            height: 700px;
+            font-size: 16px;
+        }
+
+        .result{
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        #top{
+            font-size: 25px;
+            text-align: center;
+            margin-top: -10px;
+        }
+        #bt{
+            margin-left: 53%;
+            margin-top: -2%;
+        }
+
+
+    </style>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<!--logo and name-->
+<div class="container-fluid">
+    <img id="logo" src="../pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+</div>
+
+
+
+<!--Body Page-->
+<div id="container">
+
+    <div id="content">
+        <br> User ID: &nbsp; <span class="result" th:text="${userID}"> User ID </span> <br> <br> <br>
+
+        1. Age Range：<span class="result" th:text="${resultOne}"> q1 </span> <br> <br><br>
+
+        2. Any of the following symptoms?   &nbsp;&nbsp; <span class="result" th:text="${resultTwo}"> q2 </span> <br> <br>
+        - High Fever <br>
+        - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
+        - Recent cough or worsening of a chronic cough<br>
+        - Shortness of breath<br>
+        - Trouble breathing<br>
+        - Sore throat<br>
+        - Runny nose or congestion (of unknown cause) <br> <br> <br>
+
+
+        3. One of the situations below? &nbsp;&nbsp;  <span class="result" th:text="${resultThree}"> q3 </span> <br><br>
+        - Is 0 to 3 months old<br>
+        - Is experiencing an obstruction of nasal passages other than normal congestion<br>
+        - Is currently having a nosebleed episode<br>
+        - Has had a nosebleed episode in the past week<br>
+        - Has undergone any of the following types of surgery:<br>
+        - Mouth surgery in the past week?<br>
+        - Nose surgery in the past month (adult) OR<br>
+        - Nose surgery in the past 3 weeks (child)<br>
+        - Is currently wheezing <br> <br> <br>
+
+
+        4. Any 2 of the following symptoms? &nbsp;&nbsp;  <span class="result" th:text="${resultFour}"> q4 </span><br><br>
+        - Stomach aches<br>
+        - Nausea or vomiting<br>
+        - Diarrhea<br>
+        - Major fatigue<br>
+        - Significant loss of appetite<br>
+        - Generalized muscle pain (not related to physical exertion)<br>
+        - Headache <br> <br> <br>
+    </div>
+
+</div>
+
+<div id="bt">
+    <button id="close" class="btn-info btn"> Close current page </button>
+</div>
+
+<!--Functions-->
+<script>
+
+$('#close').click(function () {
+    window.opener=null;
+    window.open('','_self');
+    window.close();
+});
+
+
+</script>
+
+</body>
+
+</html> 
