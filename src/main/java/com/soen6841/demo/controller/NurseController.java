@@ -55,27 +55,7 @@ public class NurseController {
     
     @GetMapping("/nurse_profile")
     public String getProfile(Model model) {
-        //Iterable<Patient> patients =   nurseService.getPatientByRegisterStatus(Status.wating);
-        //model.addAttribute("patients",patients);
         return "nurse_profile";
     }
-    
-
-    @RequestMapping("/getAssessmentResult/{patientId}")
-    public String assessmentResult(@PathVariable String patientId, Model model) {
-        String[] results = patientService.getQuestionAnswers(patientId);
-        model.addAttribute("userID",patientId);
-        model.addAttribute("resultOne",results[0]);
-        model.addAttribute("resultTwo",results[1]);
-        model.addAttribute("resultThree",results[2]);
-        model.addAttribute("resultFour",results[3]);
-        return "patient_result";
-    }
-
-
-    @RequestMapping("/allnn")
-    @ResponseBody
-    public Iterable<Nurse> test() {
-        return nurseService.getAllNurses();
-    }
+ 
 }

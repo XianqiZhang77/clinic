@@ -97,7 +97,7 @@ public class UserService {
     	Doctor doctor = doctorRepository.findOneById(user.getRegisterID());
     	Status status = doctor.getRegisterStatus();
     	if(status == Status.accepted) {
-    		return "doctor";
+    		return "doctor_success";
     	}else if(status == Status.wating) {
     		model.addAttribute("msg", "Your register is pending, please wait.");
     		return "index";

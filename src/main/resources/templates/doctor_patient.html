@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/doctorStyles.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+    <title>Patients</title>
+    <style>
+        body {
+            background: url("pictures/nurse.png") no-repeat;
+            background-size: 100%;
+
+        }
+
+        #logo {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #title {
+            font-size: 20px;
+            color: #122b40;
+        }
+        .self_re {
+             display: none;
+             position: absolute;
+             top: 20%;
+             left: 30%;
+             width: 38%;
+             height: 50%;
+             border: 16px solid lightblue;
+             background-color: lightcyan;
+             z-index:1002;
+             overflow: auto;
+             font-size: 15px;
+         }
+
+        .result{
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        #content{
+            margin-left: 5%;
+        }
+
+        #close{
+            margin-left: 45%;
+            margin-bottom: 2%;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <img id="logo" src="pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+</div>
+
+<<div class="container-fluid dashboard">
+    <div class="row">
+
+        <!--Nav bar-->
+        <div class="col-lg-2">
+            <nav class="navbar navbar-inverse" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="doctor_patient" style="color: darkgray"> Patients </a>
+                    </li>
+                    <li>
+                        <a href="doctor_profile" > Profile</a>
+                    </li>
+                    <li>
+                        <a href="index"> Log out</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!--Table-->
+        <div id="container">
+            <table id="patient_table" style="text-align: center" border="1px">
+                <thead>
+                <tr>
+                    <th width="120px" style="text-align: center">User ID</th>
+                    <th width="120px" style="text-align: center">Full name</th>
+                    <th width="200px" style="text-align: center">Email</th>
+                    <th width="300px" style="text-align: center">Address</th>
+                    <th width="130px" style="text-align: center">Phone number</th>
+                    <th width="110px" style="text-align: center">Date of birth</th>
+                    <th width="150px" style="text-align: center">Results</th>
+                    <th width="100px" style="text-align: center">Appointment</th>
+                    <th width="100px" style="text-align: center">Delete</th>
+                </tr>
+                <tr th:each="patient:${patients}">
+                    <td th:text="${patient.userID}">User ID</td>
+                    <td th:text="${patient.fullName}">Full Name</td>
+                    <td th:text="${patient.email}">Email</td>
+                    <td th:text="${patient.address}">Address</td>
+                    <td th:text="${patient.phoneNumber}">Phone Number</td>
+                    <td th:text="${patient.birthDate}">Birth Date</td>
+                    <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
+                    <td><a th:href="@{'/approvePatient/'+${patient.userID}}" >Appointment</a></td>
+                    <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
+                </tr>
+                </thead>
+                <tbody id="tb">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</div>
+<div id="self_re" class="self_re" style="display: none">
+    <div id="content">
+        <br> User ID: &nbsp; <span class="result" th:text="${userID}"> User ID </span> <br> <br> <br>
+
+        1. Age Range：<span class="result" th:text="${resultOne}"> q1 </span> <br> <br><br>
+
+        2. Any of the following symptoms?   &nbsp;&nbsp; <span class="result" th:text="${resultTwo}"> q2 </span> <br> <br>
+        - High Fever <br>
+        - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
+        - Recent cough or worsening of a chronic cough<br>
+        - Shortness of breath<br>
+        - Trouble breathing<br>
+        - Sore throat<br>
+        - Runny nose or congestion (of unknown cause) <br> <br> <br>
+
+
+        3. One of the situations below? &nbsp;&nbsp;  <span class="result" th:text="${resultThree}"> q3 </span> <br><br>
+        - Is 0 to 3 months old<br>
+        - Is experiencing an obstruction of nasal passages other than normal congestion<br>
+        - Is currently having a nosebleed episode<br>
+        - Has had a nosebleed episode in the past week<br>
+        - Has undergone any of the following types of surgery:<br>
+        - Mouth surgery in the past week?<br>
+        - Nose surgery in the past month (adult) OR<br>
+        - Nose surgery in the past 3 weeks (child)<br>
+        - Is currently wheezing <br> <br> <br>
+
+
+        4. Any 2 of the following symptoms? &nbsp;&nbsp;  <span class="result" th:text="${resultFour}"> q4 </span><br><br>
+        - Stomach aches<br>
+        - Nausea or vomiting<br>
+        - Diarrhea<br>
+        - Major fatigue<br>
+        - Significant loss of appetite<br>
+        - Generalized muscle pain (not related to physical exertion)<br>
+        - Headache <br> <br> <br>
+    </div>
+    <button class="btn btn-info " id="close" type="button"> Close </button>
+</div>
+
+</html>
+<!--Functions-->
+<script>
+    window.onload = function () {
+        $("btnAdd").onclick = function () {
+
+            let tr = document.createElement('tr');
+
+            let tdName = document.createElement('td');
+            let tdFull_name = document.createElement('td');
+            let tdAddress = document.createElement('td');
+            let tdBirthday = document.createElement('td');
+            let tdPhone = document.createElement('td');
+            let tdEmail = document.createElement('td');
+            let tdPassword = document.createElement('td');
+            let tdregister_status = document.createElement('td');
+            let tdDelete = document.createElement('td');
+
+            tdName.innerText = $('name').value;
+            tdFull_name.innerText = $('full_name').value;
+            tdAddress.innerText = $('address').value;
+            tdBirthday.innerText = $('date_of_birth').value;
+            tdPhone.innerText = $('phone_number').value;
+            tdEmail.innerText = $('email').value;
+            tdPassword.innerText = $('password').value;
+            tdregister_status.innerText = $('register_status').value;
+
+            let btndelete = document.createElement('input');
+            btndelete.classList.add('btn', 'btn-info');
+            btndelete.type = 'button';
+            btndelete.value = 'delete';
+            btndelete.onclick = function () {
+                this.parentNode.parentNode.remove();
+            }
+            tdDelete.appendChild(btndelete);
+
+            tr.appendChild(tdName);
+            tr.appendChild(tdFull_name);
+            tr.appendChild(tdAddress);
+            tr.appendChild(tdBirthday);
+            tr.appendChild(tdPhone);
+            tr.appendChild(tdEmail);
+            tr.appendChild(tdDelete)
+
+            $('tb').appendChild(tr);
+        }
+
+        let btnlist = document.querySelectorAll('.delete');
+        for (let i = 0; i < btnlist.length; i++) {
+            btnlist[i].onclick = function () {
+                this.parentNode.parentNode.remove();
+            }
+        }
+
+    }
+
+    $('#close').click(function(){
+        //const self_re = document.getElementById('self_re');
+        //self_re.style.display='none';
+    });
+
+    function openRe(patient) {
+        console.log(patient.innerText)
+        window.open("/getAssessmentResult/" + patient.innerText,"_blank");
+    }
+
+</script>
+
+</body>
+</html>

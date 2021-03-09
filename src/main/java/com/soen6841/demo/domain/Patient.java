@@ -52,6 +52,23 @@ public class Patient {
         this.registerStatus = registerStatus;
         this.appointmentStatus = appointmentStatus;
     }
+    
+    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus, Status appointmentStatus, String reviewer, String assignee, String answerOne, String answerTwo, String answerThree, String answerFour) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.registerStatus = registerStatus;
+        this.appointmentStatus = appointmentStatus;
+        this.reviewer = reviewer;
+        this.assignee = assignee;
+        this.answerOne = answerOne;
+        this.answerTwo = answerTwo;
+        this.answerThree = answerThree;
+        this.answerFour = answerFour;
+    }
 
     public String getUserID() {
         return userID;
