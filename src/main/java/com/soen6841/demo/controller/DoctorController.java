@@ -1,6 +1,7 @@
 package com.soen6841.demo.controller;
 
 import com.soen6841.demo.domain.Doctor;
+import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
 import com.soen6841.demo.domain.User;
 import com.soen6841.demo.service.DoctorService;
@@ -9,6 +10,7 @@ import com.soen6841.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,10 +40,19 @@ public class DoctorController {
         userService.saveUser(user);
         return "redirect:/index";
     }
-
-    @RequestMapping("/alldd")
-    @ResponseBody
-    public Iterable<Doctor> getAllDoctors() {
-        return doctorService.getAllDoctors();
+    
+    @GetMapping("/doctor_patient")
+    public String getAllPatientUnderReview(Model model, HttpSession httpSession) {
+        Iterable<Patient> patients = doctorService.getPatientByAssignee((String) httpSession.getAttribute("userID"));
+        model.addAttribute("patients",patients);
+        return "doctor_patient";
     }
+    
+    @GetMapping("/doctor_profile")
+    public String getDoctorProfile(Model model) {
+        //Iterable<Patient> patients =   nurseService.getPatientByRegisterStatus(Status.wating);
+        //model.addAttribute("patients",patients);
+        return "doctor_profile";
+    }
+
 }
