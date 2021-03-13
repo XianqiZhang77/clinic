@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Symptom Self-Assessment Center</title>
+    <link rel="stylesheet" type="text/css" href= "../static/css/bootstrap.min.css") >
+    <link rel="shortcut icon" href="../static/pictures/favicon.ico" type="image/x-icon"/>
+    <style type="text/css">
+
+        body {
+            background: url("../static/pictures/mainPage.png") no-repeat;
+            background-size: 100%;
+        }
+
+        #logo {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #title {
+            font-size: 20px;
+            color: #122b40;
+            margin-top: -20%;
+        }
+        #index{
+            margin-left: 65%;
+        }
+
+        .containe{
+            display: -webkit-box;
+            display: -moz-box;
+            webkit-box-orient: horizontal;
+            -moz-box-orient: horizontal;
+            height: 60%;
+            margin-top: 5%;
+            margin-left: 3%;
+            font-size: 16px;
+        }
+        #notice{
+            width: 30%;
+            height: 100%;
+            margin-right: 3%;
+        }
+        #symptoms{
+            width: 60%;
+            height: 100%;
+            margin-left: 4%;
+        }
+        .head{
+            font-size: 24px;
+            text-align: center;
+        }
+
+        #d{
+            border:2px dotted grey;
+        }
+
+
+    </style>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+<div class="container-fluid" >
+    <img id="logo" src="../static/pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+    <a id="index" href="index" style="font-size: 16px">Log in</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+    <a id="newAccount" href="create_account" style="font-size: 16px">Log on</a>
+</div>
+
+<div class="containe">
+
+    <div id="notice" >
+        <div class="head"> Assessment Introduction </div> <br> <br>
+               This tool is not intended to be a substitute for medical attention. <br>
+               Please always follow your healthcare professional’s instructions. </span> <br> <br> <br>
+
+               Perform self-assessment if you fear you’ve been exposed to COVID-19 (SARS-CoV-2 virus)
+               or show symptoms that could be associated with COVID-19.
+               You can also use this tool to assess the status of your child or another family member. <br> <br> <br>
+
+               I already have an account: &nbsp;
+        <button id="in" class="btn btn-info"> Log in </button> <br><br><br>
+
+               I am a new user and want to creat an account:  &nbsp;
+        <button id="on" class="btn btn-info"> Log on </button> <br>
+    </div>
+
+<div id="d">
+
+</div>
+
+    <div id="symptoms">
+        <div class="head"> Introduction for children from 0 ~ 6 months of age </div> <br> <br>
+        If your child of 6 months to 5 years of age has been showing one or more symptoms on this list for less than 24 hours,
+        it is recommended that you keep them at home and avoid contact with other people.
+        After 24 hours, re-evaluate the situation to see if there is any change in their symptoms.
+        If one or more symptoms persist for more than 24 hours, proceed with self-assessment. <br> <br>
+
+        - Children ages 0-5: Rectal temperature of 38.5 °C (101.3 °F) and above<br>
+        - Children ages 6+: Oral temperature of 38.1 °C (100.6 °F) and above<br> <br>
+
+
+        - Sudden loss of smell without nasal congestion, with or without loss of taste &nbsp; &nbsp;
+        - Significant loss of appetite <br>
+        - Great fatigue or Headache &nbsp; &nbsp;
+        - Generalized muscle pain (not related to physical exertion) <br>  <br>
+
+        - Cough (new or worse) &nbsp; &nbsp;
+        - Shortness of breath, difficulty in breathing<br>
+        - Sore throat &nbsp; &nbsp;
+        - Runny or stuffy nose <br>  <br>
+
+        - Nausea &nbsp; &nbsp;
+        - Vomiting <br>
+        - Diarrhea &nbsp; &nbsp;
+        - Stomach aches <br> <br>
+
+
+    </div>
+
+
+</div>
+
+<script>
+
+    $('#in').click(function () {
+        window.location.href="index";
+    });
+
+    $('#on').click(function () {
+        window.location.href="create_account";
+    });
+
+    </script>
+
+
+</body>
+</html>
