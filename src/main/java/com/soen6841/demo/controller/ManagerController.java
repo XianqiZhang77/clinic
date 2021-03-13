@@ -22,7 +22,8 @@ public class ManagerController {
 
     @GetMapping("/getAllDoctorUnderReview")
     public String getAllDoctorUnderReview(Model model) {
-        Iterable<Doctor> doctors = managerService.getDoctorByRegisterStatus(Status.wating);
+        //Iterable<Doctor> doctors = managerService.getDoctorByRegisterStatus(Status.wating);
+        Iterable<Doctor> doctors = managerService.getAllDoctors();
         model.addAttribute("doctors",doctors);
         return "manager_doctor";
     }
