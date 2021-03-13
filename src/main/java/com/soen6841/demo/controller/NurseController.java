@@ -26,22 +26,18 @@ public class NurseController {
     
     @Autowired
     UserService userService;
-    
-    @Autowired
-    private PatientService patientService;
 
     @PostMapping("/nurse/registration")
     public String nurseRegister(Nurse nurse, Model model, HttpSession httpSession) {
 
         nurse.setRegisterStatus(Status.wating);
-        nurse.setUserID((String) httpSession.getAttribute("userID"));
-        nurseService.saveNurse(nurse);
-        
-        //
-        Nurse nn = nurseService.getNurseByUserID(nurse.getUserID());
+        String userID = (String) httpSession.getAttribute("userID");
+        nurse.setUserID(userID);
+        Nurse nurse1 = nurseService.saveNurse(nurse);
+
         User user = userService.getUserByUserID(nurse.getUserID());
         user.setUserType("nurse");
-        user.setRegisterID(nn.getId());
+        user.setRegisterID(nurse1.getId());
         userService.saveUser(user);
         return "redirect:/index";
     }
