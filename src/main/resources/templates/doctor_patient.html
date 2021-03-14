@@ -24,35 +24,23 @@
             font-size: 20px;
             color: #122b40;
         }
-        .self_re {
-             display: none;
-             position: absolute;
-             top: 20%;
-             left: 30%;
-             width: 38%;
-             height: 50%;
-             border: 16px solid lightblue;
-             background-color: lightcyan;
-             z-index:1002;
-             overflow: auto;
-             font-size: 15px;
-         }
 
-        .result{
-            color: #ff0000;
-            font-weight: bold;
-        }
 
-        #content{
-            margin-left: 5%;
-        }
-
-        #close{
-            margin-left: 45%;
-            margin-bottom: 2%;
+        .notice {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 35%;
+            height: 47%;
+            border: 5px solid lightblue;
+            background-color: rgba(255,255,255,1);
+            z-index:1002;
+            overflow: auto;
+            font-size: 20px;
         }
     </style>
-    <script src="js/jquery.min.js"></script>
+    <script src="static/js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -104,7 +92,7 @@
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
-                    <td><a th:href="@{'/approvePatient/'+${patient.userID}}" >Appointment</a></td>
+                    <td><a th:href="@{'/approvePatient/'+${patient.userID}}" onclick=" open_notice()">Appointment</a></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
                 </tr>
                 </thead>
@@ -117,47 +105,17 @@
 </div>
 
 </div>
-<div id="self_re" class="self_re" style="display: none">
-    <div id="content">
-        <br> User ID: &nbsp; <span class="result" th:text="${userID}"> User ID </span> <br> <br> <br>
 
-        1. Age Range：<span class="result" th:text="${resultOne}"> q1 </span> <br> <br><br>
-
-        2. Any of the following symptoms?   &nbsp;&nbsp; <span class="result" th:text="${resultTwo}"> q2 </span> <br> <br>
-        - High Fever <br>
-        - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
-        - Recent cough or worsening of a chronic cough<br>
-        - Shortness of breath<br>
-        - Trouble breathing<br>
-        - Sore throat<br>
-        - Runny nose or congestion (of unknown cause) <br> <br> <br>
-
-
-        3. One of the situations below? &nbsp;&nbsp;  <span class="result" th:text="${resultThree}"> q3 </span> <br><br>
-        - Is 0 to 3 months old<br>
-        - Is experiencing an obstruction of nasal passages other than normal congestion<br>
-        - Is currently having a nosebleed episode<br>
-        - Has had a nosebleed episode in the past week<br>
-        - Has undergone any of the following types of surgery:<br>
-        - Mouth surgery in the past week?<br>
-        - Nose surgery in the past month (adult) OR<br>
-        - Nose surgery in the past 3 weeks (child)<br>
-        - Is currently wheezing <br> <br> <br>
-
-
-        4. Any 2 of the following symptoms? &nbsp;&nbsp;  <span class="result" th:text="${resultFour}"> q4 </span><br><br>
-        - Stomach aches<br>
-        - Nausea or vomiting<br>
-        - Diarrhea<br>
-        - Major fatigue<br>
-        - Significant loss of appetite<br>
-        - Generalized muscle pain (not related to physical exertion)<br>
-        - Headache <br> <br> <br>
+<div id="notice" class="notice" style="display: none">
+    <div style="margin-left: 1%" >
+        <br>
+    Doctor Name: <input id="docName" class="form-control" placeholder="Please input your name" width="100px"> <br>
+    Patient Name: <input id="patName"  class="form-control" placeholder="Please input teh patient's name" ><br>
+    Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
+    Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
+    <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 47%" > Close </button>
     </div>
-    <button class="btn btn-info " id="close" type="button"> Close </button>
 </div>
-
-</html>
 <!--Functions-->
 <script>
     window.onload = function () {
@@ -221,6 +179,16 @@
     function openRe(patient) {
         console.log(patient.innerText)
         window.open("/getAssessmentResult/" + patient.innerText,"_blank");
+    }
+
+    $('#closeNotice').click(function(){
+        const notice = document.getElementById('notice');
+        notice.style.display='none';
+    });
+
+    function open_notice(){
+        const notice = document.getElementById('notice');
+        notice.style.display='block';
     }
 
 </script>
