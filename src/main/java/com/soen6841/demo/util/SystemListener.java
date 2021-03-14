@@ -77,31 +77,31 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
 
     private List<Doctor> getDoctorList(){
         List<Doctor> doctorList = new ArrayList<>();
-        Doctor doctor1 = new Doctor("Bob","Bob","a@gamil.com","A St,","111222333",new Date(19999999),"889", Status.wating);
+        Doctor doctor1 = new Doctor("Bob","Bob","a@gamil.com","A St,","111222333",new Date(19999999),"889", Status.wating, new Date());
         doctorList.add(doctor1);
-        Doctor doctor2 = new Doctor("Mike","Mike","b@gamil.com","B St,","888866666",new Date(19999999),"123", Status.accepted);
+        Doctor doctor2 = new Doctor("Mike","Mike","b@gamil.com","B St,","888866666",new Date(19999999),"123", Status.accepted, new Date());
         doctorList.add(doctor2);
-        Doctor doctor3 = new Doctor("Lucy","Lucy","c@gamil.com","C St,","768676678678",new Date(19999999),"188", Status.wating);
+        Doctor doctor3 = new Doctor("Lucy","Lucy","c@gamil.com","C St,","768676678678",new Date(19999999),"188", Status.wating, new Date());
         doctorList.add(doctor3);
         return doctorList;
     }
 
     private List<Nurse> getNurseList(){
         List<Nurse> nurseList = new ArrayList<>();
-        Nurse nurse1 = new Nurse("Linda","Linda","k@gamil.com","L St,","54768558",new Date(19999999),"1992", Status.wating);
+        Nurse nurse1 = new Nurse("Linda","Linda","k@gamil.com","L St,","54768558",new Date(19999999),"1992", Status.wating, new Date());
         nurseList.add(nurse1);
-        Nurse nurse2 = new Nurse("Bill","Bill","bikk@gamil.com","Bi St,","8888698699",new Date(288888888),"1236", Status.wating);
+        Nurse nurse2 = new Nurse("Bill","Bill","bikk@gamil.com","Bi St,","8888698699",new Date(288888888),"1236", Status.wating, new Date());
         nurseList.add(nurse2);
-        Nurse nurse3 = new Nurse("Alice","Alice","alice@gamil.com","Ai St,","88824328699",new Date(288888888),"1237", Status.accepted);
+        Nurse nurse3 = new Nurse("Alice","Alice","alice@gamil.com","Ai St,","88824328699",new Date(288888888),"1237", Status.accepted, new Date());
         nurseList.add(nurse3);
         return nurseList;
     }
 
     private List<Patient> getPatientList(){
         List<Patient> patientList = new ArrayList<>();
-        Patient patient1 = new Patient("Will","Will","ww@gamil.com","WWD St,","19999",new Date(19999999), Status.wating, Status.unfinished);
+        Patient patient1 = new Patient("Will","Will","ww@gamil.com","WWD St,","19999",new Date(19999999), Status.wating, new Date(), Status.under_review);
         patientList.add(patient1);
-        Patient patient2 = new Patient("Peter","Peter","peter@gamil.com","WWD St,","19999",new Date(19999999), Status.accepted, Status.accepted, "Alice", "Mike", "18 years+" , "No", "No" ,"No");
+        Patient patient2 = new Patient("Peter","Peter","peter@gamil.com","WWD St,","19999",new Date(19999999), Status.accepted, new Date(), "18 years+" , "No", "No" ,"No", new Date(), Status.under_review);
         patientList.add(patient2);
         return patientList;
     }

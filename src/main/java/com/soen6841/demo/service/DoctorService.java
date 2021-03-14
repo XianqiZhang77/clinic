@@ -9,6 +9,10 @@ import com.soen6841.demo.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 @Service
 public class DoctorService {
 
@@ -16,10 +20,20 @@ public class DoctorService {
     private DoctorRepository doctorRepository;
     
     @Autowired
-    private PatientRepository patientRepository;
+    private PatientService patientService;
 
     public Iterable<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
+        List<Doctor> doctors = (List<Doctor>) doctorRepository.findAll();
+        Collections.sort(doctors, (d1, d2) -> {
+            if (d1.getRegisterTime().before(d2.getRegisterTime())) {
+                return 1;
+            }
+            if (d1.getRegisterTime().after(d2.getRegisterTime())) {
+                return -1;
+            }
+            return 0;
+        });
+        return doctors;
     }
 
     public Doctor saveDoctor(Doctor doctor) {
@@ -33,12 +47,18 @@ public class DoctorService {
     public Doctor getDoctorByUserID(String userID) {
         return doctorRepository.findOneByUserID(userID);
     }
-    
-    public Iterable<Patient> getPatientByAppoinmentStatus(Status registerStatus) {
-        return patientRepository.findPatientByAppointmentStatus(registerStatus);
+
+    public boolean existsByUserID(String doctorUserID) {
+        return doctorRepository.existsByUserID(doctorUserID);
     }
-    
-    public Iterable<Patient> getPatientByAssignee(String assignee) {
-        return patientRepository.findPatientByAssignee(assignee);
+
+    public Iterable<Patient> getAllAcceptedPatients() {
+        return patientService.findAllAcceptedPatients();
     }
+
+    public Iterable<Doctor> getAllAcceptedDoctors() {
+        return doctorRepository.findDoctorByRegisterStatus(Status.accepted);
+    }
+
+
 }

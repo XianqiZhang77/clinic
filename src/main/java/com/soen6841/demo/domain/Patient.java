@@ -26,13 +26,11 @@ public class Patient {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
     @Column(name = "registerStatus")
-    private Status registerStatus;   
-    @Column(name = "reviewer")
-    private String reviewer;
-    @Column(name = "appointmentStatus")
-    private Status appointmentStatus;
-    @Column(name = "assignee")
-    private String assignee; 
+    private Status registerStatus;
+    @Column(name = "register_Time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date registerTime;
     @Column(name = "answerOne")
     private String answerOne;
     @Column(name = "answerTwo")
@@ -41,8 +39,12 @@ public class Patient {
     private String answerThree;
     @Column(name = "answerFour")
     private String answerFour;
+    @Column(name = "selfAssessmentTime")
+    private Date selfAssessmentTime;
+    @Column(name = "reviewStatus")
+    private Status reviewStatus;
 
-    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus, Status appointmentStatus) {
+    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus, Date registerTime, String answerOne, String answerTwo, String answerThree, String answerFour, Date selfAssessmentTime, Status reviewStatus) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;
@@ -50,24 +52,49 @@ public class Patient {
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.registerStatus = registerStatus;
-        this.appointmentStatus = appointmentStatus;
-    }
-    
-    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus, Status appointmentStatus, String reviewer, String assignee, String answerOne, String answerTwo, String answerThree, String answerFour) {
-        this.userID = userID;
-        this.fullName = fullName;
-        this.email = email;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-        this.registerStatus = registerStatus;
-        this.appointmentStatus = appointmentStatus;
-        this.reviewer = reviewer;
-        this.assignee = assignee;
+        this.registerTime = registerTime;
         this.answerOne = answerOne;
         this.answerTwo = answerTwo;
         this.answerThree = answerThree;
         this.answerFour = answerFour;
+        this.selfAssessmentTime = selfAssessmentTime;
+        this.reviewStatus = reviewStatus;
+    }
+
+    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus, Date registerTime, Status reviewStatus) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.registerStatus = registerStatus;
+        this.registerTime = registerTime;
+        this.reviewStatus = reviewStatus;
+    }
+
+    public Date getSelfAssessmentTime() {
+        return selfAssessmentTime;
+    }
+
+    public void setSelfAssessmentTime(Date selfAssessmentTime) {
+        this.selfAssessmentTime = selfAssessmentTime;
+    }
+
+    public Status getReviewStatus() {
+        return reviewStatus;
+    }
+
+    public void setReviewStatus(Status reviewStatus) {
+        this.reviewStatus = reviewStatus;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
     }
 
     public String getUserID() {
@@ -132,30 +159,6 @@ public class Patient {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }
-    
-    public String getReviewer() {
-        return reviewer;
-    }
-
-    public void setReviewer(String reviewer) {
-        this.reviewer = reviewer;
-    }
-    
-    public Status getAppointmentStatus() {
-        return appointmentStatus;
-    }
-
-    public void setAppointmentStatus(Status appointmentStatus) {
-        this.appointmentStatus = appointmentStatus;
-    }
-    
-    public String getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
     }
 
     public String getAnswerOne() { return answerOne; }

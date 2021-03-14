@@ -3,12 +3,12 @@ package com.soen6841.demo.service;
 import com.soen6841.demo.dao.PatientRepository;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class PatientService {
@@ -28,17 +28,23 @@ public class PatientService {
         return patientRepository.findOneById(id);
     }
 
+    public boolean existsByUserID(String patientUserID) {
+        return patientRepository.existsByUserID(patientUserID);
+    }
+
     public Patient getPatientByUserID(String userID) {
         return patientRepository.findOneByUserID(userID);
     }
 
     public Patient saveQuestionAnswers(String patientId, String[] answer) {
         if(patientRepository.existsByUserID(patientId)){
-            patientRepository.findOneByUserID(patientId).setAnswerOne(answer[0]);
-            patientRepository.findOneByUserID(patientId).setAnswerTwo(answer[1]);
-            patientRepository.findOneByUserID(patientId).setAnswerThree(answer[2]);
-            patientRepository.findOneByUserID(patientId).setAnswerFour(answer[3]);
-            patientRepository.findOneByUserID(patientId).setAppointmentStatus(Status.wating);
+            Patient patient = patientRepository.findOneByUserID(patientId);
+            patient.setAnswerOne(answer[0]);
+            patient.setAnswerTwo(answer[1]);
+            patient.setAnswerThree(answer[2]);
+            patient.setAnswerFour(answer[3]);
+            patient.setSelfAssessmentTime(new Date());
+            patient.setReviewStatus(Status.under_review);
         }
         return patientRepository.findOneByUserID(patientId);
     }
@@ -53,6 +59,41 @@ public class PatientService {
             results[3] = check.getAnswerFour();
         }
         return results;
+    }
+
+    public Iterable<Patient> findAllAcceptedPatients() {
+        List<Patient> patients = (List<Patient>) patientRepository.findPatientByRegisterStatus(Status.accepted);
+        Collections.sort(patients, (p1, p2) -> {
+
+            if (p1.getSelfAssessmentTime() == null) {
+                return 1;
+            }
+            if (p2.getSelfAssessmentTime() == null) {
+                return -1;
+            }
+            if (p1.getReviewStatus().equals(Status.under_review) && p2.getReviewStatus().equals(Status.reviewed)) {
+                return -1;
+            }
+            if (p1.getReviewStatus().equals(Status.reviewed) && p2.getReviewStatus().equals(Status.under_review)) {
+                return 1;
+            }
+            if (p1.getSelfAssessmentTime().before(p2.getSelfAssessmentTime())) {
+                return -1;
+            }
+            if (p1.getSelfAssessmentTime().after(p2.getSelfAssessmentTime())) {
+                return 1;
+            }
+            return 0;
+        });
+        return patients;
+    }
+
+    public boolean setReviewStatus(Patient patient, Status reviewStatus) {
+        patient.setReviewStatus(reviewStatus);
+        if (patientRepository.save(patient) == null) {
+            return false;
+        }
+        return true;
     }
 
 }

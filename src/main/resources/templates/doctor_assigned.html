@@ -25,18 +25,18 @@
             color: #122b40;
         }
         .self_re {
-             display: none;
-             position: absolute;
-             top: 20%;
-             left: 30%;
-             width: 38%;
-             height: 50%;
-             border: 16px solid lightblue;
-             background-color: lightcyan;
-             z-index:1002;
-             overflow: auto;
-             font-size: 15px;
-         }
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 38%;
+            height: 50%;
+            border: 16px solid lightblue;
+            background-color: lightcyan;
+            z-index:1002;
+            overflow: auto;
+            font-size: 15px;
+        }
 
         .result{
             color: #ff0000;
@@ -72,10 +72,10 @@
                         <a href="doctor_patient" style="color: darkgray"> Patients </a>
                     </li>
                     <li>
-                        <a href="doctor_profile" > Profile</a>
+                        <a href="doctor_profile"> Profile</a>
                     </li>
                     <li>
-                        <a href="doctor_assigned" > Assigned</a>
+                        <a href="doctor_assigned"> Assigned</a>
                     </li>
                     <li>
                         <a href="index"> Log out</a>
@@ -89,26 +89,20 @@
             <table id="patient_table" style="text-align: center" border="1px">
                 <thead>
                 <tr>
-                    <th width="120px" style="text-align: center">User ID</th>
+                    <th width="120px" style="text-align: center">Patient ID</th>
                     <th width="120px" style="text-align: center">Full name</th>
-                    <th width="200px" style="text-align: center">Email</th>
-                    <th width="300px" style="text-align: center">Address</th>
-                    <th width="130px" style="text-align: center">Phone number</th>
-                    <th width="110px" style="text-align: center">Date of birth</th>
                     <th width="150px" style="text-align: center">Results</th>
+                    <th width="120px" style="text-align: center">Reviewer</th>
                     <th width="100px" style="text-align: center">Appointment</th>
                     <th width="100px" style="text-align: center">Delete</th>
                 </tr>
-                <tr th:each="patient:${patients}">
-                    <td th:text="${patient.userID}">User ID</td>
-                    <td th:text="${patient.fullName}">Full Name</td>
-                    <td th:text="${patient.email}">Email</td>
-                    <td th:text="${patient.address}">Address</td>
-                    <td th:text="${patient.phoneNumber}">Phone Number</td>
-                    <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
-                    <td><a th:href="@{'/approvePatient/'+${patient.userID}}" >Appointment</a></td>
-                    <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
+                <tr th:each="appointment:${appointments}">
+                    <td th:text="${appointment.patientUserID}">Patient ID</td>
+                    <td th:text="${appointment.patient}">Full Name</td>
+                    <td><button th:text="${appointment.patientUserID}" id="result" onclick="openRe(this)">Results</button></td>
+                    <td th:text="${appointment.reviewer}">Reviewer</td>
+                    <td><a th:href="@{'/approvePatient/'+${appointment.patientUserID}}" >Appointment</a></td>
+                    <td><a th:href="@{'/rejectPatient/'+${appointment.patientUserID}}" >Delete</a></td>
                 </tr>
                 </thead>
                 <tbody id="tb">

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 
 @Controller
@@ -33,11 +34,11 @@ public class PatientController {
     @PostMapping("/patient/registration")
     public String patientRegister(Patient patient, Model model, HttpSession httpSession) {
         patient.setRegisterStatus(Status.wating);
-        patient.setAppointmentStatus(Status.unfinished);
         patient.setUserID((String) httpSession.getAttribute("userID"));
+        patient.setRegisterTime(new Date());
+        patient.setReviewStatus(Status.under_review);
         Patient patient1 = patientService.savePatient(patient);
-        
-        //
+
         User user = userService.getUserByUserID(patient.getUserID());
         user.setUserType("patient");
         user.setRegisterID(patient1.getId());
