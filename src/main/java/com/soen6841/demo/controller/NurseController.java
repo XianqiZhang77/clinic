@@ -35,13 +35,13 @@ public class NurseController {
 
         nurse.setRegisterStatus(Status.wating);
         nurse.setUserID((String) httpSession.getAttribute("userID"));
-        nurseService.saveNurse(nurse);
+        Nurse nurse1 = nurseService.saveNurse(nurse);
         
         //
-        Nurse nn = nurseService.getNurseByUserID(nurse.getUserID());
+        //Nurse nn = nurseService.getNurseByUserID(nurse.getUserID());
         User user = userService.getUserByUserID(nurse.getUserID());
         user.setUserType("nurse");
-        user.setRegisterID(nn.getId());
+        user.setRegisterID(nurse1.getId());
         userService.saveUser(user);
         return "redirect:/index";
     }

@@ -30,13 +30,13 @@ public class DoctorController {
     public String doctorRegister(Doctor doctor, Model model, HttpSession httpSession) {
         doctor.setRegisterStatus(Status.wating);
         doctor.setUserID((String) httpSession.getAttribute("userID"));
-        doctorService.saveDoctor(doctor);
+        Doctor doctor1 = doctorService.saveDoctor(doctor);
         
         //
-        Doctor dd = doctorService.getDoctorByUserID(doctor.getUserID());
+        //Doctor dd = doctorService.getDoctorByUserID(doctor.getUserID());
         User user = userService.getUserByUserID(doctor.getUserID());
         user.setUserType("doctor");
-        user.setRegisterID(dd.getId());
+        user.setRegisterID(doctor1.getId());
         userService.saveUser(user);
         return "redirect:/index";
     }

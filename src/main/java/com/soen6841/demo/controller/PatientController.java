@@ -35,13 +35,13 @@ public class PatientController {
         patient.setRegisterStatus(Status.wating);
         patient.setAppointmentStatus(Status.unfinished);
         patient.setUserID((String) httpSession.getAttribute("userID"));
-        patientService.savePatient(patient);
+        Patient patient1 = patientService.savePatient(patient);
         
         //
-        Patient pp = patientService.getPatientByUserID(patient.getUserID());
+        //Patient pp = patientService.getPatientByUserID(patient.getUserID());
         User user = userService.getUserByUserID(patient.getUserID());
         user.setUserType("patient");
-        user.setRegisterID(pp.getId());
+        user.setRegisterID(patient1.getId());
         userService.saveUser(user);
         return "redirect:/index";
     }
