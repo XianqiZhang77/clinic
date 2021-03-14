@@ -90,6 +90,7 @@
                     <td th:text="${doctor.doctorNumber}">Doctor Number</td>
                     <td><a th:href="@{'/approveDoctor/'+${doctor.id}}" >Approve</a></td>
                     <td><a th:href="@{'/rejectDoctor/'+${doctor.id}}" >Reject</a></td>
+                    <td th:text="${doctor.registerStatus}">Status</td>
                 </tr>
                 </thead>
                 <tbody id="tb">
