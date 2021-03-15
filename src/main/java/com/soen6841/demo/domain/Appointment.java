@@ -23,6 +23,8 @@ public class Appointment {
     private String nurse;
     @Column(name = "nurseUserID")
     private String nurseUserID;
+    @Column(name = "note")
+    private String note;
     @Column(name = "appointmentDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)

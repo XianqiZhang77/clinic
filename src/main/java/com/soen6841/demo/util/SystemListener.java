@@ -72,6 +72,8 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         userList.add(patient1);
         User patient2 = new User("Peter",PasswordUtil.encrypt("Peter"),"patient", (long) 2);
         userList.add(patient2);
+        User patient3 = new User("Ray",PasswordUtil.encrypt("Ray"),"patient", (long) 3);
+        userList.add(patient3);
         return userList;
     }
 
@@ -101,9 +103,10 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         List<Patient> patientList = new ArrayList<>();
         Patient patient1 = new Patient("Will","Will","ww@gamil.com","WWD St,","19999",new Date(19999999), Status.wating, new Date(), Status.under_review);
         patientList.add(patient1);
-        Patient patient2 = new Patient("Peter","Peter","peter@gamil.com","WWD St,","19999",new Date(19999999), Status.accepted, new Date(), "18 years+" , "No", "No" ,"No", new Date(), Status.under_review);
+        Patient patient2 = new Patient("Peter","Peter","peter@gamil.com","WWD St,","19999",new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "No", "No" ,"No", new Date(), Status.under_review);
         patientList.add(patient2);
-        Patient patient3 = new Patient("Ray", "Ray", "Ray@gmail.com", "Du Fort", "43234545", new Date(19999999), Status.accepted, new Date(), "18 years+" , "Yes", "Yes" ,"Yes", new Date(), Status.reviewed, "Mike", "Alice");
+        Patient patient3 = new Patient("Ray", "Ray", "Ray@gmail.com", "Du Fort", "43234545", new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "Yes", "Yes" ,"Yes", new Date(), Status.reviewed, "Alice", "Mike");
+        patientList.add(patient3);
         return patientList;
     }
 }

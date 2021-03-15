@@ -108,7 +108,7 @@
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
-                    <td th:text="${patient.reviewer}">Reviewer</td>
+                    <td th:text="${patient.reviewer}">Assigned By</td>
                     <td><a th:href="@{'/approvePatient/'+${patient.userID}}" >Appointment</a></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
                 </tr>
