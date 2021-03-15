@@ -15,4 +15,6 @@ public interface NurseRepository extends CrudRepository<Nurse, Long> {
     Nurse findOneById(Long id);
     
     Nurse findOneByUserID(String userID);
+
+    boolean existsByUserID(String nurseUserID);
 }

@@ -16,4 +16,5 @@ public interface DoctorRepository extends CrudRepository<Doctor, Long> {
 
     Iterable<Doctor> findDoctorByRegisterStatus(Status registerStatus);
 
+    boolean existsByUserID(String doctorUserID);
 }

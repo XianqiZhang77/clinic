@@ -1,21 +1,19 @@
 package com.soen6841.demo.controller;
 
-import com.soen6841.demo.domain.Doctor;
-import com.soen6841.demo.domain.Patient;
-import com.soen6841.demo.domain.Status;
-import com.soen6841.demo.domain.User;
+import com.soen6841.demo.domain.*;
+import com.soen6841.demo.service.AppointmentService;
 import com.soen6841.demo.service.DoctorService;
+import com.soen6841.demo.service.PatientService;
 import com.soen6841.demo.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Controller
 public class DoctorController {
@@ -26,13 +24,19 @@ public class DoctorController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PatientService patientService;
+
+    @Autowired
+    private AppointmentService appointmentService;
+
     @PostMapping("/doctor/registration")
     public String doctorRegister(Doctor doctor, Model model, HttpSession httpSession) {
         doctor.setRegisterStatus(Status.wating);
         doctor.setUserID((String) httpSession.getAttribute("userID"));
+        doctor.setRegisterTime(new Date());
         Doctor doctor1 = doctorService.saveDoctor(doctor);
-        
-        //
+
         User user = userService.getUserByUserID(doctor.getUserID());
         user.setUserType("doctor");
         user.setRegisterID(doctor1.getId());
@@ -41,9 +45,9 @@ public class DoctorController {
     }
     
     @GetMapping("/doctor_patient")
-    public String getAllPatientUnderReview(Model model, HttpSession httpSession) {
-        Iterable<Patient> patients = doctorService.getPatientByAssignee((String) httpSession.getAttribute("userID"));
-        model.addAttribute("patients",patients);
+    public String getAllPatients(Model model) {
+        Iterable<Patient> patients = doctorService.getAllAcceptedPatients();
+        model.addAttribute("patients", patients);
         return "doctor_patient";
     }
     
@@ -52,6 +56,14 @@ public class DoctorController {
         //Iterable<Patient> patients =   nurseService.getPatientByRegisterStatus(Status.wating);
         //model.addAttribute("patients",patients);
         return "doctor_profile";
+    }
+
+    @RequestMapping("/doctor_assigned")
+    public String getAssignedPatients(Model model, HttpSession httpSession) {
+        //String userID = (String) httpSession.getAttribute("userID");
+        Iterable<Patient> patients = patientService.findByAssignee("Bob");
+        model.addAttribute("patients", patients);
+        return "doctor_assigned";
     }
 
 }

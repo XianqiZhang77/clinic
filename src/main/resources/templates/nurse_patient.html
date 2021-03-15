@@ -93,6 +93,8 @@
                     <th width="130px" style="text-align: center">Phone number</th>
                     <th width="110px" style="text-align: center">Date of birth</th>
                     <th width="150px" style="text-align: center">Results</th>
+                    <th width="120px" style="text-align: center">Review Status</th>
+                    <th width="150px" style="text-align: center">Doctor</th>
                     <th width="100px" style="text-align: center">Assign</th>
                     <th width="100px" style="text-align: center">Appointment</th>
                     <th width="100px" style="text-align: center">Delete</th>
@@ -105,7 +107,16 @@
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
-                    <td><a th:href="@{'/assignToDoctor/'+${patient.userID}}" >Assign</a></td>
+                    <td th:text="${patient.reviewStatus}">Review Status</td>
+                    <td class = "select"> Doctor
+                        <select class="form-control">
+                            <option th:each="doctor:${doctors}"
+                                    th:text="${doctor.fullName}"
+                                    th:value="${doctor.userID}">
+                            </option>
+                        </select>
+                    </td>
+                    <td><a th:href="@{'/nurse_assign/'+${patient.userID}}">Assign</a></td>
                     <td><a th:href="@{'/approvePatient/'+${patient.userID}}" >Appointment</a></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
                 </tr>
@@ -159,7 +170,6 @@
     <button class="btn btn-info " id="close" type="button"> Close </button>
 </div>
 
-</html>
 <!--Functions-->
 <script>
     window.onload = function () {
