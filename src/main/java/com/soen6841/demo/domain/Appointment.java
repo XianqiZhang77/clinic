@@ -23,16 +23,22 @@ public class Appointment {
     private String nurse;
     @Column(name = "nurseUserID")
     private String nurseUserID;
-    @Column(name = "reviewer")
-    private String reviewer;
-    @Column(name = "assignedStatus")
-    private Status assignedStatus;
     @Column(name = "appointmentDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date appointmentDate;
+    @Column(name = "appointmentStatus")
+    private Status appointmentStatus; // cancelled, available
 
     public Appointment() {
+    }
+
+    public Status getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(Status appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
     }
 
     public String getPatientUserID() {
@@ -91,14 +97,6 @@ public class Appointment {
         this.nurse = nurse;
     }
 
-    public String getReviewer() {
-        return reviewer;
-    }
-
-    public void setReviewer(String reviewer) {
-        this.reviewer = reviewer;
-    }
-
     public Date getAppointmentDate() {
         return appointmentDate;
     }
@@ -106,12 +104,5 @@ public class Appointment {
     public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
-
-    public Status getAssignedStatus() {
-        return assignedStatus;
-    }
-
-    public void setAssignedStatus(Status assignedStatus) {
-        this.assignedStatus = assignedStatus;
-    }
 }
+

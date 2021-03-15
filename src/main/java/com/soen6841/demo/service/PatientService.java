@@ -16,6 +16,12 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private NurseService nurseService;
+
+    @Autowired
+    private DoctorService doctorService;
+
     public Iterable<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
@@ -88,12 +94,26 @@ public class PatientService {
         return patients;
     }
 
-    public boolean setReviewStatus(Patient patient, Status reviewStatus) {
+    public void setReviewStatus(Patient patient, Status reviewStatus) {
         patient.setReviewStatus(reviewStatus);
-        if (patientRepository.save(patient) == null) {
-            return false;
-        }
-        return true;
+        patientRepository.save(patient);
     }
 
+    public void assignedToDoctor(String patientUserID, String nurseUserID, String doctorUserID) {
+
+        if (!patientRepository.existsByUserID(patientUserID) || !nurseService.existsByUserID(nurseUserID) || !doctorService.existsByUserID(doctorUserID)) {
+            return;
+        }
+
+        Patient patient = patientRepository.findOneByUserID(patientUserID);
+        patient.setAssignee(doctorUserID);
+        patient.setReviewer(nurseUserID);
+        patient.setReviewStatus(Status.reviewed);
+        patientRepository.save(patient);
+
+    }
+
+    public Iterable<Patient> findByAssignee(String assignee) {
+        return patientRepository.findPatientByAssignee(assignee);
+    }
 }

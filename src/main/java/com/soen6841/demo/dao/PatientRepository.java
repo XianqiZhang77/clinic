@@ -18,4 +18,6 @@ public interface PatientRepository extends CrudRepository<Patient,Long> {
 
     boolean existsByUserID(String userID);
 
+    Iterable<Patient> findPatientByAssignee(String assignee);
+
 }

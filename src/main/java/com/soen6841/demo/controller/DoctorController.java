@@ -3,6 +3,7 @@ package com.soen6841.demo.controller;
 import com.soen6841.demo.domain.*;
 import com.soen6841.demo.service.AppointmentService;
 import com.soen6841.demo.service.DoctorService;
+import com.soen6841.demo.service.PatientService;
 import com.soen6841.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class DoctorController {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PatientService patientService;
 
     @Autowired
     private AppointmentService appointmentService;
@@ -57,8 +61,8 @@ public class DoctorController {
     @RequestMapping("/doctor_assigned")
     public String getAssignedPatients(Model model, HttpSession httpSession) {
         //String userID = (String) httpSession.getAttribute("userID");
-        Iterable<Appointment> assignedAppointments = appointmentService.getAllAssignedByDoctorUserID("Bob");
-        model.addAttribute("appointments", assignedAppointments);
+        Iterable<Patient> patients = patientService.findByAssignee("Bob");
+        model.addAttribute("patients", patients);
         return "doctor_assigned";
     }
 

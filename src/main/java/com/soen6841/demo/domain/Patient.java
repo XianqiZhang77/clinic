@@ -43,6 +43,29 @@ public class Patient {
     private Date selfAssessmentTime;
     @Column(name = "reviewStatus")
     private Status reviewStatus;
+    @Column(name = "reviewer")
+    private String reviewer;
+    @Column(name = "assignee")
+    private String assignee;
+
+    public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus, Date registerTime, String answerOne, String answerTwo, String answerThree, String answerFour, Date selfAssessmentTime, Status reviewStatus, String reviewer, String assignee) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.registerStatus = registerStatus;
+        this.registerTime = registerTime;
+        this.answerOne = answerOne;
+        this.answerTwo = answerTwo;
+        this.answerThree = answerThree;
+        this.answerFour = answerFour;
+        this.selfAssessmentTime = selfAssessmentTime;
+        this.reviewStatus = reviewStatus;
+        this.reviewer = reviewer;
+        this.assignee = assignee;
+    }
 
     public Patient(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, Status registerStatus, Date registerTime, String answerOne, String answerTwo, String answerThree, String answerFour, Date selfAssessmentTime, Status reviewStatus) {
         this.userID = userID;
@@ -71,6 +94,22 @@ public class Patient {
         this.registerStatus = registerStatus;
         this.registerTime = registerTime;
         this.reviewStatus = reviewStatus;
+    }
+
+    public String getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(String reviewer) {
+        this.reviewer = reviewer;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
     public Date getSelfAssessmentTime() {

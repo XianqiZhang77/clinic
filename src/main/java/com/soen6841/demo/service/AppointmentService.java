@@ -26,14 +26,11 @@ public class AppointmentService {
         }
         Patient patient = patientService.getPatientByUserID(patientUserID);
         Doctor doctor = doctorService.getDoctorByUserID(doctorUserID);
-        Nurse reviewer = nurseService.getNurseByUserID(nurseUserID);
         Appointment appointment = new Appointment();
         appointment.setPatient(patient.getFullName());
         appointment.setPatientUserID(patientUserID);
         appointment.setDoctor(doctor.getFullName());
         appointment.setDoctorUserID(doctorUserID);
-        appointment.setReviewer(reviewer.getFullName());
-        appointment.setAssignedStatus(Status.wating);
         if (appointmentRepository.save(appointment) == null) {
             return false;
         }
