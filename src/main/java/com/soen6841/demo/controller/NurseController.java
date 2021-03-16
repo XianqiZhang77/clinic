@@ -72,15 +72,9 @@ public class NurseController {
     }
     
     @RequestMapping("/nurseAppointment")
-    public String makeAppointment(HttpSession httpSession, @PathVariable String patientUserID, @PathVariable String doctorUserID, @PathVariable String nurseUserID) {
-        //String nurseUserID = (String) httpSession.getAttribute("userID");
-//        Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
-//        Patient patient = patientService.getPatientByUserID(patientUserID);
-//        Doctor doctor = doctorService.getDoctorByUserID(doctorUserID);
-//        System.out.println(nurse.getFullName());
-//        System.out.println(patient.getFullName());
-//        System.out.println(doctor.getFullName());
-        patientService.assignedToDoctor(patientUserID, nurseUserID, doctorUserID);
+    public String makeAppointment(Appointment appointment, HttpSession httpSession) {
+    	appointment.setAppointmentStatus(Status.available);
+        appointmentService.saveAppointment(appointment);
         return "forward:/nurse_patient";
     }
 }

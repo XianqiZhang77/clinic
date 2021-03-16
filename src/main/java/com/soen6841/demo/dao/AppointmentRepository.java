@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AppointmentRepository extends CrudRepository<Appointment, Long> {
 
-    Appointment save(Appointment appointment);
-
     Iterable<Appointment> findAppointmentByDoctorUserID(String doctorUserID);
 
     Iterable<Appointment> findAppointmentByPatientUserID(String patientUserID);

@@ -40,7 +40,7 @@
             font-size: 20px;
         }
     </style>
-    <script src="static/js/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -60,7 +60,7 @@
                         <a href="doctor_patient" style="color: darkgray"> Patients </a>
                     </li>
                     <li>
-                        <a href="doctor_profile" > Profile</a>
+                        <a href="doctor_profile" > My Appointment</a>
                     </li>
                     <li>
                         <a href="doctor_assigned" > Assigned</a>
@@ -94,8 +94,8 @@
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
-                    <td><a th:href="@{'/approvePatient/'+${patient.userID}}" onclick=" open_notice()">Appointment</a></td>
+                    <td><button id="result" onclick="openRe(this)">Results</button></td>
+                    <td><button onclick=" open_notice(this)">Appointment</button></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
                 </tr>
                 </thead>
@@ -179,9 +179,12 @@
         //self_re.style.display='none';
     });
 
-    function openRe(patient) {
-        console.log(patient.innerText)
-        window.open("/getAssessmentResult/" + patient.innerText,"_blank");
+    function openRe(obj) {
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        console.log(uid)
+        window.open("/getAssessmentResult/" + uid,"_blank");
     }
 
     $('#closeNotice').click(function(){
@@ -189,7 +192,12 @@
         notice.style.display='none';
     });
 
-    function open_notice(){
+    function open_notice(obj){
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        console.log(uid)
+
         const notice = document.getElementById('notice');
         notice.style.display='block';
     }

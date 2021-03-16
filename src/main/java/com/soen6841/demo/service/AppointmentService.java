@@ -18,7 +18,8 @@ public class AppointmentService {
     DoctorService doctorService;
     @Autowired
     NurseService nurseService;
-
+    
+    /*
     public boolean addNewAppointmentByAssign(String patientUserID, String doctorUserID, String nurseUserID) {
 
         if (!patientService.existsByUserID(patientUserID) || !doctorService.existsByUserID(doctorUserID) || !nurseService.existsByUserID(nurseUserID)) {
@@ -36,6 +37,10 @@ public class AppointmentService {
         }
         patientService.setReviewStatus(patient, Status.reviewed);
         return true;
+    }
+    */
+    public Appointment saveAppointment(Appointment appointment) {
+        return appointmentRepository.save(appointment);
     }
 
     public Iterable<Appointment> getAllAssignedByDoctorUserID(String userID) {
