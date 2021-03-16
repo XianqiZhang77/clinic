@@ -95,7 +95,7 @@
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button id="result" onclick="openRe(this)">Results</button></td>
-                    <td><button onclick=" open_notice(this)">Appointment</button></td>
+                    <td><button onclick=" open_notice()">Appointment</button></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
                 </tr>
                 </thead>
@@ -112,11 +112,23 @@
 <div id="notice" class="notice" style="display: none">
     <div style="margin-left: 1%" >
         <br>
-    Doctor Name: <input id="docName" class="form-control" placeholder="Please input your name" width="100px"> <br>
-    Patient Name: <input id="patName"  class="form-control" placeholder="Please input teh patient's name" ><br>
-    Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
-    Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
-    <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 47%" > Close </button>
+
+        <div class="dropdown">
+            Doctor Name: &nbsp;
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Name
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li> </li>
+            </ul>
+        </div>
+
+        <br> <br>
+        Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
+        Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
+        <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
+        <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
     </div>
 </div>
 <!--Functions-->
@@ -192,12 +204,19 @@
         notice.style.display='none';
     });
 
+/*
     function open_notice(obj){
         $("#myModal").modal('show');
         var $td = $(obj).parent().parent().children();
         var uid = $td.eq(0).text();
         console.log(uid)
 
+        const notice = document.getElementById('notice');
+        notice.style.display='block';
+    }
+*/
+
+    function open_notice(){
         const notice = document.getElementById('notice');
         notice.style.display='block';
     }

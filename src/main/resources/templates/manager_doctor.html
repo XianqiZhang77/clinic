@@ -88,9 +88,15 @@
                     <td th:text="${doctor.phoneNumber}">Phone Number</td>
                     <td th:text="${doctor.birthDate}">Birth Date</td>
                     <td th:text="${doctor.doctorNumber}">Doctor Number</td>
-                    <td><a th:href="@{'/approveDoctor/'+${doctor.id}}" >Approve</a></td>
-                    <td><a th:href="@{'/rejectDoctor/'+${doctor.id}}" >Reject</a></td>
-                    <td th:text="${doctor.registerStatus}">Status</td>
+                    <td th:switch="${doctor.registerStatus}">
+                        <p th:case=""> <a th:href="@{'/approveDoctor/'+${doctor.id}}" >Approve</a> </p>
+                        <p th:case="">Approve</p>
+                    </td>
+                    <td th:switch="${doctor.registerStatus}">
+                        <p th:case=""> <a th:href="@{'/rejectDoctor/'+${doctor.id}}" >Reject</a> </p>
+                        <p th:case="">Reject</p>
+                    </td>
+
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -181,6 +187,7 @@
                 this.parentNode.parentNode.remove();
             }
         }
+
 
     }
 

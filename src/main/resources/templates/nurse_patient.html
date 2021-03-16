@@ -30,7 +30,7 @@
             top: 20%;
             left: 30%;
             width: 35%;
-            height: 47%;
+            height: 38%;
             border: 5px solid lightblue;
             background-color: rgba(255,255,255,1);
             z-index:1002;
@@ -80,7 +80,6 @@
                     <th width="110px" style="text-align: center">Date of birth</th>
                     <th width="150px" style="text-align: center">Results</th>
                     <th width="120px" style="text-align: center">Review Status</th>
-                    <th width="150px" style="text-align: center">Doctor</th>
                     <th width="100px" style="text-align: center">Assign</th>
                     <th width="100px" style="text-align: center">Appointment</th>
                     <th width="100px" style="text-align: center">Delete</th>
@@ -93,7 +92,26 @@
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
-                    <td><a th:href="@{'/assignToDoctor/'+${patient.userID}}" >Assign</a></td>
+                    <td><div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Status
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">?</a></li>
+                            <li><a href="#">?</a></li>
+                            <li><a href="#">?</a></li>
+                        </ul>
+                    </div></td>
+                    <td><div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="assign" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Name
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+                            </ul>
+                        </div></td>
                     <td><a th:href="@{'/approvePatient/'+${patient.userID}}" onclick=" open_notice()">Appointment</a></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
                 </tr>
@@ -111,11 +129,23 @@
 <div id="notice" class="notice" style="display: none">
     <div style="margin-left: 1%" >
         <br>
-        Doctor Name: <input id="docName" class="form-control" placeholder="Please input your name" width="100px"> <br>
-        Patient Name: <input id="patName"  class="form-control" placeholder="Please input teh patient's name" ><br>
+
+        <div class="dropdown">
+            Nurse Name: &nbsp;
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Name
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li> </li>
+            </ul>
+        </div>
+
+        <br> <br>
         Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
         Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
-        <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 47%" > Close </button>
+        <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
+        <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
     </div>
 </div>
 
