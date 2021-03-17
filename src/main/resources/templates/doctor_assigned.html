@@ -24,32 +24,20 @@
             font-size: 20px;
             color: #122b40;
         }
-        .self_re {
+
+
+        .notice {
             display: none;
             position: absolute;
             top: 20%;
             left: 30%;
-            width: 38%;
-            height: 50%;
-            border: 16px solid lightblue;
-            background-color: lightcyan;
+            width: 35%;
+            height: 47%;
+            border: 5px solid lightblue;
+            background-color: rgba(255,255,255,1);
             z-index:1002;
             overflow: auto;
-            font-size: 15px;
-        }
-
-        .result{
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        #content{
-            margin-left: 5%;
-        }
-
-        #close{
-            margin-left: 45%;
-            margin-bottom: 2%;
+            font-size: 20px;
         }
     </style>
     <script src="js/jquery.min.js"></script>
@@ -69,13 +57,13 @@
             <nav class="navbar navbar-inverse" id="sidebar-wrapper" role="navigation">
                 <ul class="nav sidebar-nav">
                     <li class="sidebar-brand">
-                        <a href="doctor_patient"> Patients </a>
+                        <a href="doctor_patient" style="color: darkgray"> Patients </a>
                     </li>
                     <li>
-                        <a href="doctor_profile"> My Appointment</a>
+                        <a href="doctor_profile" > My Appointment</a>
                     </li>
                     <li>
-                        <a href="doctor_assigned" style="color: darkgray"> Assigned</a>
+                        <a href="doctor_assigned" > Assigned</a>
                     </li>
                     <li>
                         <a href="index"> Log out</a>
@@ -89,28 +77,30 @@
             <table id="patient_table" style="text-align: center" border="1px">
                 <thead>
                 <tr>
-                    <th width="120px" style="text-align: center">User ID</th>
+                    <th width="120px" style="text-align: center; display: none">User ID</th>
                     <th width="120px" style="text-align: center">Full name</th>
                     <th width="200px" style="text-align: center">Email</th>
                     <th width="300px" style="text-align: center">Address</th>
                     <th width="130px" style="text-align: center">Phone number</th>
                     <th width="110px" style="text-align: center">Date of birth</th>
                     <th width="150px" style="text-align: center">Results</th>
-                    <th width="120px" style="text-align: center">Reviewer</th>
+                    <th width="120px" style="text-align: center">Status</th>
+                    <th width="120px" style="text-align: center">Assigned by</th>
                     <th width="100px" style="text-align: center">Appointment</th>
                     <th width="100px" style="text-align: center">Delete</th>
                 </tr>
                 <tr th:each="patient:${patients}">
-                    <td th:text="${patient.userID}">User ID</td>
+                    <td th:text="${patient.userID}" style="display: none">User ID</td>
                     <td th:text="${patient.fullName}">Full Name</td>
                     <td th:text="${patient.email}">Email</td>
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
+                    <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
+                    <td th:text="${patient.reviewStatus}">Status</td>
                     <td th:text="${patient.reviewer}">Assigned By</td>
-                    <td><a th:href="@{'/approvePatient/'+${patient.userID}}" >Appointment</a></td>
-                    <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
+                    <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
+                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -122,47 +112,16 @@
 </div>
 
 </div>
-<div id="self_re" class="self_re" style="display: none">
-    <div id="content">
-        <br> User ID: &nbsp; <span class="result" th:text="${userID}"> User ID </span> <br> <br> <br>
 
-        1. Age Range：<span class="result" th:text="${resultOne}"> q1 </span> <br> <br><br>
-
-        2. Any of the following symptoms?   &nbsp;&nbsp; <span class="result" th:text="${resultTwo}"> q2 </span> <br> <br>
-        - High Fever <br>
-        - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
-        - Recent cough or worsening of a chronic cough<br>
-        - Shortness of breath<br>
-        - Trouble breathing<br>
-        - Sore throat<br>
-        - Runny nose or congestion (of unknown cause) <br> <br> <br>
-
-
-        3. One of the situations below? &nbsp;&nbsp;  <span class="result" th:text="${resultThree}"> q3 </span> <br><br>
-        - Is 0 to 3 months old<br>
-        - Is experiencing an obstruction of nasal passages other than normal congestion<br>
-        - Is currently having a nosebleed episode<br>
-        - Has had a nosebleed episode in the past week<br>
-        - Has undergone any of the following types of surgery:<br>
-        - Mouth surgery in the past week?<br>
-        - Nose surgery in the past month (adult) OR<br>
-        - Nose surgery in the past 3 weeks (child)<br>
-        - Is currently wheezing <br> <br> <br>
-
-
-        4. Any 2 of the following symptoms? &nbsp;&nbsp;  <span class="result" th:text="${resultFour}"> q4 </span><br><br>
-        - Stomach aches<br>
-        - Nausea or vomiting<br>
-        - Diarrhea<br>
-        - Major fatigue<br>
-        - Significant loss of appetite<br>
-        - Generalized muscle pain (not related to physical exertion)<br>
-        - Headache <br> <br> <br>
+<div id="notice" class="notice" style="display: none">
+    <div style="margin-left: 5%; margin-right: 5%" >
+        <br> <br>
+        Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
+        Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
+        <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
+        <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
     </div>
-    <button class="btn btn-info " id="close" type="button"> Close </button>
 </div>
-
-</html>
 <!--Functions-->
 <script>
     window.onload = function () {
@@ -218,14 +177,22 @@
 
     }
 
-    $('#close').click(function(){
-        //const self_re = document.getElementById('self_re');
-        //self_re.style.display='none';
+    function openRe(obj) {
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        console.log(uid)
+        window.open("/getAssessmentResult/" + uid,"_blank");
+    }
+
+    $('#closeNotice').click(function(){
+        const notice = document.getElementById('notice');
+        notice.style.display='none';
     });
 
-    function openRe(patient) {
-        console.log(patient.innerText)
-        window.open("/getAssessmentResult/" + patient.innerText,"_blank");
+    function open_notice(){
+        const notice = document.getElementById('notice');
+        notice.style.display='block';
     }
 
 </script>

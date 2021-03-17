@@ -72,7 +72,7 @@
             <table id="patient_table" style="text-align: center" border="1px">
                 <thead>
                 <tr>
-                    <th width="120px" style="text-align: center">User ID</th>
+                    <th width="120px" style="text-align: center; display: none" >User ID</th>
                     <th width="120px" style="text-align: center">Full name</th>
                     <th width="200px" style="text-align: center">Email</th>
                     <th width="300px" style="text-align: center">Address</th>
@@ -85,24 +85,17 @@
                     <th width="100px" style="text-align: center">Delete</th>
                 </tr>
                 <tr th:each="patient:${patients}">
-                    <td th:text="${patient.userID}">User ID</td>
+                    <td th:text="${patient.userID}" style="display: none">User ID</td>
                     <td th:text="${patient.fullName}">Full Name</td>
                     <td th:text="${patient.email}">Email</td>
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
+                    <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
-                    <td><div class="dropdown" th:each="doctor : ${doctors}">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="assign" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            </ul>
-                        </div>
-                    </td>
-                    <td><a th:href="@{'/approvePatient/'+${patient.userID}}" onclick=" open_notice()">Appointment</a></td>
-                    <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
+                    <td><button clsss="btn btn-primary" onclick="open_assign()">Assign</button></td>
+                    <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
+                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -115,8 +108,8 @@
 
 </div>
 
-<div id="notice" class="notice" style="display: none">
-    <div style="margin-left: 1%" >
+<div id="assign" class="notice" style="display: none">
+    <div style="margin-left: 5%; margin-right: 5%" >
         <br>
 
         <div class="dropdown">
@@ -130,6 +123,14 @@
             </ul>
         </div>
 
+        <br>
+        <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
+        <button class="btn btn-info " id="closeAssign" type="button" style="margin-left: 25%" > Close </button>
+    </div>
+</div>
+
+<div id="notice" class="notice" style="display: none">
+    <div style="margin-left: 5%; margin-right: 5%" >
         <br> <br>
         Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
         Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
@@ -137,7 +138,6 @@
         <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
     </div>
 </div>
-
 <!--Functions-->
 <script>
     window.onload = function () {
@@ -193,14 +193,12 @@
 
     }
 
-    $('#close').click(function(){
-        //const self_re = document.getElementById('self_re');
-        //self_re.style.display='none';
-    });
-
-    function openRe(patient) {
-        console.log(patient.innerText)
-        window.open("/getAssessmentResult/" + patient.innerText,"_blank");
+    function openRe(obj) {
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        console.log(uid)
+        window.open("/getAssessmentResult/" + uid,"_blank");
     }
 
     $('#closeNotice').click(function(){
@@ -212,6 +210,16 @@
         const notice = document.getElementById('notice');
         notice.style.display='block';
     }
+
+    function open_assign(){
+        const assign = document.getElementById('assign');
+        assign.style.display='block';
+    }
+
+    $('#closeAssign').click(function(){
+        const assign = document.getElementById('assign');
+        assign.style.display='none';
+    });
 
 </script>
 

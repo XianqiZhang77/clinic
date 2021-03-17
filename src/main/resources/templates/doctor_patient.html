@@ -77,26 +77,28 @@
             <table id="patient_table" style="text-align: center" border="1px">
                 <thead>
                 <tr>
-                    <th width="120px" style="text-align: center">User ID</th>
+                    <th width="120px" style="text-align: center; display: none">User ID</th>
                     <th width="120px" style="text-align: center">Full name</th>
                     <th width="200px" style="text-align: center">Email</th>
                     <th width="300px" style="text-align: center">Address</th>
                     <th width="130px" style="text-align: center">Phone number</th>
                     <th width="110px" style="text-align: center">Date of birth</th>
                     <th width="150px" style="text-align: center">Results</th>
+                    <th width="120px" style="text-align: center">Status</th>
                     <th width="100px" style="text-align: center">Appointment</th>
                     <th width="100px" style="text-align: center">Delete</th>
                 </tr>
                 <tr th:each="patient:${patients}">
-                    <td th:text="${patient.userID}">User ID</td>
+                    <td th:text="${patient.userID}" style="display: none">User ID</td>
                     <td th:text="${patient.fullName}">Full Name</td>
                     <td th:text="${patient.email}">Email</td>
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><button id="result" onclick="openRe(this)">Results</button></td>
-                    <td><button onclick=" open_notice()">Appointment</button></td>
-                    <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
+                    <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
+                    <td th:text="${patient.reviewStatus}">Status</td>
+                    <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
+                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -110,20 +112,7 @@
 </div>
 
 <div id="notice" class="notice" style="display: none">
-    <div style="margin-left: 1%" >
-        <br>
-
-        <div class="dropdown">
-            Doctor Name: &nbsp;
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Name
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li> </li>
-            </ul>
-        </div>
-
+    <div style="margin-left: 5%; margin-right: 5%" >
         <br> <br>
         Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
         Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
@@ -186,11 +175,6 @@
 
     }
 
-    $('#close').click(function(){
-        //const self_re = document.getElementById('self_re');
-        //self_re.style.display='none';
-    });
-
     function openRe(obj) {
         $("#myModal").modal('show');
         var $td = $(obj).parent().parent().children();
@@ -203,18 +187,6 @@
         const notice = document.getElementById('notice');
         notice.style.display='none';
     });
-
-/*
-    function open_notice(obj){
-        $("#myModal").modal('show');
-        var $td = $(obj).parent().parent().children();
-        var uid = $td.eq(0).text();
-        console.log(uid)
-
-        const notice = document.getElementById('notice');
-        notice.style.display='block';
-    }
-*/
 
     function open_notice(){
         const notice = document.getElementById('notice');
