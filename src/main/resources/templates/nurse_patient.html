@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,7 +79,7 @@
                     <th width="130px" style="text-align: center">Phone number</th>
                     <th width="110px" style="text-align: center">Date of birth</th>
                     <th width="150px" style="text-align: center">Results</th>
-                    <th width="120px" style="text-align: center">Review Status</th>
+                    <th width="120px" style="text-align: center">Status</th>
                     <th width="100px" style="text-align: center">Assign</th>
                     <th width="100px" style="text-align: center">Appointment</th>
                     <th width="100px" style="text-align: center">Delete</th>
@@ -92,26 +92,15 @@
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
-                    <td><div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Status
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">?</a></li>
-                            <li><a href="#">?</a></li>
-                            <li><a href="#">?</a></li>
-                        </ul>
-                    </div></td>
-                    <td><div class="dropdown">
+                    <td th:text="${patient.reviewStatus}">Status</td>
+                    <td><div class="dropdown" th:each="doctor : ${doctors}">
                             <button class="btn btn-default dropdown-toggle" type="button" id="assign" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Name
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-
                             </ul>
-                        </div></td>
+                        </div>
+                    </td>
                     <td><a th:href="@{'/approvePatient/'+${patient.userID}}" onclick=" open_notice()">Appointment</a></td>
                     <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
                 </tr>

@@ -14,6 +14,10 @@ public class PageController {
     public String indexPage() {
         return "main_page";
     }
+    @RequestMapping("/")
+    public String index() {
+        return "forward:/index";
+    }
     
 	/*
 	 * 登录页

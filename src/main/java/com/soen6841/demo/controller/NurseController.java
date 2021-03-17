@@ -31,7 +31,7 @@ public class NurseController {
     @PostMapping("/nurse/registration")
     public String nurseRegister(Nurse nurse, Model model, HttpSession httpSession) {
 
-        nurse.setRegisterStatus(Status.wating);
+        nurse.setRegisterStatus(Status.waiting);
         String userID = (String) httpSession.getAttribute("userID");
         nurse.setUserID(userID);
         nurse.setRegisterTime(new Date());
@@ -41,7 +41,7 @@ public class NurseController {
         user.setUserType("nurse");
         user.setRegisterID(nurse1.getId());
         userService.saveUser(user);
-        return "redirect:/index";
+        return "redirect:/login";
     }
     
     @GetMapping("/nurse_patient")

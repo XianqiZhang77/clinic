@@ -46,10 +46,10 @@ public class UserController {
                 return userService.getJumpPage(user, model);
             }
             model.addAttribute("msg", "Incorrect ID or password. Please try again.");
-            return "index";
+            return "login";
         }
         model.addAttribute("msg", "This User ID not exsit. Please try again.");
-        return "index";
+        return "login";
     }
     
     

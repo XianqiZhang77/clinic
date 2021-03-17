@@ -98,9 +98,9 @@ public class UserService {
     	Status status = doctor.getRegisterStatus();
     	if(status == Status.accepted) {
     		return "doctor_success";
-    	}else if(status == Status.wating) {
+    	}else if(status == Status.waiting) {
     		model.addAttribute("msg", "Your register is pending, please wait.");
-    		return "index";
+    		return "login";
     	}else if(status == Status.rejected) {
     		user.setUserType(null);
     		user.setRegisterID(null);
@@ -116,9 +116,9 @@ public class UserService {
     	Status status = nurse.getRegisterStatus();
     	if(status == Status.accepted) {
     		return "nurse_success";
-    	}else if(status == Status.wating) {
+    	}else if(status == Status.waiting) {
     		model.addAttribute("msg", "Your register is pending, please wait.");
-    		return "index";
+    		return "login";
     	}else if(status == Status.rejected) {
     		user.setUserType(null);
     		user.setRegisterID(null);
@@ -134,9 +134,9 @@ public class UserService {
     	Status status = patient.getRegisterStatus();
     	if(status == Status.accepted) {
     		return "enter_assessment";
-    	}else if(status == Status.wating) {
+    	}else if(status == Status.waiting) {
     		model.addAttribute("msg", "Your register is pending, please wait.");
-    		return "index";
+    		return "login";
     	}else if(status == Status.rejected) {
     		user.setUserType(null);
     		user.setRegisterID(null);

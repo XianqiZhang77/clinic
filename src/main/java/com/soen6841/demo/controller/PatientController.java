@@ -33,17 +33,17 @@ public class PatientController {
 
     @PostMapping("/patient/registration")
     public String patientRegister(Patient patient, Model model, HttpSession httpSession) {
-        patient.setRegisterStatus(Status.wating);
+        patient.setRegisterStatus(Status.waiting);
         patient.setUserID((String) httpSession.getAttribute("userID"));
         patient.setRegisterTime(new Date());
-        patient.setReviewStatus(Status.under_review);
+        patient.setReviewStatus(Status.unfinished);
         Patient patient1 = patientService.savePatient(patient);
 
         User user = userService.getUserByUserID(patient.getUserID());
         user.setUserType("patient");
         user.setRegisterID(patient1.getId());
         userService.saveUser(user);
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
     @RequestMapping("/selfAssessment")
