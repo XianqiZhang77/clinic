@@ -20,8 +20,6 @@ public class ManagerController {
 
     @Autowired
     private ManagerService managerService;
-    @Autowired
-    PatientService patientService;
 
     @GetMapping("/getAllDoctorUnderReview")
     public String getAllDoctorUnderReview(Model model) {
@@ -42,7 +40,7 @@ public class ManagerController {
     @GetMapping("/getAllPatientUnderReview")
     public String getAllPatientUnderReview(Model model) {
         //Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.wating);
-        Iterable<Patient> patients = patientService.getAllPatients();
+        Iterable<Patient> patients = managerService.getAllPatients();
         model.addAttribute("patients",patients);
         return "manager_patient";
     }

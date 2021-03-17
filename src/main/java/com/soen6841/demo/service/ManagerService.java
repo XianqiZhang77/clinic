@@ -82,4 +82,8 @@ public class ManagerService {
     public Iterable<Nurse> getAllNurse() {
         return nurseRepository.findAll();
     }
+
+    public Iterable<Patient> getAllPatients() {
+        return patientRepository.findAll();
+    }
 }
