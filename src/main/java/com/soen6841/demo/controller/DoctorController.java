@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -64,6 +65,20 @@ public class DoctorController {
         Iterable<Patient> patients = patientService.findByAssignee(userID);
         model.addAttribute("patients", patients);
         return "doctor_assigned";
+    }
+
+    @RequestMapping("/rejectPatientByDoctor/{patientId}")
+    public String rejectPatientByDoctor(@PathVariable String patientId) {
+        Patient patient = patientService.getPatientByUserID(patientId);
+        patientService.setReviewStatus(patient,Status.rejected);
+        return "redirect:/doctor_patient";
+    }
+
+    @RequestMapping("/rejectPatientByDoctorAssigned/{patientId}")
+    public String rejectPatientByDoctorAssigned(@PathVariable String patientId) {
+        Patient patient = patientService.getPatientByUserID(patientId);
+        patientService.setReviewStatus(patient,Status.rejected);
+        return "redirect:/doctor_assigned";
     }
 
 }

@@ -75,4 +75,11 @@ public class NurseController {
         appointmentService.saveAppointment(appointment);
         return "forward:/nurse_patient";
     }
+
+    @RequestMapping("/rejectPatientByNurse/{patientId}")
+    public String rejectPatientByNurse(@PathVariable String patientId, Model model) {
+        Patient patient = patientService.getPatientByUserID(patientId);
+        patientService.setReviewStatus(patient,Status.rejected);
+        return "redirect:/nurse_patient";
+    }
 }

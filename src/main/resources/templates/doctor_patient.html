@@ -98,7 +98,7 @@
                     <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
                     <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
-                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
+                    <td><a th:href="@{'/rejectPatientByDoctor/'+${patient.userID}}" >Reject</a></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
