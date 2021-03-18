@@ -56,3 +56,18 @@ body {
     margin-left: 50px;
 }
 
+.disabled {
+    pointer-events: none;
+    text-decoration: none;
+    color: gray;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+}
+
+.disabled a{
+    pointer-events: none;
+    text-decoration: none;
+    color: gray;
+}
+

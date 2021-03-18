@@ -5,6 +5,7 @@ import com.soen6841.demo.domain.Nurse;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
 import com.soen6841.demo.service.ManagerService;
+import com.soen6841.demo.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -19,24 +20,29 @@ public class ManagerController {
 
     @Autowired
     private ManagerService managerService;
+    @Autowired
+    PatientService patientService;
 
     @GetMapping("/getAllDoctorUnderReview")
     public String getAllDoctorUnderReview(Model model) {
-        Iterable<Doctor> doctors = managerService.getDoctorByRegisterStatus(Status.wating);
+        //Iterable<Doctor> doctors = managerService.getDoctorByRegisterStatus(Status.wating);
+        Iterable<Doctor> doctors = managerService.getAllDoctors();
         model.addAttribute("doctors",doctors);
         return "manager_doctor";
     }
 
     @GetMapping("/getAllNurseUnderReview")
     public String getAllNurseUnderReview(Model model) {
-        Iterable<Nurse> nurses =  managerService.getNurseByRegisterStatus(Status.wating);
+        //Iterable<Nurse> nurses =  managerService.getNurseByRegisterStatus(Status.waiting);
+        Iterable<Nurse> nurses = managerService.getAllNurse();
         model.addAttribute("nurses",nurses);
         return "manager_nurse";
     }
 
     @GetMapping("/getAllPatientUnderReview")
     public String getAllPatientUnderReview(Model model) {
-        Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.wating);
+        //Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.wating);
+        Iterable<Patient> patients = patientService.getAllPatients();
         model.addAttribute("patients",patients);
         return "manager_patient";
     }
@@ -50,7 +56,7 @@ public class ManagerController {
         }else {
             managerService.approveDoctor(doctor);
         }
-        Iterable<Doctor> doctors = managerService.getDoctorByRegisterStatus(Status.wating);
+        Iterable<Doctor> doctors = managerService.getDoctorByRegisterStatus(Status.waiting);
         model.addAttribute("doctors",doctors);
         return "redirect:/getAllDoctorUnderReview";
     }
@@ -85,7 +91,7 @@ public class ManagerController {
         }else {
             managerService.rejectNurse(nurse);
         }
-        Iterable<Nurse> nurses =  managerService.getNurseByRegisterStatus(Status.wating);
+        Iterable<Nurse> nurses =  managerService.getNurseByRegisterStatus(Status.waiting);
         model.addAttribute("nurses",nurses);
         return "redirect:/getAllNurseUnderReview";
     }
@@ -98,7 +104,7 @@ public class ManagerController {
         }else {
             managerService.approvePatient(patient);
         }
-        Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.wating);
+        Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.waiting);
         model.addAttribute("patients",patients);
         return "redirect:/getAllPatientUnderReview";
     }
@@ -111,7 +117,7 @@ public class ManagerController {
         }else {
             managerService.rejectPatient(patient);
         }
-        Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.wating);
+        Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.waiting);
         model.addAttribute("patients",patients);
         return "redirect:/getAllPatientUnderReview";
     }

@@ -89,8 +89,12 @@
                     <td th:text="${nurse.phoneNumber}">Phone Number</td>
                     <td th:text="${nurse.birthDate}">Birth Date</td>
                     <td th:text="${nurse.nurseNumber}">Nurse Number</td>
-                    <td><a th:href="@{'/approveNurse/'+${nurse.id}}" >Approve</a></td>
-                    <td><a th:href="@{'/rejectNurse/'+${nurse.id}}" >Reject</a></td>
+                    <td th:class="${nurse.registerStatus.name() == 'waiting'?'':'disabled'}">
+                        <a th:href="@{'/approveNurse/'+${nurse.id}}" >Approve</a>
+                    </td>
+                    <td th:class="${nurse.registerStatus.name() == 'waiting' || nurse.registerStatus.name() == 'accepted' ? '':'disabled'}">
+                        <a th:href="@{'/rejectNurse/'+${nurse.id}}" >Reject</a>
+                    </td>
                 </tr>
                 </thead>
                 <tbody id="tb">

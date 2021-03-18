@@ -1,5 +1,6 @@
 package com.soen6841.demo.domain;
 
 public enum Status {
-    wating, accepted, rejected , unfinished
+    waiting, accepted, rejected, unfinished, under_review, reviewed, cancelled, available
+
 }

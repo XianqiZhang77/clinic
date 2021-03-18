@@ -74,4 +74,12 @@ public class ManagerService {
         patient.setRegisterStatus(Status.rejected);
         patientRepository.save(patient);
     }
+
+    public Iterable<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
+    }
+
+    public Iterable<Nurse> getAllNurse() {
+        return nurseRepository.findAll();
+    }
 }

@@ -28,8 +28,12 @@ public class Doctor {
     private String doctorNumber;
     @Column(name = "registerStatus")
     private Status registerStatus;
+    @Column(name = "register_Time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date registerTime;
 
-    public Doctor(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String doctorNumber, Status registerStatus) {
+    public Doctor(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String doctorNumber, Status registerStatus, Date register_time) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;
@@ -38,6 +42,16 @@ public class Doctor {
         this.birthDate = birthDate;
         this.doctorNumber = doctorNumber;
         this.registerStatus = registerStatus;
+        registerTime = register_time;
+    }
+
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
     }
 
     public String getDoctorNumber() {

@@ -8,12 +8,24 @@ import org.springframework.web.bind.annotation.*;
 public class PageController {
     
 	/*
-	 * 网站主页，登录页
-	 * *用户名，密码
+	 * 网站主页
 	 */
     @RequestMapping("/index")
     public String indexPage() {
-        return "index";
+        return "main_page";
+    }
+    @RequestMapping("/")
+    public String index() {
+        return "forward:/index";
+    }
+    
+	/*
+	 * 登录页
+	 * *用户名，密码
+	 */
+    @RequestMapping("/login")
+    public String loginPage() {
+        return "login";
     }
 
     /*

@@ -85,6 +85,7 @@
                     <th width="110px" style="text-align: center">Date of birth</th>
                     <th width="150px" style="text-align: center">Results</th>
                     <th width="120px" style="text-align: center">Status</th>
+                    <th width="120px" style="text-align: center">Assigned by</th>
                     <th width="100px" style="text-align: center">Appointment</th>
                     <th width="100px" style="text-align: center">Delete</th>
                 </tr>
@@ -97,6 +98,7 @@
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
+                    <td th:text="${patient.reviewer}">Assigned By</td>
                     <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
                     <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
                 </tr>

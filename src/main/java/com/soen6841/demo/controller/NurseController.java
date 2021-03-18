@@ -1,23 +1,16 @@
 package com.soen6841.demo.controller;
 
-import com.soen6841.demo.domain.Nurse;
-import com.soen6841.demo.domain.Patient;
-import com.soen6841.demo.domain.Status;
-import com.soen6841.demo.domain.User;
-import com.soen6841.demo.service.NurseService;
-import com.soen6841.demo.service.PatientService;
-import com.soen6841.demo.service.UserService;
-
+import com.soen6841.demo.domain.*;
+import com.soen6841.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class NurseController {
@@ -26,30 +19,38 @@ public class NurseController {
     
     @Autowired
     UserService userService;
-    
+
     @Autowired
-    private PatientService patientService;
+    PatientService patientService;
+
+    @Autowired
+    DoctorService doctorService;
+
+    @Autowired
+    AppointmentService appointmentService;
 
     @PostMapping("/nurse/registration")
     public String nurseRegister(Nurse nurse, Model model, HttpSession httpSession) {
 
-        nurse.setRegisterStatus(Status.wating);
-        nurse.setUserID((String) httpSession.getAttribute("userID"));
+        nurse.setRegisterStatus(Status.waiting);
+        String userID = (String) httpSession.getAttribute("userID");
+        nurse.setUserID(userID);
+        nurse.setRegisterTime(new Date());
         Nurse nurse1 = nurseService.saveNurse(nurse);
-        
-        //
-        //Nurse nn = nurseService.getNurseByUserID(nurse.getUserID());
+
         User user = userService.getUserByUserID(nurse.getUserID());
         user.setUserType("nurse");
         user.setRegisterID(nurse1.getId());
         userService.saveUser(user);
-        return "redirect:/index";
+        return "redirect:/login";
     }
     
     @GetMapping("/nurse_patient")
-    public String getAllPatientUnderReview(Model model) {
-        Iterable<Patient> patients = nurseService.getPatientByAppoinmentStatus(Status.wating);
-        model.addAttribute("patients",patients);
+    public String getAllPatient(Model model) {
+        Iterable<Patient> patients = nurseService.getAllAcceptedPatients();
+        Iterable<Doctor> doctors = nurseService.getAllAcceptedDoctors();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors", doctors);
         return "nurse_patient";
     }
     
@@ -57,5 +58,21 @@ public class NurseController {
     public String getProfile(Model model) {
         return "nurse_profile";
     }
- 
+    
+    @RequestMapping("/nurse_assign")
+    public String assignToDoctor(HttpSession httpSession, Assign assign) {
+        String nurseUserID = (String) httpSession.getAttribute("userID");
+        Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
+        String doctorUserID = assign.getDoctorUserID();
+        String patientUserID = assign.getPatientUserID();
+        patientService.assignedToDoctor(patientUserID, nurseUserID, doctorUserID);
+        return "redirect:/nurse_patient";
+    }
+    
+    @RequestMapping("/nurseAppointment")
+    public String makeAppointment(Appointment appointment, HttpSession httpSession) {
+    	appointment.setAppointmentStatus(Status.available);
+        appointmentService.saveAppointment(appointment);
+        return "forward:/nurse_patient";
+    }
 }

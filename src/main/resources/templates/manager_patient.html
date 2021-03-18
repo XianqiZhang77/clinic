@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,11 +26,6 @@
             border: 1px solid #ccc;
 
         }
-
-        /*        #add_user {
-                    margin-left: 1400px;
-                    margin-top: -20px;
-                }*/
     </style>
 
 </head>
@@ -87,31 +82,18 @@
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><a th:href="@{'/approvePatient/'+${patient.id}}" >Approve</a></td>
-                    <td><a th:href="@{'/rejectPatient/'+${patient.id}}" >Reject</a></td>
+                    <td th:class="${patient.registerStatus.name() == 'waiting'?'':'disabled'}">
+                        <a th:href="@{'/approvePatient/'+${patient.id}}" >Approve</a>
+                    </td>
+                    <td th:class="${patient.registerStatus.name() == 'waiting' || patient.registerStatus.name() == 'accepted' ? '':'disabled'}">
+                        <a th:href="@{'/rejectPatient/'+${patient.id}}" >Reject</a>
+                    </td>
                 </tr>
                 </thead>
                 <tbody id="tb">
                 </tbody>
             </table>
         </div>
-
-        <!--Add a User-->
-        <!--        <div id="add_user">
-                    <form action="" id="myfrm">
-                        Name：<input type="text" id="name"> <br> <br>
-                        Full name: <input type="text" id="full_name"> <br> <br>
-                        Address: <input type="text" id="address"> <br> <br>
-                        Birthday: <input type="text" id="date_of_birth"> <br> <br>
-                        Phone Number: <input type="text" id="phone_number"> <br> <br>
-                        E-mail: <input type="text" id="email"> <br> <br>
-                        Password：<input type="text" id="password"> <br> <br>
-                        User Type：<input type="radio" name="register_type" id="register_type" value="patient" checked> Patient
-                        <br> <br>
-                        User Status：<input type="text" id="register_status"> <br> <br>
-                        <input class="btn-info btn" type="button" value="Add" id="btnAdd">
-                    </form>
-                </div>-->
 
     </div>
 

@@ -88,8 +88,13 @@
                     <td th:text="${doctor.phoneNumber}">Phone Number</td>
                     <td th:text="${doctor.birthDate}">Birth Date</td>
                     <td th:text="${doctor.doctorNumber}">Doctor Number</td>
-                    <td><a th:href="@{'/approveDoctor/'+${doctor.id}}" >Approve</a></td>
-                    <td><a th:href="@{'/rejectDoctor/'+${doctor.id}}" >Reject</a></td>
+                    <td th:class="${doctor.registerStatus.name() == 'waiting'?'':'disabled'}">
+                        <a th:href="@{'/approveDoctor/'+${doctor.id}}" >Approve</a>
+                    </td>
+                    <td th:class="${doctor.registerStatus.name() == 'waiting' || doctor.registerStatus.name() == 'accepted' ? '':'disabled'}">
+                        <a th:href="@{'/rejectDoctor/'+${doctor.id}}" >Reject</a>
+                    </td>
+
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -180,6 +185,7 @@
                 this.parentNode.parentNode.remove();
             }
         }
+
 
     }
 
