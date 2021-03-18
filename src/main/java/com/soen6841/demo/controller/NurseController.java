@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class NurseController {
@@ -58,17 +59,14 @@ public class NurseController {
         return "nurse_profile";
     }
     
-    @RequestMapping("/nurse_assign/{patientUserID}/{doctorUserID}/{nurseUserID}")
-    public String assignToDoctor(HttpSession httpSession, @PathVariable String patientUserID, @PathVariable String doctorUserID, @PathVariable String nurseUserID) {
-        //String nurseUserID = (String) httpSession.getAttribute("userID");
-//        Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
-//        Patient patient = patientService.getPatientByUserID(patientUserID);
-//        Doctor doctor = doctorService.getDoctorByUserID(doctorUserID);
-//        System.out.println(nurse.getFullName());
-//        System.out.println(patient.getFullName());
-//        System.out.println(doctor.getFullName());
+    @RequestMapping("/nurse_assign")
+    public String assignToDoctor(HttpSession httpSession, Assign assign) {
+        String nurseUserID = (String) httpSession.getAttribute("userID");
+        Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
+        String doctorUserID = assign.getDoctorUserID();
+        String patientUserID = assign.getPatientUserID();
         patientService.assignedToDoctor(patientUserID, nurseUserID, doctorUserID);
-        return "forward:/nurse_patient";
+        return "redirect:/nurse_patient";
     }
     
     @RequestMapping("/nurseAppointment")

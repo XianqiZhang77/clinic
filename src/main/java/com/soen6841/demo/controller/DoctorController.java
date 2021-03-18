@@ -60,8 +60,8 @@ public class DoctorController {
 
     @RequestMapping("/doctor_assigned")
     public String getAssignedPatients(Model model, HttpSession httpSession) {
-        //String userID = (String) httpSession.getAttribute("userID");
-        Iterable<Patient> patients = patientService.findByAssignee("Bob");
+        String userID = (String) httpSession.getAttribute("userID");
+        Iterable<Patient> patients = patientService.findByAssignee(userID);
         model.addAttribute("patients", patients);
         return "doctor_assigned";
     }
