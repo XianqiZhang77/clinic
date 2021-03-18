@@ -26,8 +26,8 @@ public class Nurse {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-    @Column(name = "nurseNumber")
-    private String nurseNumber;
+    @Column(name = "licenseNumber")
+    private String licenseNumber;
     @Column(name = "registerStatus")
     private Status registerStatus;
     @Column(name = "register_Time")
@@ -56,14 +56,14 @@ public class Nurse {
     public Nurse() {
     }
 
-    public Nurse(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String nurseNumber, Status registerStatus, Date registerTime) {
+    public Nurse(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String licenseNumber, Status registerStatus, Date registerTime) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
-        this.nurseNumber = nurseNumber;
+        this.licenseNumber = licenseNumber;
         this.registerStatus = registerStatus;
         this.registerTime = registerTime;
     }
@@ -124,11 +124,11 @@ public class Nurse {
         this.birthDate = birthDate;
     }
 
-    public String getNurseNumber() {
-        return nurseNumber;
+    public String getLicenseNumber() {
+        return licenseNumber;
     }
 
-    public void setNurseNumber(String nurseNumber) {
-        this.nurseNumber = nurseNumber;
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
     }
 }

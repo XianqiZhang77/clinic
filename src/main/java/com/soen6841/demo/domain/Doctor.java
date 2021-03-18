@@ -24,8 +24,8 @@ public class Doctor {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-    @Column(name = "doctorNumber")
-    private String doctorNumber;
+    @Column(name = "licenseNumber")
+    private String licenseNumber;
     @Column(name = "registerStatus")
     private Status registerStatus;
     @Column(name = "register_Time")
@@ -33,14 +33,14 @@ public class Doctor {
     @Temporal(TemporalType.DATE)
     private Date registerTime;
 
-    public Doctor(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String doctorNumber, Status registerStatus, Date register_time) {
+    public Doctor(String userID, String fullName, String email, String address, String phoneNumber, Date birthDate, String licenseNumber, Status registerStatus, Date register_time) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
-        this.doctorNumber = doctorNumber;
+        this.licenseNumber = licenseNumber;
         this.registerStatus = registerStatus;
         registerTime = register_time;
     }
@@ -54,12 +54,12 @@ public class Doctor {
         this.registerTime = registerTime;
     }
 
-    public String getDoctorNumber() {
-        return doctorNumber;
+    public String getLicenseNumber() {
+        return licenseNumber;
     }
 
-    public void setDoctorNumber(String doctorNumber) {
-        this.doctorNumber = doctorNumber;
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
     }
 
     public Status getRegisterStatus() {
