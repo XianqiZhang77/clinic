@@ -177,8 +177,8 @@
 
     function openRe(obj) {
         $("#myModal").modal('show');
-        var $td = $(obj).parent().parent().children();
-        var uid = $td.eq(0).text();
+        let $td = $(obj).parent().parent().children();
+        let uid = $td.eq(0).text();
         console.log(uid)
         window.open("/getAssessmentResult/" + uid,"_blank");
     }

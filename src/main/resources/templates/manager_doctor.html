@@ -94,7 +94,6 @@
                     <td th:class="${doctor.registerStatus.name() == 'waiting' || doctor.registerStatus.name() == 'accepted' ? '':'disabled'}">
                         <a th:href="@{'/rejectDoctor/'+${doctor.id}}" >Reject</a>
                     </td>
-
                 </tr>
                 </thead>
                 <tbody id="tb">

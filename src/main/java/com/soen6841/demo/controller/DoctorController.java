@@ -1,10 +1,7 @@
 package com.soen6841.demo.controller;
 
 import com.soen6841.demo.domain.*;
-import com.soen6841.demo.service.AppointmentService;
-import com.soen6841.demo.service.DoctorService;
-import com.soen6841.demo.service.PatientService;
-import com.soen6841.demo.service.UserService;
+import com.soen6841.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +27,9 @@ public class DoctorController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private NoticeService noticeService;
 
     @PostMapping("/doctor/registration")
     public String doctorRegister(Doctor doctor, Model model, HttpSession httpSession) {
@@ -68,16 +68,20 @@ public class DoctorController {
     }
 
     @RequestMapping("/rejectPatientByDoctor/{patientId}")
-    public String rejectPatientByDoctor(@PathVariable String patientId) {
+    public String rejectPatientByDoctor(@PathVariable String patientId, HttpSession httpSession) {
         Patient patient = patientService.getPatientByUserID(patientId);
+        String userID = (String) httpSession.getAttribute("userID");
         patientService.setReviewStatus(patient,Status.rejected);
+        noticeService.addRejectNoticeByDoctor(patient.getUserID(), userID);
         return "redirect:/doctor_patient";
     }
 
     @RequestMapping("/rejectPatientByDoctorAssigned/{patientId}")
-    public String rejectPatientByDoctorAssigned(@PathVariable String patientId) {
+    public String rejectPatientByDoctorAssigned(@PathVariable String patientId, HttpSession httpSession) {
         Patient patient = patientService.getPatientByUserID(patientId);
+        String userID = (String) httpSession.getAttribute("userID");
         patientService.setReviewStatus(patient,Status.rejected);
+        noticeService.addRejectNoticeByDoctor(patient.getUserID(), userID);
         return "redirect:/doctor_assigned";
     }
 

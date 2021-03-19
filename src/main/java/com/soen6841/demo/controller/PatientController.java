@@ -2,9 +2,11 @@ package com.soen6841.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.soen6841.demo.domain.Notice;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
 import com.soen6841.demo.domain.User;
+import com.soen6841.demo.service.NoticeService;
 import com.soen6841.demo.service.PatientService;
 import com.soen6841.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class PatientController {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private NoticeService noticeService;
 
     @GetMapping("/all")
     @ResponseBody
@@ -69,6 +74,9 @@ public class PatientController {
         model.addAttribute("resultTwo",results[1]);
         model.addAttribute("resultThree",results[2]);
         model.addAttribute("resultFour",results[3]);
+        model.addAttribute("resultFive",results[4]);
+        model.addAttribute("resultSix",results[5]);
+        model.addAttribute("resultSeven",results[6]);
         return "assessment_result";
     }
     
@@ -80,7 +88,18 @@ public class PatientController {
         model.addAttribute("resultTwo",results[1]);
         model.addAttribute("resultThree",results[2]);
         model.addAttribute("resultFour",results[3]);
+        model.addAttribute("resultFive",results[4]);
+        model.addAttribute("resultSix",results[5]);
+        model.addAttribute("resultSeven",results[6]);
         return "patient_result";
+    }
+
+    @RequestMapping("/patient/main")
+    public String jumpToPatientMain(Model model, HttpSession httpSession) {
+        String userID = (String) httpSession.getAttribute("userID");
+        Iterable<Notice> notices = noticeService.findNoticeByUserID(userID);
+        model.addAttribute("notices", notices);
+        return "patient_main";
     }
 
 }

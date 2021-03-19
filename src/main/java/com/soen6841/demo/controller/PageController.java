@@ -110,7 +110,6 @@ public class PageController {
         return "nurse_profile";
     }
 
-
     @RequestMapping("/assessment")
     public String assessmentPage() {
         return "assessment";
@@ -125,5 +124,11 @@ public class PageController {
     public String advisePage() {
         return "advise";
     }
+
+    @RequestMapping("/patient_main")
+    public String patientMainPage() {return "patient_main";}
+
+    @RequestMapping("/patient_appointment")
+    public String patient_appointmentPage() {return "patient_appointment";}
 
 }
