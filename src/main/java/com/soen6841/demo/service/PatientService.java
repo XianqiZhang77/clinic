@@ -49,6 +49,9 @@ public class PatientService {
             patient.setAnswerTwo(answer[1]);
             patient.setAnswerThree(answer[2]);
             patient.setAnswerFour(answer[3]);
+            patient.setAnswerFive(answer[4]);
+            patient.setAnswerSix(answer[5]);
+            patient.setAnswerSeven(answer[6]);
             patient.setSelfAssessmentTime(new Date());
             patient.setReviewStatus(Status.under_review);
         }
@@ -56,13 +59,16 @@ public class PatientService {
     }
 
     public String[] getQuestionAnswers(String patientId) {
-        String[] results = new String[4];
+        String[] results = new String[7];
         if(patientRepository.existsByUserID(patientId)){
             Patient check = patientRepository.findOneByUserID(patientId);
             results[0] = check.getAnswerOne();
             results[1] = check.getAnswerTwo();
             results[2] = check.getAnswerThree();
             results[3] = check.getAnswerFour();
+            results[4] = check.getAnswerFive();
+            results[5] = check.getAnswerSix();
+            results[6] = check.getAnswerSeven();
         }
         return results;
     }

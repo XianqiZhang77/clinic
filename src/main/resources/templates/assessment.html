@@ -62,22 +62,7 @@
             margin-left: 50px;
         }
 
-        .question1_choice{
-            margin-top: 30px;
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-        .question2_choice{
-            margin-top: 30px;
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-        .question3_choice{
-            margin-top: 30px;
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-        .question4_choice{
+        .question_choice{
             margin-top: 30px;
             margin-left: 20px;
             margin-bottom: 20px;
@@ -147,7 +132,7 @@
                 <a href="assessmentResult"> Self-Assessment Results</a>
             </li>
             <li>
-                <a href="" > My Appointments</a>
+                <a href="patient_appointment" > My Appointments</a>
             </li>
             <li>
                 <a href="index"> Log out</a>
@@ -166,7 +151,7 @@
     <div class="question1 question">
         <br>
         Please choose your age range:<br>
-        <div class="question1_choice" style="margin-top: 30px">
+        <div class="question_choice" style="margin-top: 30px" id="question1Choice">
         <button class="btn btn-info" id="under5" type="button" onclick="switchItem2_1('question2_under5')"> 6 months - 5 years</button>
         <button class="btn btn-info" id="above6" type="button" onclick="switchItem2_2('question2_above6')"> 6 - 17 years</button>
         <button class="btn btn-info" id="above18" type="button" onclick="switchItem2_3('question2_above18')"> 18 years+</button>
@@ -211,7 +196,7 @@
         - Runny nose or congestion (of unknown cause)
     </div>
 
-    <div class="question2_choice" style="display: none" id="question2_answer">
+    <div class="question_choice" style="display: none" id="question2_answer">
         <button class="btn btn-info" id="yes_question2" type="button" onclick="switchItem3_1('question3_1')" > Yes
         </button>
         <button class="btn btn-info" id="no_question2" type="button" onclick="switchItem3_2('question3_2')"> No</button>
@@ -246,7 +231,7 @@
         - Is currently wheezing
     </div>
 
-    <div class="question3_choice" style="display: none" id="question3_answer">
+    <div class="question_choice " style="display: none" id="question3_answer">
         <button class="btn btn-info" id="yes_question3" type="button" onclick="switchItem4_1('question4_1')"> Yes</button>
 
         <button class="btn btn-info" id="no_question3" type="button" onclick="switchItem4_2('question4_2')"> No</button>
@@ -266,10 +251,48 @@
         - Headache
     </div>
 
-    <div class="question4_choice" style="display: none" id="end">
-        <button class="btn btn-info" id="yes_question4" type="button" onclick="open_submit1('question4_1')"> Yes</button>
-        <button class="btn btn-info" id="no_question4" type="button" onclick="open_submit2('question4_2')"> No</button>
+    <div class="question_choice" style="display: none" id="question4Choice">
+        <button class="btn btn-info" id="yes_question4" type="button" onclick="switchItem5('question5')"> Yes</button>
+        <button class="btn btn-info" id="no_question4" type="button" onclick="switchItem5('question5')"> No</button>
     </div>
+
+
+    <!-- Question 5-->
+
+    <div class="question5 question" style="display: none" id="question5">
+        <br>
+        Have you been in close contact with a confirmed or probable case of COVID-19?
+    </div>
+
+    <div class="question_choice" style="display: none" id="question5Choice">
+        <button class="btn btn-info" id="yes_question5" type="button" onclick="switchItem6('question6')"> Yes</button>
+        <button class="btn btn-info" id="no_question5" type="button" onclick="switchItem6('question6')"> No</button>
+    </div>
+
+    <!-- Question 6-->
+
+    <div class="question6 question" style="display: none" id="question6">
+        <br>
+        Have you been tested for COVID-19?
+    </div>
+
+    <div class="question_choice" style="display: none" id="question6Choice">
+        <button class="btn btn-info" id="yes_question6" type="button" onclick="switchItem7('question7')"> Yes</button>
+        <button class="btn btn-info" id="no_question6" type="button" onclick="switchItem7('question7')"> No</button>
+    </div>
+
+    <!-- Question 7-->
+
+    <div class="question6 question" style="display: none" id="question7">
+        <br>
+        Have you or someone close to you travelled outside of Canada within the last 14 days?
+    </div>
+
+    <div class="question_choice" style="display: none" id="question7Choice">
+        <button class="btn btn-info" id="yes_question7" type="button" onclick="toSubmit('submit')"> Yes</button>
+        <button class="btn btn-info" id="no_question7" type="button" onclick="toSubmit('submit')"> No</button>
+    </div>
+
 
     <!-- Submit -->
     <a id="ntc" onclick="open_notice()" > * Notice </a>
@@ -295,6 +318,10 @@
     let result_2 = [];
     let result_3 = [];
     let result_4 = [];
+    let result_5 = [];
+    let result_6 = [];
+    let result_7 = [];
+
 
     function switchItem2_1(tag) {
         const question2_under5 = document.getElementById('question2_under5');
@@ -389,10 +416,10 @@
 
     function switchItem4_1(tag) {
         const question4 = document.getElementById('question4');
-        const end = document.getElementById('end');
+        const question4Choice = document.getElementById('question4Choice');
         if (tag == 'question4_1') {
             question4.style.display = '';
-            end.style.display = '';
+            question4Choice.style.display = '';
         }
         document.onclick=function() {
             let obj = event.srcElement;
@@ -404,10 +431,10 @@
 
     function switchItem4_2(tag) {
         const question4 = document.getElementById('question4');
-        const end = document.getElementById('end');
+        const question4Choice = document.getElementById('question4Choice');
         if (tag == 'question4_2') {
             question4.style.display = '';
-            end.style.display = '';
+            question4Choice.style.display = '';
         }
         document.onclick=function() {
             let obj = event.srcElement;
@@ -417,37 +444,85 @@
         }
     }
 
-    function open_submit1(tag) {
-        const submit = document.getElementById('submit');
-        if (tag == 'question4_1' ) {
-            submit.style.display = '';
+    function switchItem5(tag) {
+        const question5 = document.getElementById('question5');
+        const question5Choice = document.getElementById('question5Choice');
+        if (tag == 'question5' ) {
+            question5.style.display = '';
+            question5Choice.style.display = '';
         }
         document.onclick=function() {
             let obj = event.srcElement;
             if(obj.id == "yes_question4"){
                 result_4.push('Yes');
             }
-        }
-    }
-
-    function open_submit2(tag) {
-        const submit = document.getElementById('submit');
-        if (tag == 'question4_2' ) {
-            submit.style.display = '';
-        }
-        document.onclick=function() {
-            let obj = event.srcElement;
             if(obj.id == "no_question4"){
                 result_4.push('No');
             }
         }
     }
 
+    function switchItem6(tag) {
+        const question6 = document.getElementById('question6');
+        const question6Choice = document.getElementById('question6Choice');
+        if (tag == 'question6' ) {
+            question6.style.display = '';
+            question6Choice.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "yes_question5"){
+                result_5.push('Yes');
+            }
+            if(obj.id == "no_question5"){
+                result_5.push('No');
+            }
+        }
+    }
+
+    function switchItem7(tag) {
+        const question7 = document.getElementById('question7');
+        const question7Choice = document.getElementById('question7Choice');
+        if (tag == 'question7' ) {
+            question7.style.display = '';
+            question7Choice.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "yes_question6"){
+                result_6.push('Yes');
+            }
+            if(obj.id == "no_question6"){
+                result_6.push('No');
+            }
+        }
+    }
+
+    function toSubmit(tag) {
+        const submit = document.getElementById('submit');
+        if (tag == 'submit' ) {
+            submit.style.display = '';
+        }
+        document.onclick=function() {
+            let obj = event.srcElement;
+            if(obj.id == "yes_question7"){
+                result_7.push('Yes');
+            }
+            if(obj.id == "no_question7"){
+                result_7.push('No');
+            }
+        }
+    }
+
+
     $('#submit').click(function(){
         result.push(result_1[result_1.length-1]);
         result.push(result_2[result_2.length-1]);
         result.push(result_3[result_3.length-1]);
         result.push(result_4[result_4.length-1]);
+        result.push(result_5[result_5.length-1]);
+        result.push(result_6[result_6.length-1]);
+        result.push(result_7[result_7.length-1]);
 
         $.ajax({
             url: "/selfAssessment",
@@ -457,7 +532,6 @@
                 $(window).attr("location","assessment")
             }
         });
-
     });
 
     $('#closeNotice').click(function(){
@@ -470,23 +544,34 @@
         notice.style.display='block';
     }
 
-    $(".question1_choice button").click(
+    $("#question1Choice button").click(
         function() {
-            $(".question1_choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+            $("#question1Choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
         })
-    $(".question2_choice button").click(
+    $("#question2_answer button").click(
         function() {
-            $(".question2_choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+            $("#question2_answer button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
         })
-    $(".question3_choice button").click(
+    $("#question3_answer button").click(
         function() {
-            $(".question3_choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+            $("#question3_answer button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
         })
-    $(".question4_choice button").click(
+    $("#question4Choice button").click(
         function() {
-            $(".question4_choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+            $("#question4Choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
         })
-
+    $("#question5Choice button").click(
+        function() {
+            $("#question5Choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+        })
+    $("#question6Choice button").click(
+        function() {
+            $("#question6Choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+        })
+    $("#question7Choice button").click(
+        function() {
+            $("#question7Choice button").eq($(this).index()).css('background', '#FC5531').siblings().css('background', '#5BC0DE');
+        })
 
 
 

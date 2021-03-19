@@ -69,6 +69,9 @@ public class PatientController {
         model.addAttribute("resultTwo",results[1]);
         model.addAttribute("resultThree",results[2]);
         model.addAttribute("resultFour",results[3]);
+        model.addAttribute("resultFive",results[4]);
+        model.addAttribute("resultSix",results[5]);
+        model.addAttribute("resultSeven",results[6]);
         return "assessment_result";
     }
     
@@ -80,6 +83,9 @@ public class PatientController {
         model.addAttribute("resultTwo",results[1]);
         model.addAttribute("resultThree",results[2]);
         model.addAttribute("resultFour",results[3]);
+        model.addAttribute("resultFive",results[4]);
+        model.addAttribute("resultSix",results[5]);
+        model.addAttribute("resultSeven",results[6]);
         return "patient_result";
     }
 
