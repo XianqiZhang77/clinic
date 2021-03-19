@@ -49,7 +49,7 @@
     <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
 </div>
 
-<<div class="container-fluid dashboard">
+<div class="container-fluid dashboard">
     <div class="row">
 
         <!--Nav bar-->
@@ -57,15 +57,15 @@
             <nav class="navbar navbar-inverse" id="sidebar-wrapper" role="navigation">
                 <ul class="nav sidebar-nav">
                     <li class="sidebar-brand">
+                        <a href="doctor_assigned" >Assigned Patients</a>
+                    </li>
+                    <li class="sidebar-brand">
                         <a href="doctor_patient" style="color: darkgray"> Patients </a>
                     </li>
-                    <li>
-                        <a href="doctor_profile" > My Appointment</a>
+                    <li class="sidebar-brand">
+                        <a href="doctor_profile" >Appointments</a>
                     </li>
-                    <li>
-                        <a href="doctor_assigned" > Assigned</a>
-                    </li>
-                    <li>
+                    <li class="sidebar-brand">
                         <a href="index"> Log out</a>
                     </li>
                 </ul>
@@ -86,7 +86,7 @@
                     <th width="150px" style="text-align: center">Results</th>
                     <th width="120px" style="text-align: center">Status</th>
                     <th width="100px" style="text-align: center">Appointment</th>
-                    <th width="100px" style="text-align: center">Delete</th>
+                    <th width="100px" style="text-align: center">Reject</th>
                 </tr>
                 <tr th:each="patient:${patients}">
                     <td th:text="${patient.userID}" style="display: none">User ID</td>
@@ -97,8 +97,8 @@
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
-                    <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
-                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
+                    <td><button clsss="btn btn-success" onclick=" open_notice(this)">Appointment</button></td>
+                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Reject</button></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -109,15 +109,17 @@
 
 </div>
 
-</div>
-
 <div id="notice" class="notice" style="display: none">
     <div style="margin-left: 5%; margin-right: 5%" >
         <br> <br>
-        Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
-        Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
-        <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
-        <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
+        <form th:action="@{doctorAppointment}" method="get">
+            <input type="text" id="patientUserID" name="patientUserID" class="form-control" value="patientID" readonly style="display: none">
+            <input type="text" id="patientName" name="patient" class="form-control" value="patientID" readonly style="display: none">
+            Appointment Time: <input id="apptime" name="appointmentDate" class="form-control" type="date" placeholder="Please appointment information" required><br>
+            Note: <input id="note" class="form-control" name="note" placeholder="Please input the address or other information" ><br>
+            <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
+            <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
+        </form>
     </div>
 </div>
 <!--Functions-->
@@ -188,9 +190,15 @@
         notice.style.display='none';
     });
 
-    function open_notice(){
+    function open_notice(obj){
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        var uName = $td.eq(1).text();
         const notice = document.getElementById('notice');
         notice.style.display='block';
+        $("#patientName").val(uName);
+        $("#patientUserID").val(uid);
     }
 
 </script>

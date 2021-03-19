@@ -52,9 +52,10 @@ public class DoctorController {
     }
     
     @GetMapping("/doctor_profile")
-    public String getDoctorProfile(Model model) {
-        //Iterable<Patient> patients =   nurseService.getPatientByRegisterStatus(Status.wating);
-        //model.addAttribute("patients",patients);
+    public String getAppointment(Model model, HttpSession httpSession) {
+    	String userID = (String) httpSession.getAttribute("userID");   												
+    	Iterable<Appointment> apppointments = appointmentService.getAllAssignedByHealthCareID(userID);
+        model.addAttribute("appointments",apppointments);
         return "doctor_profile";
     }
 
@@ -64,6 +65,23 @@ public class DoctorController {
         Iterable<Patient> patients = patientService.findByAssignee(userID);
         model.addAttribute("patients", patients);
         return "doctor_assigned";
+    }
+    
+    //
+    @RequestMapping("/doctorAppointment")
+    public String makeAppointment(Appointment appointment, HttpSession httpSession) {
+    	String doctorUserID = (String) httpSession.getAttribute("userID");
+    	appointment.setAppointmentStatus(Status.available);
+    	User user = userService.getUserByUserID(doctorUserID);
+    	Doctor doctor = doctorService.getDoctorById(user.getRegisterID());
+    	User patient_user = userService.getUserByUserID(appointment.getPatientUserID());
+    	Patient patient = patientService.getPatientById(patient_user.getRegisterID());
+    	patient.setReviewStatus(Status.accepted);
+    	patientService.savePatient(patient);
+    	appointment.setHealthCareID(doctorUserID);
+    	appointment.setHealthCareName(doctor.getFullName());
+        appointmentService.saveAppointment(appointment);
+        return "forward:/doctor_assigned";
     }
 
 }

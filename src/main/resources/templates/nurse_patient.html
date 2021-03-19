@@ -58,10 +58,10 @@
                     <li class="sidebar-brand">
                         <a href="nurse_patient" style="color: darkgray"> Patients </a>
                     </li>
-                    <li>
-                        <a href="nurse_profile" > My Appointment</a>
+                    <li class="sidebar-brand">
+                        <a href="nurse_profile" >Appointments</a>
                     </li>
-                    <li>
+                    <li class="sidebar-brand">
                         <a href="index"> Log out</a>
                     </li>
                 </ul>
@@ -95,7 +95,7 @@
                     <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
                     <td><button clsss="btn btn-primary" onclick="open_assign(this)">Assign</button></td>
-                    <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
+                    <td><button clsss="btn btn-success" onclick=" open_notice(this)">Appointment</button></td>
                     <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
                 </tr>
                 </thead>
@@ -139,10 +139,14 @@
 <div id="notice" class="notice" style="display: none">
     <div style="margin-left: 5%; margin-right: 5%" >
         <br> <br>
-        Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
-        Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
-        <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
-        <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
+        <form th:action="@{nurseAppointment}" method="get">
+            <input type="text" id="patientUserID2" name="patientUserID" class="form-control" value="patientID" readonly style="display: none">
+            <input type="text" id="patientName2" name="patient" class="form-control" value="patientID" readonly style="display: none">
+            Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
+            Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
+            <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
+            <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
+        </form>
     </div>
 </div>
 <!--Functions-->
@@ -213,10 +217,17 @@
         notice.style.display='none';
     });
 
-    function open_notice(){
+    function open_notice(obj){
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        var uName = $td.eq(1).text();
         const notice = document.getElementById('notice');
         notice.style.display='block';
+        $("#patientName2").val(uName);
+        $("#patientUserID2").val(uid);
     }
+
     function open_assign(obj){
         $("#myModal").modal('show');
         var $td = $(obj).parent().parent().children();

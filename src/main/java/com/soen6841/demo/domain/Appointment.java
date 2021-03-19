@@ -15,14 +15,10 @@ public class Appointment {
     private String patient;
     @Column(name = "patientUserID")
     private String patientUserID;
-    @Column(name = "doctor")
-    private String doctor;
-    @Column(name = "doctorUserID")
-    private String doctorUserID;
-    @Column(name = "nurse")
-    private String nurse;
-    @Column(name = "nurseUserID")
-    private String nurseUserID;
+    @Column(name = "healthCareName")
+    private String healthCareName;
+    @Column(name = "healthCareID")
+    private String healthCareID;  
     @Column(name = "note")
     private String note;
     @Column(name = "appointmentDate")
@@ -51,20 +47,12 @@ public class Appointment {
         this.patientUserID = patientUserID;
     }
 
-    public String getDoctorUserID() {
-        return doctorUserID;
+    public String getHealthCareID() {
+        return healthCareID;
     }
 
-    public void setDoctorUserID(String doctorUserID) {
-        this.doctorUserID = doctorUserID;
-    }
-
-    public String getNurseUserID() {
-        return nurseUserID;
-    }
-
-    public void setNurseUserID(String nurseUserID) {
-        this.nurseUserID = nurseUserID;
+    public void setHealthCareID(String healthCareID) {
+        this.healthCareID = healthCareID;
     }
 
     public Long getId() {
@@ -83,20 +71,12 @@ public class Appointment {
         this.patient = patient;
     }
 
-    public String getDoctor() {
-        return doctor;
+    public String getHealthCareName() {
+        return healthCareName;
     }
 
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getNurse() {
-        return nurse;
-    }
-
-    public void setNurse(String nurse) {
-        this.nurse = nurse;
+    public void setHealthCareName(String healthCareName) {
+        this.healthCareName = healthCareName;
     }
 
     public Date getAppointmentDate() {
@@ -105,6 +85,14 @@ public class Appointment {
 
     public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
+    }
+    
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
 

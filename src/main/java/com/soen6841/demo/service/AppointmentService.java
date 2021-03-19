@@ -19,31 +19,15 @@ public class AppointmentService {
     @Autowired
     NurseService nurseService;
     
-    /*
-    public boolean addNewAppointmentByAssign(String patientUserID, String doctorUserID, String nurseUserID) {
-
-        if (!patientService.existsByUserID(patientUserID) || !doctorService.existsByUserID(doctorUserID) || !nurseService.existsByUserID(nurseUserID)) {
-            return false;
-        }
-        Patient patient = patientService.getPatientByUserID(patientUserID);
-        Doctor doctor = doctorService.getDoctorByUserID(doctorUserID);
-        Appointment appointment = new Appointment();
-        appointment.setPatient(patient.getFullName());
-        appointment.setPatientUserID(patientUserID);
-        appointment.setDoctor(doctor.getFullName());
-        appointment.setDoctorUserID(doctorUserID);
-        if (appointmentRepository.save(appointment) == null) {
-            return false;
-        }
-        patientService.setReviewStatus(patient, Status.reviewed);
-        return true;
-    }
-    */
     public Appointment saveAppointment(Appointment appointment) {
         return appointmentRepository.save(appointment);
     }
 
-    public Iterable<Appointment> getAllAssignedByDoctorUserID(String userID) {
-        return appointmentRepository.findAppointmentByDoctorUserID(userID);
+    public Iterable<Appointment> getAllAssignedByHealthCareID(String userID) {
+        return appointmentRepository.findAppointmentByHealthCareID(userID);
+    }
+    
+    public Iterable<Appointment> getAllAssignedByPatientUserID(String userID) {
+        return appointmentRepository.findAppointmentByPatientUserID(userID);
     }
 }

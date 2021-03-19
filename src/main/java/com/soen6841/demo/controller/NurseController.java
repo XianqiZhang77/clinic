@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class NurseController {
@@ -55,14 +53,16 @@ public class NurseController {
     }
     
     @GetMapping("/nurse_profile")
-    public String getProfile(Model model) {
+    public String getAppointment(Model model, HttpSession httpSession) {
+    	String userID = (String) httpSession.getAttribute("userID");   												
+    	Iterable<Appointment> apppointments = appointmentService.getAllAssignedByHealthCareID(userID);
+        model.addAttribute("appointments",apppointments);
         return "nurse_profile";
     }
     
     @RequestMapping("/nurse_assign")
     public String assignToDoctor(HttpSession httpSession, Assign assign) {
         String nurseUserID = (String) httpSession.getAttribute("userID");
-        Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
         String doctorUserID = assign.getDoctorUserID();
         String patientUserID = assign.getPatientUserID();
         patientService.assignedToDoctor(patientUserID, nurseUserID, doctorUserID);
@@ -71,7 +71,16 @@ public class NurseController {
     
     @RequestMapping("/nurseAppointment")
     public String makeAppointment(Appointment appointment, HttpSession httpSession) {
+    	String nurseUserID = (String) httpSession.getAttribute("userID");
     	appointment.setAppointmentStatus(Status.available);
+    	User user = userService.getUserByUserID(nurseUserID);
+    	Nurse nurse = nurseService.getNurseById(user.getRegisterID());
+    	User patient_user = userService.getUserByUserID(appointment.getPatientUserID());
+    	Patient patient = patientService.getPatientById(patient_user.getRegisterID());
+    	patient.setReviewStatus(Status.accepted);
+    	patientService.savePatient(patient);
+    	appointment.setHealthCareID(nurseUserID);
+    	appointment.setHealthCareName(nurse.getFullName());
         appointmentService.saveAppointment(appointment);
         return "forward:/nurse_patient";
     }
