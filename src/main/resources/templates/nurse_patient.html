@@ -94,9 +94,18 @@
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
-                    <td><button clsss="btn btn-primary" onclick="open_assign(this)">Assign</button></td>
-                    <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
-                    <td><a th:href="@{'/rejectPatientByNurse/'+${patient.userID}}" >Reject</a></td>
+                    <td th:class="${patient.reviewStatus.name()=='unfinished'
+                    || patient.reviewStatus.name() == 'rejected' || patient.reviewStatus.name() == 'assigned' ? 'disabled':''}">
+                        <button clsss="btn btn-primary" onclick="open_assign(this)">Assign</button>
+                    </td>
+                    <td th:class="${patient.reviewStatus.name() == 'unfinished'
+                    || patient.reviewStatus.name() == 'rejected' ? 'disabled':''}">
+                        <button clsss="btn btn-success" onclick=" open_notice()">Appointment</button>
+                    </td>
+                    <td th:class="${patient.reviewStatus.name() == 'unfinished'
+                    || patient.reviewStatus.name() == 'rejected' ? 'disabled':''}">
+                    <a th:href="@{'/rejectPatientByNurse/'+${patient.userID}}" >Reject</a>
+                    </td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -118,7 +127,7 @@
             Patient Name: 
 <!--            Patient ID: <div id="patientID"></div>-->
             <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                 <input type="text" id="patientUserID" name="patientUserID" class="form-control" value="patientID" readonly>
             </div>
             <div class="dropdown">
