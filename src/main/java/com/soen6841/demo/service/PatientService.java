@@ -75,27 +75,21 @@ public class PatientService {
 
     public Iterable<Patient> findAllAcceptedPatients() {
         List<Patient> patients = (List<Patient>) patientRepository.findPatientByRegisterStatus(Status.accepted);
-        Collections.sort(patients, (p1, p2) -> {
 
-            if (p1.getSelfAssessmentTime() == null) {
+        Collections.sort(patients, (p1, p2) -> {
+            if (p1.getReviewStatus() == Status.unfinished) {
                 return 1;
             }
             if (p2.getSelfAssessmentTime() == null) {
                 return -1;
             }
-            if (p1.getReviewStatus().equals(Status.under_review) && p2.getReviewStatus().equals(Status.reviewed)) {
-                return -1;
-            }
-            if (p1.getReviewStatus().equals(Status.reviewed) && p2.getReviewStatus().equals(Status.under_review)) {
-                return 1;
-            }
+
             if (p1.getSelfAssessmentTime().before(p2.getSelfAssessmentTime())) {
-                return -1;
+	            if (p2.getReviewStatus() == Status.unfinished) {
+	                return -1;
+	            }
             }
-            if (p1.getSelfAssessmentTime().after(p2.getSelfAssessmentTime())) {
-                return 1;
-            }
-            return 0;
+            return -1;
         });
         return patients;
     }
@@ -114,12 +108,13 @@ public class PatientService {
         Patient patient = patientRepository.findOneByUserID(patientUserID);
         patient.setAssignee(doctorUserID);
         patient.setReviewer(nurseUserID);
-        patient.setReviewStatus(Status.reviewed);
         patientRepository.save(patient);
+
 
     }
 
     public Iterable<Patient> findByAssignee(String assignee) {
-        return patientRepository.findPatientByAssignee(assignee);
+        List<Patient> patients = (List<Patient>) patientRepository.findPatientByAssignee(assignee);
+        return patients;
     }
 }

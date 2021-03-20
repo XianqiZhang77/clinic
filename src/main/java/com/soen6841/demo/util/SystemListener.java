@@ -1,10 +1,12 @@
 package com.soen6841.demo.util;
 
+import com.soen6841.demo.dao.AppointmentRepository;
 import com.soen6841.demo.dao.DoctorRepository;
 import com.soen6841.demo.dao.NurseRepository;
 import com.soen6841.demo.dao.PatientRepository;
 import com.soen6841.demo.dao.UserRepository;
 import com.soen6841.demo.domain.User;
+import com.soen6841.demo.domain.Appointment;
 import com.soen6841.demo.domain.Doctor;
 import com.soen6841.demo.domain.Nurse;
 import com.soen6841.demo.domain.Patient;
@@ -32,6 +34,9 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -49,7 +54,10 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         if(getUserList()!=null){
             userRepository.saveAll(getUserList());
         }
-
+        
+        if(getAppointmentList()!=null){
+            appointmentRepository.saveAll(getAppointmentList());
+        }
     }
     
     private List<User> getUserList(){
@@ -74,6 +82,8 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         userList.add(patient2);
         User patient3 = new User("Ray",PasswordUtil.encrypt("Ray"),"patient", (long) 3);
         userList.add(patient3);
+        User patient4 = new User("Tom",PasswordUtil.encrypt("Tom"),"patient", (long) 4);
+        userList.add(patient4);
         return userList;
     }
 
@@ -105,8 +115,17 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         patientList.add(patient1);
         Patient patient2 = new Patient("Peter","Peter","peter@gamil.com","WWD St,","19999",new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "No", "No" ,"No", new Date(), Status.under_review);
         patientList.add(patient2);
-        Patient patient3 = new Patient("Ray", "Ray", "Ray@gmail.com", "Du Fort", "43234545", new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "Yes", "Yes" ,"Yes", new Date(), Status.reviewed, "Alice", "Mike");
+        Patient patient3 = new Patient("Ray", "Ray", "Ray@gmail.com", "Du Fort", "43234545", new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "Yes", "Yes" ,"Yes", new Date(), Status.under_review, "Alice", "Mike");
         patientList.add(patient3);
+        Patient patient4 = new Patient("Tom", "Tom", "Tom@gmail.com", "Du Lincon", "43234545", new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "Yes", "Yes" ,"Yes", new Date(), Status.appointed);
+        patientList.add(patient4);
         return patientList;
+    }
+    
+    private List<Appointment> getAppointmentList(){
+        List<Appointment> appointmentList = new ArrayList<>();
+        Appointment appointment1 = new Appointment("Tom","Tom","Mike","Mike","Please go hospital",new Date(), Status.appointed);
+        appointmentList.add(appointment1);
+        return appointmentList;
     }
 }

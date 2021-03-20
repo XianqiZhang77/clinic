@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,7 +68,10 @@
 </div>
 
 <div id="notice">
-    <span style="margin-top: 3%;margin-left: 3%"> Notice: </span>
+    <span style="margin-top: 3%;margin-left: 3%"> Notice:</span>
+    <li th:each= "notice:${notices}" th:text="${notice.notice}">
+    </li>
+
 </div>
 
 <div class="container" >
