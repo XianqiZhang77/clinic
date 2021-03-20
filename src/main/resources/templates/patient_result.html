@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Self-Assessment Results </title>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-    <link rel="shortcut icon" href="../pictures/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
     <style type="text/css">
 
         body {
-            background: url("../pictures/patient.png") no-repeat;
+            background: url("pictures/patient.png") no-repeat;
             background-size: 100%;
         }
 
@@ -46,11 +46,6 @@
             font-weight: bold;
         }
 
-        #top{
-            font-size: 25px;
-            text-align: center;
-            margin-top: -10px;
-        }
         #bt{
             margin-left: 53%;
             margin-top: -2%;
@@ -58,8 +53,8 @@
 
 
     </style>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -110,6 +105,12 @@
         - Significant loss of appetite<br>
         - Generalized muscle pain (not related to physical exertion)<br>
         - Headache <br> <br> <br>
+
+        5. Have you been in close contact with a confirmed or probable case of COVID-19? &nbsp;&nbsp;<span class="result" th:text="${resultFive}"> q5 </span><br><br><br>
+
+        6. Have you been tested for COVID-19? &nbsp;&nbsp; <span class="result" th:text="${resultSix}"> q6 </span><br><br><br>
+
+        7. Have you or someone close to you travelled outside of Canada within the last 14 days? &nbsp;&nbsp; <span class="result" th:text="${resultSeven}"> q7 </span><br><br><br>
     </div>
 
 </div>

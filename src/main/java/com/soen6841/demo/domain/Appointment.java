@@ -28,6 +28,16 @@ public class Appointment {
     @Column(name = "appointmentStatus")
     private Status appointmentStatus; // cancelled, available
 
+    public Appointment(String patient, String patientUserID, String healthCareName, String healthCareID, String note, Date appointmentDate, Status appointmentStatus) {
+    	this.patient = patient;
+    	this.patientUserID = patientUserID;
+    	this.healthCareName = healthCareName;
+    	this.healthCareID = healthCareID;
+    	this.note = note;
+    	this.appointmentDate = appointmentDate;
+    	this.appointmentStatus = appointmentStatus;
+    }
+    
     public Appointment() {
     }
 

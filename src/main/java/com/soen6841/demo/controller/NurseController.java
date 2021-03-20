@@ -2,6 +2,7 @@ package com.soen6841.demo.controller;
 
 import com.soen6841.demo.domain.*;
 import com.soen6841.demo.service.*;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class NurseController {
 
     @Autowired
     AppointmentService appointmentService;
+
+    @Autowired
+    NoticeService noticeService;
 
     @PostMapping("/nurse/registration")
     public String nurseRegister(Nurse nurse, Model model, HttpSession httpSession) {
@@ -66,6 +70,7 @@ public class NurseController {
         String doctorUserID = assign.getDoctorUserID();
         String patientUserID = assign.getPatientUserID();
         patientService.assignedToDoctor(patientUserID, nurseUserID, doctorUserID);
+        noticeService.addAssignNotice(patientUserID, nurseUserID, doctorUserID);
         return "redirect:/nurse_patient";
     }
     
@@ -81,5 +86,14 @@ public class NurseController {
     public String cancelAppointment(@PathVariable String Id, Model model) {
     	nurseService.CancelAppointment(Id);
         return "redirect:/nurse_profile";
+    }
+
+    @RequestMapping("/rejectPatientByNurse/{patientId}")
+    public String rejectPatientByNurse(@PathVariable String patientId, HttpSession httpSession,Model model) {
+        Patient patient = patientService.getPatientByUserID(patientId);
+        String userID = (String) httpSession.getAttribute("userID");
+        patientService.setReviewStatus(patient,Status.rejected);
+        noticeService.addRejectNoticeByNurse(patient.getUserID(), userID);
+        return "redirect:/nurse_patient";
     }
 }

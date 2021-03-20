@@ -48,7 +48,7 @@ public class UserController {
             model.addAttribute("msg", "Incorrect ID or password. Please try again.");
             return "login";
         }
-        model.addAttribute("msg", "This User ID not exsit. Please try again.");
+        model.addAttribute("msg", "This User ID not exist. Please try again.");
         return "login";
     }
     

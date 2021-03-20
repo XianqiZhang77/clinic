@@ -39,6 +39,15 @@ public class Patient {
     private String answerThree;
     @Column(name = "answerFour")
     private String answerFour;
+    @Column(name = "answerFive")
+    private String answerFive;
+    @Column(name = "answerSix")
+    private String answerSix;
+
+
+
+    @Column(name = "answerSeven")
+    private String answerSeven;
     @Column(name = "selfAssessmentTime")
     private Date selfAssessmentTime;
     @Column(name = "reviewStatus")
@@ -215,6 +224,30 @@ public class Patient {
     public String getAnswerFour() { return answerFour; }
 
     public void setAnswerFour(String answerFour) { this.answerFour = answerFour; }
+
+    public String getAnswerFive() {
+        return answerFive;
+    }
+
+    public void setAnswerFive(String answerFive) {
+        this.answerFive = answerFive;
+    }
+
+    public String getAnswerSix() {
+        return answerSix;
+    }
+
+    public void setAnswerSix(String answerSix) {
+        this.answerSix = answerSix;
+    }
+
+    public String getAnswerSeven() {
+        return answerSeven;
+    }
+
+    public void setAnswerSeven(String answerSeven) {
+        this.answerSeven = answerSeven;
+    }
 
     public Patient() {
     }

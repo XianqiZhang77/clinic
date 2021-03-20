@@ -102,4 +102,10 @@ public class PageController {
         return "advise";
     }
 
+    @RequestMapping("/patient_main")
+    public String patientMainPage() {return "patient_main";}
+
+    @RequestMapping("/patient_appointment")
+    public String patient_appointmentPage() {return "patient_appointment";}
+
 }

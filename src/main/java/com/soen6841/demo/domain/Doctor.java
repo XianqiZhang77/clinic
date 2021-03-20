@@ -45,7 +45,6 @@ public class Doctor {
         registerTime = register_time;
     }
 
-
     public Date getRegisterTime() {
         return registerTime;
     }
