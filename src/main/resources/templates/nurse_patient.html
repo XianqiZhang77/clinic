@@ -91,11 +91,11 @@
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
+                    <td><button class="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
-                    <td><button clsss="btn btn-primary" onclick="open_assign()">Assign</button></td>
-                    <td><button clsss="btn btn-success" onclick=" open_notice()">Appointment</button></td>
-                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
+                    <td><button class="btn btn-primary" onclick="open_assign()">Assign</button></td>
+                    <td><button class="btn btn-success" onclick=" open_notice()">Appointment</button></td>
+                    <td><button class="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
