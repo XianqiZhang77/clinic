@@ -5,8 +5,6 @@ import com.soen6841.demo.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-
 @Service
 public class AppointmentService {
 
@@ -29,5 +27,9 @@ public class AppointmentService {
     
     public Iterable<Appointment> getAllAssignedByPatientUserID(String userID) {
         return appointmentRepository.findAppointmentByPatientUserID(userID);
+    }
+    
+    public Appointment getAppointmentByID(Long ID) {
+        return appointmentRepository.findOneById(ID);
     }
 }

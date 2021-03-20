@@ -77,12 +77,12 @@ public class PatientService {
             if (p2.getSelfAssessmentTime() == null) {
                 return -1;
             }
-            if (p1.getReviewStatus().equals(Status.under_review) && p2.getReviewStatus().equals(Status.reviewed)) {
-                return -1;
-            }
-            if (p1.getReviewStatus().equals(Status.reviewed) && p2.getReviewStatus().equals(Status.under_review)) {
-                return 1;
-            }
+            //if (p1.getReviewStatus().equals(Status.under_review) && p2.getReviewStatus().equals(Status.reviewed)) {
+            //    return -1;
+            //}
+            //if (p1.getReviewStatus().equals(Status.reviewed) && p2.getReviewStatus().equals(Status.under_review)) {
+            //    return 1;
+            //}
             if (p1.getSelfAssessmentTime().before(p2.getSelfAssessmentTime())) {
                 return -1;
             }
@@ -108,7 +108,6 @@ public class PatientService {
         Patient patient = patientRepository.findOneByUserID(patientUserID);
         patient.setAssignee(doctorUserID);
         patient.setReviewer(nurseUserID);
-        patient.setReviewStatus(Status.reviewed);
         patientRepository.save(patient);
 
     }

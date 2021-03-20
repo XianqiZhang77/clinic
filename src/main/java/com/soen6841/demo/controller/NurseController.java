@@ -52,7 +52,7 @@ public class NurseController {
         return "nurse_patient";
     }
     
-    @GetMapping("/nurse_profile")
+    @RequestMapping("/nurse_profile")
     public String getAppointment(Model model, HttpSession httpSession) {
     	String userID = (String) httpSession.getAttribute("userID");   												
     	Iterable<Appointment> apppointments = appointmentService.getAllAssignedByHealthCareID(userID);
@@ -69,19 +69,17 @@ public class NurseController {
         return "redirect:/nurse_patient";
     }
     
+    
     @RequestMapping("/nurseAppointment")
     public String makeAppointment(Appointment appointment, HttpSession httpSession) {
     	String nurseUserID = (String) httpSession.getAttribute("userID");
-    	appointment.setAppointmentStatus(Status.available);
-    	User user = userService.getUserByUserID(nurseUserID);
-    	Nurse nurse = nurseService.getNurseById(user.getRegisterID());
-    	User patient_user = userService.getUserByUserID(appointment.getPatientUserID());
-    	Patient patient = patientService.getPatientById(patient_user.getRegisterID());
-    	patient.setReviewStatus(Status.accepted);
-    	patientService.savePatient(patient);
-    	appointment.setHealthCareID(nurseUserID);
-    	appointment.setHealthCareName(nurse.getFullName());
-        appointmentService.saveAppointment(appointment);
+    	nurseService.MakeAppointment(appointment, nurseUserID);
         return "forward:/nurse_patient";
+    }
+    
+    @RequestMapping("/nurseCancelAppointment/{Id}")
+    public String cancelAppointment(@PathVariable String Id, Model model) {
+    	nurseService.CancelAppointment(Id);
+        return "redirect:/nurse_profile";
     }
 }

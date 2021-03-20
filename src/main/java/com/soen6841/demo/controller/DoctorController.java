@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -51,7 +52,7 @@ public class DoctorController {
         return "doctor_patient";
     }
     
-    @GetMapping("/doctor_profile")
+    @RequestMapping("/doctor_profile")
     public String getAppointment(Model model, HttpSession httpSession) {
     	String userID = (String) httpSession.getAttribute("userID");   												
     	Iterable<Appointment> apppointments = appointmentService.getAllAssignedByHealthCareID(userID);
@@ -67,21 +68,17 @@ public class DoctorController {
         return "doctor_assigned";
     }
     
-    //
     @RequestMapping("/doctorAppointment")
     public String makeAppointment(Appointment appointment, HttpSession httpSession) {
     	String doctorUserID = (String) httpSession.getAttribute("userID");
-    	appointment.setAppointmentStatus(Status.available);
-    	User user = userService.getUserByUserID(doctorUserID);
-    	Doctor doctor = doctorService.getDoctorById(user.getRegisterID());
-    	User patient_user = userService.getUserByUserID(appointment.getPatientUserID());
-    	Patient patient = patientService.getPatientById(patient_user.getRegisterID());
-    	patient.setReviewStatus(Status.accepted);
-    	patientService.savePatient(patient);
-    	appointment.setHealthCareID(doctorUserID);
-    	appointment.setHealthCareName(doctor.getFullName());
-        appointmentService.saveAppointment(appointment);
+    	doctorService.MakeAppointment(appointment, doctorUserID);
         return "forward:/doctor_assigned";
+    }
+    
+    @RequestMapping("/doctorCancelAppointment/{Id}")
+    public String cancelAppointment(@PathVariable String Id, Model model) {
+    	doctorService.CancelAppointment(Id);
+        return "redirect:/doctor_profile";
     }
 
 }

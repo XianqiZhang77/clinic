@@ -83,7 +83,7 @@
                     <th width="120px" style="text-align: center">Status</th>
                     <th width="100px" style="text-align: center">Assign</th>
                     <th width="100px" style="text-align: center">Appointment</th>
-                    <th width="100px" style="text-align: center">Delete</th>
+                    <th width="100px" style="text-align: center">Reject</th>
                 </tr>
                 <tr th:each="patient:${patients}">
                     <td th:text="${patient.userID}" style="display: none">User ID</td>
@@ -96,7 +96,7 @@
                     <td th:text="${patient.reviewStatus}">Status</td>
                     <td><button clsss="btn btn-primary" onclick="open_assign(this)">Assign</button></td>
                     <td><button clsss="btn btn-success" onclick=" open_notice(this)">Appointment</button></td>
-                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</button></td>
+                    <td><button clsss="btn btn-danger" th:href="@{'/rejectPatient/'+${patient.userID}}" >Reject</button></td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -140,10 +140,10 @@
     <div style="margin-left: 5%; margin-right: 5%" >
         <br> <br>
         <form th:action="@{nurseAppointment}" method="get">
-            <input type="text" id="patientUserID2" name="patientUserID" class="form-control" value="patientID" readonly style="display: none">
-            <input type="text" id="patientName2" name="patient" class="form-control" value="patientID" readonly style="display: none">
-            Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
-            Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
+            <input type="text" id="appointmentPatientID" name="patientUserID" class="form-control" value="patientID" readonly style="display: none">
+            <input type="text" id="appointmentPatientName" name="patient" class="form-control" value="patientID" readonly style="display: none">
+            Appointment Time: <input id="apptime" name="appointmentDate" class="form-control" type="date" placeholder="Please appointment information" required><br>
+            Note: <input id="note" class="form-control" name="note" placeholder="Please input the address or other information" ><br>
             <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
             <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
         </form>
@@ -224,8 +224,8 @@
         var uName = $td.eq(1).text();
         const notice = document.getElementById('notice');
         notice.style.display='block';
-        $("#patientName2").val(uName);
-        $("#patientUserID2").val(uid);
+        $("#appointmentPatientName").val(uName);
+        $("#appointmentPatientID").val(uid);
     }
 
     function open_assign(obj){
