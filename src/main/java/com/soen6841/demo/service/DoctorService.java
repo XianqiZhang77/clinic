@@ -1,7 +1,7 @@
 package com.soen6841.demo.service;
 
 import com.soen6841.demo.dao.DoctorRepository;
-import com.soen6841.demo.dao.PatientRepository;
+import com.soen6841.demo.domain.Appointment;
 import com.soen6841.demo.domain.Doctor;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -21,6 +20,12 @@ public class DoctorService {
     
     @Autowired
     private PatientService patientService;
+    
+    @Autowired
+    private AppointmentService appointmentService;
+
+    @Autowired
+    private NoticeService noticeService;
 
     public Iterable<Doctor> getAllDoctors() {
         List<Doctor> doctors = (List<Doctor>) doctorRepository.findAll();
@@ -60,5 +65,35 @@ public class DoctorService {
         return doctorRepository.findDoctorByRegisterStatus(Status.accepted);
     }
 
+    public void MakeAppointment(Appointment appointment, String doctorUserID) {
+    	
+    	appointment.setAppointmentStatus(Status.appointed);
+    	appointment.setHealthCareID(doctorUserID);
+    	
+    	Patient patient = patientService.getPatientByUserID(appointment.getPatientUserID());
+    	patient.setReviewStatus(Status.appointed);
+    	patientService.savePatient(patient);
+    	Doctor doctor =  getDoctorByUserID(doctorUserID);
+    	appointment.setHealthCareName(doctor.getFullName());
+        appointmentService.saveAppointment(appointment);
+        noticeService.addAcceptNoticeByDoctor(patient.getUserID(), doctorUserID);
+    }
+    
+    public void CancelAppointment(String Id) {
+    	Long number = Long.valueOf(Id);
+    	
+    	//Change Appointment Status
+    	Appointment appointment = appointmentService.getAppointmentByID(number);
+    	appointment.setAppointmentStatus(Status.cancelled);
+    	appointmentService.saveAppointment(appointment);
+    	
+    	//Change Review Status
+    	String patientUserID = appointment.getPatientUserID();
+    	Patient patient = patientService.getPatientByUserID(patientUserID);
+    	patient.setReviewStatus(Status.under_review);
+    	patientService.savePatient(patient);
 
+    	//send a notice to patient
+        noticeService.cancelAppointmentByDoctor(patientUserID, appointment.getHealthCareID());
+    }
 }

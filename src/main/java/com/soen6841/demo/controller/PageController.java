@@ -1,6 +1,7 @@
 package com.soen6841.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -85,31 +86,6 @@ public class PageController {
     public String registerSuccessPage() {
         return "register_success";
     }
-    
-    /*
-     * 已批准为患者用户登录后主页
-     */
-    @RequestMapping("/patient")
-    public String patientPage() {
-        return "patient";
-    }
-    
-    /*
-     * 已批准为医生用户登录后主页
-     */
-    @RequestMapping("/doctor")
-    public String doctorPage() {
-        return "doctor";
-    }
-    
-    /*
-     * 已批准为护士用户登录后主页
-     */
-    @RequestMapping("/nurse")
-    public String nursePage() {
-        return "nurse_profile";
-    }
-
 
     @RequestMapping("/assessment")
     public String assessmentPage() {
@@ -125,5 +101,11 @@ public class PageController {
     public String advisePage() {
         return "advise";
     }
+
+    @RequestMapping("/patient_main")
+    public String patientMainPage() {return "patient_main";}
+
+    @RequestMapping("/patient_appointment")
+    public String patient_appointmentPage() {return "patient_appointment";}
 
 }

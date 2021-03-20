@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/doctorStyles.css">
@@ -57,10 +58,10 @@
                     <li class="sidebar-brand">
                         <a href="nurse_patient" style="color: darkgray"> Patients </a>
                     </li>
-                    <li>
-                        <a href="nurse_profile" > My Appointment</a>
+                    <li class="sidebar-brand">
+                        <a href="nurse_profile" >Appointments</a>
                     </li>
-                    <li>
+                    <li class="sidebar-brand">
                         <a href="index"> Log out</a>
                     </li>
                 </ul>
@@ -72,7 +73,7 @@
             <table id="patient_table" style="text-align: center" border="1px">
                 <thead>
                 <tr>
-                    <th width="120px" style="text-align: center">User ID</th>
+                    <th width="120px" style="text-align: center; display: none" >User ID</th>
                     <th width="120px" style="text-align: center">Full name</th>
                     <th width="200px" style="text-align: center">Email</th>
                     <th width="300px" style="text-align: center">Address</th>
@@ -82,27 +83,26 @@
                     <th width="120px" style="text-align: center">Status</th>
                     <th width="100px" style="text-align: center">Assign</th>
                     <th width="100px" style="text-align: center">Appointment</th>
-                    <th width="100px" style="text-align: center">Delete</th>
+                    <th width="100px" style="text-align: center">Reject</th>
                 </tr>
                 <tr th:each="patient:${patients}">
-                    <td th:text="${patient.userID}">User ID</td>
+                    <td th:text="${patient.userID}" style="display: none">User ID</td>
                     <td th:text="${patient.fullName}">Full Name</td>
                     <td th:text="${patient.email}">Email</td>
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><button th:text="${patient.userID}" id="result" onclick="openRe(this)">Results</button></td>
+                    <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
-                    <td><div class="dropdown" th:each="doctor : ${doctors}">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="assign" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            </ul>
-                        </div>
+                    <td th:class="${patient.reviewStatus.name() == 'under_review' ? '' : 'disabled'}">
+                        <button clsss="btn btn-primary" onclick="open_assign(this)">Assign</button>
                     </td>
-                    <td><a th:href="@{'/approvePatient/'+${patient.userID}}" onclick=" open_notice()">Appointment</a></td>
-                    <td><a th:href="@{'/rejectPatient/'+${patient.userID}}" >Delete</a></td>
+                    <td th:class="${patient.reviewStatus.name() == 'under_review' ? '' : 'disabled'}">
+                        <button clsss="btn btn-success" onclick=" open_notice(this)">Appointment</button>
+                    </td>
+                    <td  th:class="${patient.reviewStatus.name() == 'under_review' ? '' : 'disabled '}">
+                        <a th:href="@{'/rejectPatientByNurse/'+${patient.userID}}" >Reject</a>
+                    </td>
                 </tr>
                 </thead>
                 <tbody id="tb">
@@ -115,29 +115,46 @@
 
 </div>
 
-<div id="notice" class="notice" style="display: none">
-    <div style="margin-left: 1%" >
-        <br>
+<div id="assign" class="notice" style="display: none">
+    <div style="margin-left: 5%; margin-right: 5%" >
 
-        <div class="dropdown">
-            Nurse Name: &nbsp;
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Name
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li> </li>
-            </ul>
-        </div>
 
-        <br> <br>
-        Appointment Time: <input id="apptime" class="form-control" type="date" placeholder="Please appointment information" ><br>
-        Note: <input id="note" class="form-control" placeholder="Please input the address or other information" ><br>
-        <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
-        <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
+        <form th:action="@{nurse_assign}" method="get">
+
+            Patient Name:
+            <!--            Patient ID: <div id="patientID"></div>-->
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" id="patientUserID" name="patientUserID" class="form-control" value="patientID" readonly>
+            </div>
+            <div class="dropdown">
+                <label>Doctor Name</label>
+                <select class="form-control" name="doctorUserID">
+                    <option th:each="doctor:${doctors}"
+                            th:value="${doctor.userID}"
+                            th:text="${doctor.fullName}">
+                    </option>
+                </select>
+            </div>
+            <button class="btn btn-info" id="submit1" type="submit" style="margin-left: 25%"> Submit </button>
+            <button class="btn btn-info " id="closeAssign" type="button" style="margin-left: 25%" > Close </button>
+        </form>
     </div>
 </div>
 
+<div id="notice" class="notice" style="display: none">
+    <div style="margin-left: 5%; margin-right: 5%" >
+        <br> <br>
+        <form th:action="@{nurseAppointment}" method="get">
+            <input type="text" id="appointmentPatientID" name="patientUserID" class="form-control" value="patientID" readonly style="display: none">
+            <input type="text" id="appointmentPatientName" name="patient" class="form-control" value="patientID" readonly style="display: none">
+            Appointment Time: <input id="apptime" name="appointmentDate" class="form-control" type="date" placeholder="Please appointment information" required><br>
+            Note: <input id="note" class="form-control" name="note" placeholder="Please input the address or other information" ><br>
+            <button class="btn btn-info" id="submit" type="submit" style="margin-left: 25%"> Submit </button>
+            <button class="btn btn-info " id="closeNotice" type="button" style="margin-left: 25%" > Close </button>
+        </form>
+    </div>
+</div>
 <!--Functions-->
 <script>
     window.onload = function () {
@@ -193,14 +210,12 @@
 
     }
 
-    $('#close').click(function(){
-        //const self_re = document.getElementById('self_re');
-        //self_re.style.display='none';
-    });
-
-    function openRe(patient) {
-        console.log(patient.innerText)
-        window.open("/getAssessmentResult/" + patient.innerText,"_blank");
+    function openRe(obj) {
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        console.log(uid)
+        window.open("/getAssessmentResult/" + uid,"_blank");
     }
 
     $('#closeNotice').click(function(){
@@ -208,10 +223,34 @@
         notice.style.display='none';
     });
 
-    function open_notice(){
+    function open_notice(obj){
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        var uName = $td.eq(1).text();
         const notice = document.getElementById('notice');
         notice.style.display='block';
+        $("#appointmentPatientName").val(uName);
+        $("#appointmentPatientID").val(uid);
     }
+
+    function open_assign(obj){
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(0).text();
+        console.log(uid);
+        var uName = $td.eq(1).text();
+        console.log(uName);
+        const assign = document.getElementById('assign');
+        assign.style.display='block';
+        $("#patientName").text(uName);
+        $("#patientUserID").val(uid);
+    }
+
+    $('#closeAssign').click(function(){
+        const assign = document.getElementById('assign');
+        assign.style.display='none';
+    });
 
 </script>
 

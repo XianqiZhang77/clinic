@@ -2,6 +2,7 @@ package com.soen6841.demo.controller;
 
 import com.soen6841.demo.domain.*;
 import com.soen6841.demo.service.*;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class NurseController {
@@ -27,6 +27,9 @@ public class NurseController {
 
     @Autowired
     AppointmentService appointmentService;
+
+    @Autowired
+    NoticeService noticeService;
 
     @PostMapping("/nurse/registration")
     public String nurseRegister(Nurse nurse, Model model, HttpSession httpSession) {
@@ -53,28 +56,42 @@ public class NurseController {
         return "nurse_patient";
     }
     
-    @GetMapping("/nurse_profile")
-    public String getProfile(Model model) {
+    @RequestMapping("/nurse_profile")
+    public String getAppointment(Model model, HttpSession httpSession) {
+    	String userID = (String) httpSession.getAttribute("userID");   												
+    	Iterable<Appointment> apppointments = appointmentService.getAllAssignedByHealthCareID(userID);
+        model.addAttribute("appointments",apppointments);
         return "nurse_profile";
     }
     
-    @RequestMapping("/nurse_assign/{patientUserID}/{doctorUserID}/{nurseUserID}")
-    public String assignToDoctor(HttpSession httpSession, @PathVariable String patientUserID, @PathVariable String doctorUserID, @PathVariable String nurseUserID) {
-        //String nurseUserID = (String) httpSession.getAttribute("userID");
-//        Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
-//        Patient patient = patientService.getPatientByUserID(patientUserID);
-//        Doctor doctor = doctorService.getDoctorByUserID(doctorUserID);
-//        System.out.println(nurse.getFullName());
-//        System.out.println(patient.getFullName());
-//        System.out.println(doctor.getFullName());
-        patientService.assignedToDoctor(patientUserID, nurseUserID, doctorUserID);
-        return "forward:/nurse_patient";
+    @RequestMapping("/nurse_assign")
+    public String assignToDoctor(HttpSession httpSession, Assign assign) {
+        String nurseUserID = (String) httpSession.getAttribute("userID");
+        String doctorUserID = assign.getDoctorUserID();
+        String patientUserID = assign.getPatientUserID();
+        nurseService.assignPatientToDoctor(patientUserID, nurseUserID, doctorUserID);
+        return "redirect:/nurse_patient";
     }
+    
     
     @RequestMapping("/nurseAppointment")
     public String makeAppointment(Appointment appointment, HttpSession httpSession) {
-    	appointment.setAppointmentStatus(Status.available);
-        appointmentService.saveAppointment(appointment);
+    	String nurseUserID = (String) httpSession.getAttribute("userID");
+    	nurseService.MakeAppointment(appointment, nurseUserID);
         return "forward:/nurse_patient";
+    }
+    
+    @RequestMapping("/nurseCancelAppointment/{Id}")
+    public String cancelAppointment(@PathVariable String Id, Model model) {
+    	nurseService.CancelAppointment(Id);
+        return "redirect:/nurse_profile";
+    }
+
+    @RequestMapping("/rejectPatientByNurse/{patientId}")
+    public String rejectPatientByNurse(@PathVariable String patientId, HttpSession httpSession,Model model) {
+        Patient patient = patientService.getPatientByUserID(patientId);
+        String userID = (String) httpSession.getAttribute("userID");
+        patientService.setReviewStatus(patient,Status.rejected);
+        return "redirect:/nurse_patient";
     }
 }

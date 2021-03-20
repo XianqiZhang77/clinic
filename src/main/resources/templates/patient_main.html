@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+
+    <style type="text/css">
+
+        body{
+            background: url("pictures/patient.png" ) no-repeat ;
+            background-size: 100%;
+        }
+        #logo{
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #title{
+            font-size: 20px;
+            color: #122b40;
+        }
+
+        .container{
+            margin-left: 45%;
+            margin-top: -1%;
+            width: 40%;
+            background-color: rgba(255,255,255,0.5);
+
+        }
+        #notice{
+            margin-top: 5%;
+            margin-left: 5%;
+            width: 20%;
+            height:20%;
+            background-color: rgba(255,255,255,0.5);
+
+        }
+        .logo{
+            height: 100px;
+            width: 100px;
+            margin-left: 110px;
+            margin-top: 20px;
+        }
+
+        .btn{
+            margin-top: 5%;
+            margin-left: 11%;
+            margin-bottom: 5%;
+        }
+
+
+
+    </style>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<div class="container-fluid">
+    <img id="logo" src="pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+</div>
+
+<div id="notice">
+    <span style="margin-top: 3%;margin-left: 3%"> Notice:</span>
+    <li th:each= "notice:${notices}" th:text="${notice.notice}">
+    </li>
+
+</div>
+
+<div class="container" >
+
+
+    <div>
+        <img class="logo" src="pictures/asssessment.png">
+        <img class="logo" src="pictures/toresult.png">
+        <img class="logo" src="pictures/toappointment.png">
+    </div>
+
+    <button class="btn-info btn" id="assessment"> Enter Assessment </button>
+    <button class="btn-info btn" id="result" > Assessment Result </button>
+    <button class="btn-info btn" id="appointment"> My Appointment </button>
+
+</div>
+
+
+<script>
+
+$('#assessment').click(function () {
+    window.location.href = "enter_assessment";
+});
+
+$('#result').click(function () {
+    window.location.href = "assessmentResult";
+});
+
+$('#appointment').click(function () {
+    window.location.href = "patient_appointment";
+});
+
+
+</script>
+
+</body>
+</html>>

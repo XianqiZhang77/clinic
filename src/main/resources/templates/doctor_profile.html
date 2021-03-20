@@ -1,23 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/doctorStyles.css">
-    <link rel="shortcut icon" href="../pictures/favicon.ico" type="image/x-icon"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/doctorStyles.css">
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+    <title>Appointments</title>
+    <style>
+        body {
+            background: url("pictures/nurse.png") no-repeat;
+            background-size: 100%;
 
+        }
+
+        #logo {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        #title {
+            font-size: 20px;
+            color: #122b40;
+        }
+
+
+        .notice {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 35%;
+            height: 47%;
+            border: 5px solid lightblue;
+            background-color: rgba(255,255,255,1);
+            z-index:1002;
+            overflow: auto;
+            font-size: 20px;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container-fluid">
-    <img id="logo" src="../pictures/logo.png">
+    <img id="logo" src="pictures/logo.png">
     <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
 </div>
 
-<<div class="container-fluid dashboard">
+<div class="container-fluid dashboard">
     <div class="row">
 
         <!--Nav bar-->
@@ -25,23 +57,73 @@
             <nav class="navbar navbar-inverse" id="sidebar-wrapper" role="navigation">
                 <ul class="nav sidebar-nav">
                     <li class="sidebar-brand">
+                        <a href="doctor_assigned" >Assigned Patients</a>
+                    </li>
+                    <li class="sidebar-brand">
                         <a href="doctor_patient"> Patients </a>
                     </li>
-                    <li>
-                        <a href="doctor_profile" style="color: darkgray"> Profile</a>
+                    <li class="sidebar-brand">
+                        <a href="doctor_profile" style="color: darkgray">Appointments</a>
                     </li>
-                    <li>
-                        <a href="doctor_assigned" > Assigned</a>
-                    </li>
-                    <li>
+                    <li class="sidebar-brand">
                         <a href="index"> Log out</a>
                     </li>
                 </ul>
             </nav>
         </div>
 
+        <!--Table-->
+        <div id="container">
+            <table id="patient_table" style="text-align: center" border="1px">
+                <thead>
+                <tr>
+                    <th width="120px" style="text-align: center; display: none">Appointment ID</th>
+                    <th width="120px" style="text-align: center; display: none">Patient ID</th>
+                    <th width="120px" style="text-align: center">Patient name</th>
+                    <th width="110px" style="text-align: center">Date</th>
+                    <th width="300px" style="text-align: center">Note</th>
+                    <th width="150px" style="text-align: center">Results</th>
+                    <th width="120px" style="text-align: center">Status</th>
+                    <th width="100px" style="text-align: center">Cancel</th>
+                </tr>
+                <tr th:each="appointment:${appointments}">
+                    <td th:text="${appointment.id}" style="display: none">Appointment ID</td>
+                    <td th:text="${appointment.patientUserID}" style="display: none">Patient ID</td>
+                    <td th:text="${appointment.patient}">Patient Name</td>
+                    <td th:text="${appointment.appointmentDate}">Date</td>
+                    <td th:text="${appointment.note}">Note</td>
+                    <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Result</button></td>
+                    <td th:text="${appointment.appointmentStatus}">Status</td>
+                    <td th:class="${appointment.appointmentStatus.name()  == 'cancelled' ? 'disabled':''}"><button clsss="btn btn-danger" onclick="cancel(this)">Cancel</button></td>
+                </tr>
+                </thead>
+                <tbody id="tb">
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
+
+<!--Functions-->
+<script>
+
+    function openRe(obj) {
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var uid = $td.eq(1).text();
+        window.open("/getAssessmentResult/" + uid,"_blank");
+    }
+
+    function cancel(obj) {
+        $("#myModal").modal('show');
+        var $td = $(obj).parent().parent().children();
+        var id = $td.eq(0).text();
+        console.log(id)
+        window.location.href = "/doctorCancelAppointment/" + id;
+    }
+
+</script>
+
 </body>
 </html>

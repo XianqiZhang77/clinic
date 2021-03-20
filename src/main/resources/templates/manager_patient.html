@@ -26,11 +26,6 @@
             border: 1px solid #ccc;
 
         }
-
-        /*        #add_user {
-                    margin-left: 1400px;
-                    margin-top: -20px;
-                }*/
     </style>
 
 </head>
@@ -95,40 +90,12 @@
                     <td th:class="${patient.registerStatus.name() == 'waiting' || patient.registerStatus.name() == 'accepted' ? '':'disabled'}">
                         <a th:href="@{'/rejectPatient/'+${patient.id}}" >Reject</a>
                     </td>
-<!--                    <td th:switch="${patient.registerStatus}">-->
-<!--                        <p th:case="Status.waiting"> <a th:href="@{'/approvePatient/'+${patient.id}}" >Approve</a> </p>-->
-<!--                        <p th:case="Status.waiting">Approve</p>-->
-<!--                    </td>-->
-<!--                    <td th:switch="${patient.registerStatus}">-->
-<!--                        <p th:case='waiting'>  <a th:href="@{'/rejectPatient/'+${patient.id}}" >Reject</a> </p>-->
-<!--                        <p th:case='accepted'>  <a th:href="@{'/rejectPatient/'+${patient.id}}" >Reject</a> </p>-->
-<!--                        <p th:case='waiting'>Reject</p>-->
-<!--                        <p th:case='accepted'>Reject</p>-->
-
-<!--                    </td>-->
                 </tr>
                 </thead>
                 <tbody id="tb">
                 </tbody>
             </table>
         </div>
-
-        <!--Add a User-->
-        <!--        <div id="add_user">
-                    <form action="" id="myfrm">
-                        Name：<input type="text" id="name"> <br> <br>
-                        Full name: <input type="text" id="full_name"> <br> <br>
-                        Address: <input type="text" id="address"> <br> <br>
-                        Birthday: <input type="text" id="date_of_birth"> <br> <br>
-                        Phone Number: <input type="text" id="phone_number"> <br> <br>
-                        E-mail: <input type="text" id="email"> <br> <br>
-                        Password：<input type="text" id="password"> <br> <br>
-                        User Type：<input type="radio" name="register_type" id="register_type" value="patient" checked> Patient
-                        <br> <br>
-                        User Status：<input type="text" id="register_status"> <br> <br>
-                        <input class="btn-info btn" type="button" value="Add" id="btnAdd">
-                    </form>
-                </div>-->
 
     </div>
 

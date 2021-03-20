@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Self-Assessment Results </title>
+    <title> My appointment </title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" )>
     <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -60,17 +60,6 @@
             font-size: 16px;
         }
 
-        .result{
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        #top{
-            font-size: 25px;
-            text-align: center;
-            margin-top: -10px;
-        }
-
 
     </style>
     <script src="js/jquery.min.js"></script>
@@ -93,10 +82,10 @@
                 <a href="assessment" > Self-Assessment</a>
             </li>
             <li>
-                <a href="assessmentResult" disabled="" style="color: darkgray"> Self-Assessment Results</a>
+                <a href="assessmentResult"> Self-Assessment Results</a>
             </li>
             <li>
-                <a href="patient_appointment" > My Appointments</a>
+                <a href="patient_appointment" disabled="" style="color: darkgray"> My Appointments</a>
             </li>
             <li>
                 <a href="index"> Log out</a>
@@ -110,47 +99,7 @@
 <div id="container">
 
     <div id="content">
-        <br>
-        <br> <div id="top" >My Self-Assessment Result</div><br>
-        <br>
-    1. Age Range：<span class="result" th:text="${resultOne}"> t1 </span> <br> <br><br>
 
-    2. Any of the following symptoms?   &nbsp;&nbsp; <span class="result" th:text="${resultTwo}"> t2 </span> <br> <br>
-    - High Fever <br>
-    - Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste<br>
-    - Recent cough or worsening of a chronic cough<br>
-    - Shortness of breath<br>
-    - Trouble breathing<br>
-    - Sore throat<br>
-    - Runny nose or congestion (of unknown cause) <br> <br> <br>
-
-
-    3. One of the situations below? &nbsp;&nbsp;  <span class="result" th:text="${resultThree}"> t3 </span> <br><br>
-    - Is 0 to 3 months old<br>
-    - Is experiencing an obstruction of nasal passages other than normal congestion<br>
-    - Is currently having a nosebleed episode<br>
-    - Has had a nosebleed episode in the past week<br>
-    - Has undergone any of the following types of surgery:<br>
-    - Mouth surgery in the past week?<br>
-    - Nose surgery in the past month (adult) OR<br>
-    - Nose surgery in the past 3 weeks (child)<br>
-    - Is currently wheezing <br> <br> <br>
-
-
-    4. Any 2 of the following symptoms? &nbsp;&nbsp;  <span class="result" th:text="${resultFour}"> t4 </span><br><br>
-    - Stomach aches<br>
-    - Nausea or vomiting<br>
-    - Diarrhea<br>
-    - Major fatigue<br>
-    - Significant loss of appetite<br>
-    - Generalized muscle pain (not related to physical exertion)<br>
-    - Headache <br> <br> <br>
-
-    5. Have you been in close contact with a confirmed or probable case of COVID-19? &nbsp;&nbsp;<span class="result" th:text="${resultFive}"> t5 </span><br><br><br>
-
-    6. Have you been tested for COVID-19? &nbsp;&nbsp; <span class="result" th:text="${resultSix}"> t6 </span><br><br><br>
-
-    7. Have you or someone close to you travelled outside of Canada within the last 14 days? &nbsp;&nbsp; <span class="result" th:text="${resultSeven}"> t7 </span><br><br><br>
 
 
     </div>

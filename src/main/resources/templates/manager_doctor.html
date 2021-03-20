@@ -76,7 +76,7 @@
                     <th width="300px" style="text-align: center">Address</th>
                     <th width="120px" style="text-align: center">Phone number</th>
                     <th width="100px" style="text-align: center">Date of birth</th>
-                    <th width="150px" style="text-align: center">Doctor Number</th>
+                    <th width="150px" style="text-align: center">License Number</th>
                     <th width="100px" style="text-align: center">Register Status</th>
                     <th width="100px" style="text-align: center">Approve</th>
                     <th width="100px" style="text-align: center">Delete</th>
@@ -88,7 +88,7 @@
                     <td th:text="${doctor.address}">Address</td>
                     <td th:text="${doctor.phoneNumber}">Phone Number</td>
                     <td th:text="${doctor.birthDate}">Birth Date</td>
-                    <td th:text="${doctor.doctorNumber}">Doctor Number</td>
+                    <td th:text="${doctor.doctorNumber}">License Number</td>
                     <td th:text="${doctor.registerStatus}">Register Status</td>
                     <td th:class="${doctor.registerStatus.name() == 'waiting'?'':'disabled'}">
                         <a th:href="@{'/approveDoctor/'+${doctor.id}}" >Approve</a>

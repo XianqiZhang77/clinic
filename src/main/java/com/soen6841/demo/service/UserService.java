@@ -104,6 +104,8 @@ public class UserService {
     	}else if(status == Status.rejected) {
     		user.setUserType(null);
     		user.setRegisterID(null);
+    		doctor.setUserID(null);
+    		doctorRepository.save(doctor);
     		userRepository.save(user);
     		model.addAttribute("msg", "Your register was rejected, please register again.");
     		return "type";
@@ -122,6 +124,8 @@ public class UserService {
     	}else if(status == Status.rejected) {
     		user.setUserType(null);
     		user.setRegisterID(null);
+    		nurse.setUserID(null);
+    		nurseRepository.save(nurse);
     		userRepository.save(user);
     		model.addAttribute("msg", "Your register was rejected, please register again.");
     		return "type";
@@ -133,13 +137,15 @@ public class UserService {
     	Patient patient = patientRepository.findOneById(user.getRegisterID());
     	Status status = patient.getRegisterStatus();
     	if(status == Status.accepted) {
-    		return "enter_assessment";
+    		return "forward:/patient/main";
     	}else if(status == Status.waiting) {
     		model.addAttribute("msg", "Your register is pending, please wait.");
     		return "login";
     	}else if(status == Status.rejected) {
     		user.setUserType(null);
     		user.setRegisterID(null);
+    		patient.setUserID(null);
+    		patientRepository.save(patient);
     		userRepository.save(user);
     		model.addAttribute("msg", "Your register was rejected, please register again.");
     		return "type";
