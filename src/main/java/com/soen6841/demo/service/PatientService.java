@@ -43,7 +43,7 @@ public class PatientService {
     }
 
     public Patient saveQuestionAnswers(String patientId, String[] answer) {
-        if(patientRepository.existsByUserID(patientId)){
+        if (patientRepository.existsByUserID(patientId)) {
             Patient patient = patientRepository.findOneByUserID(patientId);
             patient.setAnswerOne(answer[0]);
             patient.setAnswerTwo(answer[1]);
@@ -54,13 +54,15 @@ public class PatientService {
             patient.setAnswerSeven(answer[6]);
             patient.setSelfAssessmentTime(new Date());
             patient.setReviewStatus(Status.under_review);
+            patient.setAssignee(null);
+            patient.setReviewer(null);
         }
         return patientRepository.findOneByUserID(patientId);
     }
 
     public String[] getQuestionAnswers(String patientId) {
         String[] results = new String[7];
-        if(patientRepository.existsByUserID(patientId)){
+        if (patientRepository.existsByUserID(patientId)) {
             Patient check = patientRepository.findOneByUserID(patientId);
             results[0] = check.getAnswerOne();
             results[1] = check.getAnswerTwo();
@@ -80,16 +82,14 @@ public class PatientService {
             if (p1.getReviewStatus() == Status.unfinished) {
                 return 1;
             }
-            if (p2.getSelfAssessmentTime() == null) {
+            if (p2.getReviewStatus() == Status.unfinished) {
                 return -1;
             }
 
             if (p1.getSelfAssessmentTime().before(p2.getSelfAssessmentTime())) {
-	            if (p2.getReviewStatus() == Status.unfinished) {
-	                return -1;
-	            }
+                return -1;
             }
-            return -1;
+            return 0;
         });
         return patients;
     }
@@ -104,13 +104,11 @@ public class PatientService {
         if (!patientRepository.existsByUserID(patientUserID) || !nurseService.existsByUserID(nurseUserID) || !doctorService.existsByUserID(doctorUserID)) {
             return;
         }
-
         Patient patient = patientRepository.findOneByUserID(patientUserID);
         patient.setAssignee(doctorUserID);
         patient.setReviewer(nurseUserID);
+        patient.setReviewStatus(Status.assigned);
         patientRepository.save(patient);
-
-
     }
 
     public Iterable<Patient> findByAssignee(String assignee) {

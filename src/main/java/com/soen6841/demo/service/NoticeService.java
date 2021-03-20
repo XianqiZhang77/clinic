@@ -32,25 +32,23 @@ public class NoticeService {
         return notices;
     }
 
-    public void addRejectNoticeByNurse(String patientUserID, String nurseUserID) {
+    public void cancelAppointmentByNurse(String patientUserID, String nurseUserID) {
         Notice notice = new Notice();
         Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
         Date date = new Date();
-        String message = DateFormatUtil.DateUtil(date) + ": " + nurse.getFullName() + " (Nurse) " + "has reviewed your self-assessment, " +
-                "there is no need to have appointment";
+        String message = DateFormatUtil.DateUtil(date)+" : " + "Sorry, your appointment with " + nurse.getFullName() + " (Nurse) was cancelled";
         notice.setNoticeTime(date).setPatientUserID(patientUserID)
-                .setNurseUserID(nurseUserID).setNotice(message).setStatus(Status.rejected);
+                .setNurseUserID(nurseUserID).setNotice(message).setStatus(Status.cancelled);
         noticeRepository.save(notice);
     }
 
-    public void addRejectNoticeByDoctor(String patientUserID, String doctorUserID) {
+    public void cancelAppointmentByDoctor(String patientUserID, String doctorUserID) {
         Notice notice = new Notice();
         Doctor doctor = doctorService.getDoctorByUserID(doctorUserID);
         Date date = new Date();
-        String message = DateFormatUtil.DateUtil(date) + ": " + doctor.getFullName() + " (Doctor) " + "has reviewed your self-assessment, " +
-                "there is no need to have appointment";
+        String message = DateFormatUtil.DateUtil(date)+" : " + "Sorry, your appointment with " + doctor.getFullName() + " (Nurse) was cancelled";
         notice.setNoticeTime(date).setPatientUserID(patientUserID)
-                .setDoctorUserID(doctorUserID).setNotice(message).setStatus(Status.rejected);
+                .setDoctorUserID(doctorUserID).setNotice(message).setStatus(Status.cancelled);
         noticeRepository.save(notice);
     }
 
@@ -58,7 +56,7 @@ public class NoticeService {
         Notice notice = new Notice();
         Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
         Date date = new Date();
-        String message = DateFormatUtil.DateUtil(date) + ": " + nurse.getFullName() + " (Nurse) " + "made an appointment with you, please check";
+        String message = DateFormatUtil.DateUtil(date) + " : " + nurse.getFullName() + " (Nurse) " + "made an appointment with you, please check";
         notice.setNoticeTime(date).setPatientUserID(patientUserID)
                 .setNurseUserID(nurseUserID).setNotice(message).setStatus(Status.accepted);
         noticeRepository.save(notice);
@@ -67,18 +65,18 @@ public class NoticeService {
         Notice notice = new Notice();
         Doctor doctor = doctorService.getDoctorByUserID(doctorUserID);
         Date date = new Date();
-        String message = DateFormatUtil.DateUtil(date) + ": " + doctor.getFullName() + " (Doctor) " + "made an appointment with you, please check";
+        String message = DateFormatUtil.DateUtil(date) + " : " + doctor.getFullName() + " (Doctor) " + "made an appointment with you, please check";
         notice.setNoticeTime(date).setPatientUserID(patientUserID)
                 .setDoctorUserID(doctorUserID).setNotice(message).setStatus(Status.accepted);
         noticeRepository.save(notice);
     }
 
-    public void addAssignNotice (String patientUserID, String nurseUserID, String doctorUserID) {
+    public void addAssignNotice(String patientUserID, String nurseUserID, String doctorUserID) {
         Notice notice = new Notice();
         Nurse nurse = nurseService.getNurseByUserID(nurseUserID);
         Doctor doctor = doctorService.getDoctorByUserID(doctorUserID);
         Date date = new Date();
-        String message = DateFormatUtil.DateUtil(date) + ": " + nurse.getFullName() + " (Nurse) " + "assigned you to Doctor " + doctor.getFullName()
+        String message = DateFormatUtil.DateUtil(date) + " : " + nurse.getFullName() + " (Nurse) " + "assigned you to Doctor " + doctor.getFullName()
                 + " who will help you further";
         notice.setNoticeTime(date).setPatientUserID(patientUserID)
                 .setNurseUserID(nurseUserID).setDoctorUserID(doctorUserID).setNotice(message);

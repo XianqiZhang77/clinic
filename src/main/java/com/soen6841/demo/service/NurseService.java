@@ -21,6 +21,8 @@ public class NurseService {
     private PatientService patientService;
     @Autowired
     private AppointmentService appointmentService;
+    @Autowired
+    private NoticeService noticeService;
 
     public Iterable<Nurse> getAllNurses() {
         return nurseRepository.findAll();
@@ -60,6 +62,9 @@ public class NurseService {
     	Nurse nurse =  getNurseByUserID(nurseUserID);
     	appointment.setHealthCareName(nurse.getFullName());
         appointmentService.saveAppointment(appointment);
+
+        //send a notice to patient
+        noticeService.addAcceptNoticeByNurse(patient.getUserID(), nurseUserID);
     }
     
     public void CancelAppointment(String Id) {
@@ -75,5 +80,14 @@ public class NurseService {
     	Patient patient = patientService.getPatientByUserID(patientUserID);
     	patient.setReviewStatus(Status.under_review);
     	patientService.savePatient(patient);
+
+    	//send a notice to patient
+        noticeService.cancelAppointmentByNurse(patientUserID, appointment.getHealthCareID());
+
+    }
+
+    public void assignPatientToDoctor(String patientUserID, String nurseUserID, String doctorUserID) {
+        patientService.assignedToDoctor(patientUserID, nurseUserID, doctorUserID);
+        noticeService.addAssignNotice(patientUserID, nurseUserID, doctorUserID);
     }
 }

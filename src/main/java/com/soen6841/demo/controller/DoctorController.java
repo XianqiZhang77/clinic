@@ -55,8 +55,8 @@ public class DoctorController {
     @RequestMapping("/doctor_profile")
     public String getAppointment(Model model, HttpSession httpSession) {
     	String userID = (String) httpSession.getAttribute("userID");   												
-    	Iterable<Appointment> apppointments = appointmentService.getAllAssignedByHealthCareID(userID);
-        model.addAttribute("appointments",apppointments);
+    	Iterable<Appointment> appointments = appointmentService.getAllAssignedByHealthCareID(userID);
+        model.addAttribute("appointments",appointments);
         return "doctor_profile";
     }
 
@@ -72,7 +72,7 @@ public class DoctorController {
     public String makeAppointment(Appointment appointment, HttpSession httpSession) {
     	String doctorUserID = (String) httpSession.getAttribute("userID");
     	doctorService.MakeAppointment(appointment, doctorUserID);
-        return "forward:/doctor_assigned";
+        return "redirect:/doctor_assigned";
     }
     
     @RequestMapping("/doctorCancelAppointment/{Id}")
@@ -86,7 +86,6 @@ public class DoctorController {
         Patient patient = patientService.getPatientByUserID(patientId);
         String userID = (String) httpSession.getAttribute("userID");
         patientService.setReviewStatus(patient,Status.rejected);
-        noticeService.addRejectNoticeByDoctor(patient.getUserID(), userID);
         return "redirect:/doctor_patient";
     }
 
@@ -95,7 +94,6 @@ public class DoctorController {
         Patient patient = patientService.getPatientByUserID(patientId);
         String userID = (String) httpSession.getAttribute("userID");
         patientService.setReviewStatus(patient,Status.rejected);
-        noticeService.addRejectNoticeByDoctor(patient.getUserID(), userID);
         return "redirect:/doctor_assigned";
     }
 

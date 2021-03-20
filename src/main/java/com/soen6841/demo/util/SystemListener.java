@@ -111,13 +111,20 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
 
     private List<Patient> getPatientList(){
         List<Patient> patientList = new ArrayList<>();
-        Patient patient1 = new Patient("Will","Will","ww@gamil.com","WWD St,","19999",new Date(19999999), Status.waiting, new Date(), Status.unfinished);
+        Patient patient1 = new Patient();
+        patient1.setUserID("Will").setFullName("Will").setEmail("ww@gmail.com").setAddress("WWD St").setPhoneNumber("19999").setBirthDate(new Date(19999999)).setRegisterStatus(Status.waiting).setReviewStatus(Status.unfinished);
         patientList.add(patient1);
-        Patient patient2 = new Patient("Peter","Peter","peter@gamil.com","WWD St,","19999",new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "No", "No" ,"No", new Date(), Status.under_review);
+        Patient patient2 = new Patient();
+        patient2.setUserID("Peter").setFullName("Peter").setEmail("peter@gmail.com").setAddress("WWD St").setPhoneNumber("12299991").setBirthDate(new Date(19999999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.under_review).setSelfAssessmentTime(new Date())
+                .setAnswerOne("Above 18 years").setAnswerTwo("Yes").setAnswerThree("No").setAnswerFour("Yes").setAnswerFive("No").setAnswerSix("Yes").setAnswerSeven("Yes");
         patientList.add(patient2);
-        Patient patient3 = new Patient("Ray", "Ray", "Ray@gmail.com", "Du Fort", "43234545", new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "Yes", "Yes" ,"Yes", new Date(), Status.under_review, "Alice", "Mike");
+        Patient patient3 = new Patient();
+        patient3.setUserID("Ray").setFullName("Ray").setEmail("ray77@gmail.com").setAddress("W11WD St").setPhoneNumber("122993299").setBirthDate(new Date(29999999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.assigned).setSelfAssessmentTime(new Date()).setReviewer("Alice").setAssignee("Mike")
+                .setAnswerOne("Above 18 years").setAnswerTwo("Yes").setAnswerThree("Yes").setAnswerFour("Yes").setAnswerFive("No").setAnswerSix("Yes").setAnswerSeven("Yes");
         patientList.add(patient3);
-        Patient patient4 = new Patient("Tom", "Tom", "Tom@gmail.com", "Du Lincon", "43234545", new Date(19999999), Status.accepted, new Date(), "Above 18 years" , "Yes", "Yes" ,"Yes", new Date(), Status.appointed);
+        Patient patient4 = new Patient();
+        patient4.setUserID("Tom").setFullName("Tom").setEmail("tomcat@gmail.com").setAddress("W1221WD St").setPhoneNumber("122193299").setBirthDate(new Date(29993999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.appointed).setSelfAssessmentTime(new Date())
+                .setAnswerOne("Above 18 years").setAnswerTwo("Yes").setAnswerThree("Yes").setAnswerFour("Yes").setAnswerFive("No").setAnswerSix("Yes").setAnswerSeven("Yes");
         patientList.add(patient4);
         return patientList;
     }

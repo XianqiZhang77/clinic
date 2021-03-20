@@ -97,8 +97,12 @@
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
-                    <td><button clsss="btn btn-success" onclick=" open_notice(this)">Appointment</button></td>
-                    <td><a th:href="@{'/rejectPatientByDoctor/'+${patient.userID}}" >Reject</a></td>
+                    <td th:class="${patient.reviewStatus.name() == 'under_review' ? '':'disabled'}">
+                        <button clsss="btn btn-success" onclick=" open_notice(this)">Appointment</button>
+                    </td>
+                    <td  th:class="${patient.reviewStatus.name() == 'under_review' ? '':'disabled'}">
+                        <a th:href="@{'/rejectPatientByNurse/'+${patient.userID}}" >Reject</a>
+                    </td>
                 </tr>
                 </thead>
                 <tbody id="tb">

@@ -43,9 +43,6 @@ public class Patient {
     private String answerFive;
     @Column(name = "answerSix")
     private String answerSix;
-
-
-
     @Column(name = "answerSeven")
     private String answerSeven;
     @Column(name = "selfAssessmentTime")
@@ -105,148 +102,179 @@ public class Patient {
         this.reviewStatus = reviewStatus;
     }
 
-    public String getReviewer() {
-        return reviewer;
-    }
-
-    public void setReviewer(String reviewer) {
-        this.reviewer = reviewer;
-    }
-
-    public String getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-    }
-
-    public Date getSelfAssessmentTime() {
-        return selfAssessmentTime;
-    }
-
-    public void setSelfAssessmentTime(Date selfAssessmentTime) {
-        this.selfAssessmentTime = selfAssessmentTime;
-    }
-
-    public Status getReviewStatus() {
-        return reviewStatus;
-    }
-
-    public void setReviewStatus(Status reviewStatus) {
-        this.reviewStatus = reviewStatus;
-    }
-
-    public Date getRegisterTime() {
-        return registerTime;
-    }
-
-    public void setRegisterTime(Date registerTime) {
-        this.registerTime = registerTime;
+    public Long getId() {
+        return id;
     }
 
     public String getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public Patient setUserID(String userID) {
         this.userID = userID;
-    }
-
-    public Status getRegisterStatus() {
-        return registerStatus;
-    }
-
-    public void setRegisterStatus(Status registerStatus) {
-        this.registerStatus = registerStatus;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        return this;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
+    public Patient setFullName(String fullName) {
         this.fullName = fullName;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Patient setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public Patient setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public Patient setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
     }
 
     public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public Patient setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+        return this;
     }
 
-    public String getAnswerOne() { return answerOne; }
+    public Status getRegisterStatus() {
+        return registerStatus;
+    }
 
-    public void setAnswerOne(String answerOne) { this.answerOne = answerOne; }
+    public Patient setRegisterStatus(Status registerStatus) {
+        this.registerStatus = registerStatus;
+        return this;
+    }
 
-    public String getAnswerTwo() { return answerTwo; }
+    public Date getRegisterTime() {
+        return registerTime;
+    }
 
-    public void setAnswerTwo(String answerTwo) { this.answerTwo = answerTwo; }
+    public Patient setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
+        return this;
+    }
 
-    public String getAnswerThree() { return answerThree; }
+    public String getAnswerOne() {
+        return answerOne;
+    }
 
-    public void setAnswerThree(String answerThree) { this.answerThree = answerThree; }
+    public Patient setAnswerOne(String answerOne) {
+        this.answerOne = answerOne;
+        return this;
+    }
 
-    public String getAnswerFour() { return answerFour; }
+    public String getAnswerTwo() {
+        return answerTwo;
+    }
 
-    public void setAnswerFour(String answerFour) { this.answerFour = answerFour; }
+    public Patient setAnswerTwo(String answerTwo) {
+        this.answerTwo = answerTwo;
+        return this;
+    }
+
+    public String getAnswerThree() {
+        return answerThree;
+    }
+
+    public Patient setAnswerThree(String answerThree) {
+        this.answerThree = answerThree;
+        return this;
+    }
+
+    public String getAnswerFour() {
+        return answerFour;
+    }
+
+    public Patient setAnswerFour(String answerFour) {
+        this.answerFour = answerFour;
+        return this;
+    }
 
     public String getAnswerFive() {
         return answerFive;
     }
 
-    public void setAnswerFive(String answerFive) {
+    public Patient setAnswerFive(String answerFive) {
         this.answerFive = answerFive;
+        return this;
     }
 
     public String getAnswerSix() {
         return answerSix;
     }
 
-    public void setAnswerSix(String answerSix) {
+    public Patient setAnswerSix(String answerSix) {
         this.answerSix = answerSix;
+        return this;
     }
 
     public String getAnswerSeven() {
         return answerSeven;
     }
 
-    public void setAnswerSeven(String answerSeven) {
+    public Patient setAnswerSeven(String answerSeven) {
         this.answerSeven = answerSeven;
+        return this;
+    }
+
+    public Date getSelfAssessmentTime() {
+        return selfAssessmentTime;
+    }
+
+    public Patient setSelfAssessmentTime(Date selfAssessmentTime) {
+        this.selfAssessmentTime = selfAssessmentTime;
+        return this;
+    }
+
+    public Status getReviewStatus() {
+        return reviewStatus;
+    }
+
+    public Patient setReviewStatus(Status reviewStatus) {
+        this.reviewStatus = reviewStatus;
+        return this;
+    }
+
+    public String getReviewer() {
+        return reviewer;
+    }
+
+    public Patient setReviewer(String reviewer) {
+        this.reviewer = reviewer;
+        return this;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public Patient setAssignee(String assignee) {
+        this.assignee = assignee;
+        return this;
     }
 
     public Patient() {

@@ -24,6 +24,9 @@ public class DoctorService {
     @Autowired
     private AppointmentService appointmentService;
 
+    @Autowired
+    private NoticeService noticeService;
+
     public Iterable<Doctor> getAllDoctors() {
         List<Doctor> doctors = (List<Doctor>) doctorRepository.findAll();
         Collections.sort(doctors, (d1, d2) -> {
@@ -73,6 +76,7 @@ public class DoctorService {
     	Doctor doctor =  getDoctorByUserID(doctorUserID);
     	appointment.setHealthCareName(doctor.getFullName());
         appointmentService.saveAppointment(appointment);
+        noticeService.addAcceptNoticeByDoctor(patient.getUserID(), doctorUserID);
     }
     
     public void CancelAppointment(String Id) {
@@ -88,5 +92,8 @@ public class DoctorService {
     	Patient patient = patientService.getPatientByUserID(patientUserID);
     	patient.setReviewStatus(Status.under_review);
     	patientService.savePatient(patient);
+
+    	//send a notice to patient
+        noticeService.cancelAppointmentByDoctor(patientUserID, appointment.getHealthCareID());
     }
 }

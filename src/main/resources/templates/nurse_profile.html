@@ -91,7 +91,9 @@
                     <td th:text="${appointment.note}">Note</td>
                     <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Result</button></td>
                     <td th:text="${appointment.appointmentStatus}">Status</td>
-                    <td><button clsss="btn btn-danger" onclick="cancel(this)">Cancel</button></td>
+                    <td th:class="${appointment.appointmentStatus.name() == 'cancelled' ? 'disabled':''}">
+                        <button clsss="btn btn-danger" onclick="cancel(this)">Cancel</button>
+                    </td>
                 </tr>
                 </thead>
                 <tbody id="tb">
