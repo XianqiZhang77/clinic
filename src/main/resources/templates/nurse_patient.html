@@ -92,15 +92,15 @@
                     <td th:text="${patient.address}">Address</td>
                     <td th:text="${patient.phoneNumber}">Phone Number</td>
                     <td th:text="${patient.birthDate}">Birth Date</td>
-                    <td><button clsss="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
+                    <td><button class="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
                     <td th:class="${patient.reviewStatus.name()=='unfinished'
                     || patient.reviewStatus.name() == 'rejected' || patient.reviewStatus.name() == 'assigned' ? 'disabled':''}">
-                        <button clsss="btn btn-primary" onclick="open_assign(this)">Assign</button>
+                        <button class="btn btn-primary" onclick="open_assign(this)">Assign</button>
                     </td>
                     <td th:class="${patient.reviewStatus.name() == 'unfinished'
                     || patient.reviewStatus.name() == 'rejected' ? 'disabled':''}">
-                        <button clsss="btn btn-success" onclick=" open_notice(this)">Appointment</button>
+                        <button class="btn btn-success" onclick=" open_notice(this)">Appointment</button>
                     </td>
                     <td th:class="${patient.reviewStatus.name() == 'unfinished'
                     || patient.reviewStatus.name() == 'rejected' ? 'disabled':''}">
