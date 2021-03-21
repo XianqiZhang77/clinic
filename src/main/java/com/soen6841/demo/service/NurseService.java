@@ -90,4 +90,15 @@ public class NurseService {
         patientService.assignedToDoctor(patientUserID, nurseUserID, doctorUserID);
         noticeService.addAssignNotice(patientUserID, nurseUserID, doctorUserID);
     }
+
+    public void cancelAppointmentByManager(String nurseId) {
+        Iterable<Appointment> appointments = appointmentService.getAllAssignedByHealthCareID(nurseId);
+        for(Appointment appointment:appointments){
+            doctorService.changeAppointmentAndReviewStatus(appointment);
+            //send a notice to patient
+            String patientUserID = appointment.getPatientUserID();
+            noticeService.cancelAppointmentByNurse(patientUserID, appointment.getHealthCareID());
+        }
+    }
+
 }

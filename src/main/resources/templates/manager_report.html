@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Manager Report</title>
+    <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/doctorStyles.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
+    <script type="text/javascript" src="js/daterangepicker.js"></script>
+
+    <style>
+        #dateChoice{
+            margin-left: 20%;
+        }
+        #nav{
+            margin-left: 3%;
+        }
+        #container {
+            margin-left: 100px;
+            margin-top: 5%;
+        }
+
+        #patient_table {
+            mso-cellspacing: 30px;
+            border: 1px solid #ccc;
+
+        }
+    </style>
+
+</head>
+<body>
+
+<!--logo and name-->
+<div class="container-fluid ">
+    <img id="logo" src="pictures/logo.png">
+    <span id="title"> COVID-19 Symptom Self-Assessment Center</span>
+</div>
+
+<!--Nav bar-->
+<div class="col-lg-2 dashboard" id="nav">
+    <nav class="navbar navbar-inverse" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li>
+                <a href="/getAllPatientUnderReview"> Patients</a>
+            </li>
+            <li>
+                <a href="/getAllNurseUnderReview"> Nurses</a>
+            </li>
+            <li>
+                <a href="/getAllDoctorUnderReview"> Doctors</a>
+            </li>
+            <li>
+                <a href="#" style="color: darkgray"> Report</a>
+            </li>
+            <li>
+                <a href="index"> Log out</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!--Date choice-->
+<div class="bjui-pageContent" id="dateChoice">
+    <div class="form-group d_t_dater">
+        <label class="col-sm-3 control-label"></label>
+        <div class="col-sm-12">
+            <div class="input-group">
+                <button type="button" class="btn btn-default" id="daterange-btn">
+                    <span>
+                      <i class="icon iconfont icon-calendar1"></i> Please choose the date (range)
+                    </span>
+                    <i class="icon iconfont icon-danxian-youjiantou-copy"></i>
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Patient Number: <span id="patientNum" th:text="${session.size}"></span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--Table-->
+<div id="container">
+    <table id="patient_table" style="text-align: center" border="1px">
+        <thead>
+            <tr>
+                <th width="120px" style="text-align: center">Full name</th>
+                <th width="200px" style="text-align: center">Email</th>
+                <th width="300px" style="text-align: center">Address</th>
+                <th width="120px" style="text-align: center">Phone number</th>
+                <th width="100px" style="text-align: center">Date of birth</th>
+            </tr>
+            <tr th:each="patient:${session.patients}">
+                <td th:text="${patient.fullName}">Full Name</td>
+                <td th:text="${patient.email}">Email</td>
+                <td th:text="${patient.address}">Address</td>
+                <td th:text="${patient.phoneNumber}">Phone Number</td>
+                <td th:text="${patient.birthDate}">Birth Date</td>
+            </tr>
+        </thead>
+        <tbody id="tb">
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $('.ranges_1 ul').remove();
+    $('#daterange-btn').daterangepicker({
+            startDate: moment(),
+            endDate: moment()
+        },
+
+        function(start, end) {
+            $('#daterange-btn span').html(start.format('YYYY/MM/DD')+'-'+end.format('YYYY/MM/DD'));
+
+            let dates = [];
+            dates.push(start.format('YYYY/MM/DD'));
+            dates.push(end.format('YYYY/MM/DD'));
+
+            $.ajax({
+                url: "/report",
+                type:"POST",
+                data:{params:JSON.stringify(dates)},
+                success:function(response){
+                    $(window).attr("location","manager_report")
+                }
+            });
+        }
+
+    );
+</script>
+
+</body>
+</html>

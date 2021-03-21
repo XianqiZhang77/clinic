@@ -60,6 +60,9 @@
                         <a href="/getAllDoctorUnderReview"> Doctors</a>
                     </li>
                     <li>
+                        <a href="#" > Report</a>
+                    </li>
+                    <li>
                         <a href="index"> Log out</a>
                     </li>
                 </ul>
@@ -78,6 +81,7 @@
                     <th width="120px" style="text-align: center">Phone number</th>
                     <th width="100px" style="text-align: center">Date of birth</th>
                     <th width="150px" style="text-align: center">License Number</th>
+                    <th width="100px" style="text-align: center">Register Status</th>
                     <th width="100px" style="text-align: center">Approve</th>
                     <th width="100px" style="text-align: center">Delete</th>
                 </tr>
@@ -89,6 +93,7 @@
                     <td th:text="${nurse.phoneNumber}">Phone Number</td>
                     <td th:text="${nurse.birthDate}">Birth Date</td>
                     <td th:text="${nurse.licenseNumber}">License Number</td>
+                    <td th:text="${nurse.registerStatus}">Register Status</td>
                     <td th:class="${nurse.registerStatus.name() == 'waiting'?'':'disabled'}">
                         <a th:href="@{'/approveNurse/'+${nurse.id}}" >Approve</a>
                     </td>
@@ -190,7 +195,6 @@
         return document.getElementById(id);
     }
 </script>
-
 </body>
 
 </html>

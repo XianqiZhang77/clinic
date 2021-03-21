@@ -32,4 +32,7 @@ public class AppointmentService {
     public Appointment getAppointmentByID(Long ID) {
         return appointmentRepository.findOneById(ID);
     }
+
+
+
 }

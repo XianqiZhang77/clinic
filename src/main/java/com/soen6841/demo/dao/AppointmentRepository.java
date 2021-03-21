@@ -13,4 +13,5 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Long>
     Iterable<Appointment> findAppointmentByPatientUserID(String patientUserID);
     
     Appointment findOneById(Long id);
+
 }

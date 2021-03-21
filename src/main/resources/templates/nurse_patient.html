@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/doctorStyles.css">
@@ -100,7 +99,8 @@
                     <td th:class="${patient.reviewStatus.name() == 'under_review' ? '' : 'disabled'}">
                         <button class="btn btn-success" onclick=" open_notice(this)">Appointment</button>
                     </td>
-                    <td  th:class="${patient.reviewStatus.name() == 'under_review' ? '' : 'disabled '}">
+                    <td th:class="${patient.reviewStatus.name() == 'unfinished'
+                    || patient.reviewStatus.name() == 'rejected' ? 'disabled':''}">
                         <a th:href="@{'/rejectPatientByNurse/'+${patient.userID}}" >Reject</a>
                     </td>
                 </tr>
