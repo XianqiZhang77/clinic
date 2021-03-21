@@ -2,6 +2,7 @@ package com.soen6841.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.soen6841.demo.domain.Appointment;
 import com.soen6841.demo.domain.Notice;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
@@ -101,5 +102,12 @@ public class PatientController {
         model.addAttribute("notices", notices);
         return "patient_main";
     }
-
+    
+    @RequestMapping("/patient_appointment")
+    public String patientAppointment(Model model, HttpSession httpSession) {
+        String userID = (String) httpSession.getAttribute("userID");
+        Iterable<Appointment> appointments = patientService.getAppointmentBypatientId(userID);
+        model.addAttribute("appointments", appointments);
+        return "patient_appointment";
+    }
 }

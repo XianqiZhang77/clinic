@@ -105,9 +105,6 @@ public class PageController {
     @RequestMapping("/patient_main")
     public String patientMainPage() {return "patient_main";}
 
-    @RequestMapping("/patient_appointment")
-    public String patient_appointmentPage() {return "patient_appointment";}
-
     @RequestMapping("/manager_report")
     public String manager_reportPage(){return  "manager_report";}
 

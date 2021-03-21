@@ -94,6 +94,31 @@
     </nav>
 </div>
 
+<!--Table-->
+<div id="container">
+    <table id="patient_table" style="text-align: center" border="1px">
+        <thead>
+        <tr>
+            <th width="120px" style="text-align: center; display: none">Appointment ID</th>
+            <th width="120px" style="text-align: center; display: none">Health Care ID</th>
+            <th width="120px" style="text-align: center">Health Care Name</th>
+            <th width="110px" style="text-align: center">Date</th>
+            <th width="300px" style="text-align: center">Note</th>
+            <th width="120px" style="text-align: center">Status</th>
+        </tr>
+        <tr th:each="appointment:${appointments}">
+            <td th:text="${appointment.id}" style="display: none">Appointment ID</td>
+            <td th:text="${appointment.healthCareID}" style="display: none">Health Care ID</td>
+            <td th:text="${appointment.healthCareName}">Health Care Name</td>
+            <td th:text="${appointment.appointmentDate}">Date</td>
+            <td th:text="${appointment.note}">Note</td>
+            <td th:text="${appointment.appointmentStatus}">Status</td>
+        </tr>
+        </thead>
+        <tbody id="tb">
+        </tbody>
+    </table>
+</div>
 
 <!--Body Page-->
 <div id="container">

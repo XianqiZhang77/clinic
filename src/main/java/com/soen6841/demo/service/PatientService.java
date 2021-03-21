@@ -143,4 +143,9 @@ public class PatientService {
     public Iterable<Patient> getPatientByReviewers(String reviewer){
         return patientRepository.findPatientByReviewer(reviewer);
     }
+    
+    public Iterable<Appointment> getAppointmentBypatientId(String patientId){
+	    Iterable<Appointment> appointments = appointmentService.getAllAssignedByPatientUserID(patientId);
+	    return appointments;
+    }
 }
