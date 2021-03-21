@@ -136,8 +136,9 @@ public class ManagerController {
         return "redirect:/getAllPatientUnderReview";
     }
 
-    @RequestMapping("/report")
-    public String report(@RequestParam String params, HttpSession httpSession, Model model){
+    @RequestMapping(value = "report")
+    @ResponseBody
+    public List<Patient> report(@RequestParam String params, HttpSession httpSession, Model model){
         JSONArray jsonArray = JSON.parseArray(params);
         String[] result = new String[jsonArray.size()];
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -151,6 +152,6 @@ public class ManagerController {
 
         httpSession.setAttribute("patients",patientList);
         httpSession.setAttribute("size",patientList.size());
-        return "manager_report";
+        return patientList;
     }
 }
