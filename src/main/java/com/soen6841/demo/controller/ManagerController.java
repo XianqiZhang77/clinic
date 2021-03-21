@@ -1,25 +1,38 @@
 package com.soen6841.demo.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.soen6841.demo.domain.Doctor;
 import com.soen6841.demo.domain.Nurse;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
+import com.soen6841.demo.service.DoctorService;
 import com.soen6841.demo.service.ManagerService;
+import com.soen6841.demo.service.NurseService;
 import com.soen6841.demo.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ManagerController {
 
     @Autowired
     private ManagerService managerService;
+
+    @Autowired
+    private DoctorService doctorService;
+
+    @Autowired
+    private PatientService patientService;
+
+    @Autowired
+    private NurseService nurseService;
 
     @GetMapping("/getAllDoctorUnderReview")
     public String getAllDoctorUnderReview(Model model) {
@@ -66,6 +79,7 @@ public class ManagerController {
             model.addAttribute("msg","can not find doctor");
         }else {
             managerService.rejectDoctor(doctor);
+            doctorService.cancelAppointmentByManager(doctor.getUserID());
         }
         return "redirect:/getAllDoctorUnderReview";
     }
@@ -88,6 +102,7 @@ public class ManagerController {
             model.addAttribute("msg","can not find doctor");
         }else {
             managerService.rejectNurse(nurse);
+            nurseService.cancelAppointmentByManager(nurse.getUserID());
         }
         Iterable<Nurse> nurses =  managerService.getNurseByRegisterStatus(Status.waiting);
         model.addAttribute("nurses",nurses);
@@ -114,9 +129,28 @@ public class ManagerController {
             model.addAttribute("msg","can not find doctor");
         }else {
             managerService.rejectPatient(patient);
+            patientService.cancelAppointmentByManager(patient.getUserID());
         }
         Iterable<Patient> patients =   managerService.getPatientByRegisterStatus(Status.waiting);
         model.addAttribute("patients",patients);
         return "redirect:/getAllPatientUnderReview";
+    }
+
+    @RequestMapping("/report")
+    public String report(@RequestParam String params, HttpSession httpSession, Model model){
+        JSONArray jsonArray = JSON.parseArray(params);
+        String[] result = new String[jsonArray.size()];
+        for (int i = 0; i < jsonArray.size(); i++) {
+            result[i] = jsonArray.get(i).toString();
+        }
+
+        String start = result[0];
+        String end = result[1];
+        Iterable<Patient> patients = patientService.getAllPatients();
+        List<Patient> patientList  = managerService.getPatientsBetweenStartAndEnd(start, end, patients);
+
+        httpSession.setAttribute("patients",patientList);
+        httpSession.setAttribute("size",patientList.size());
+        return "manager_report";
     }
 }

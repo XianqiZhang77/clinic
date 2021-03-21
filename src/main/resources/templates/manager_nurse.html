@@ -92,7 +92,7 @@
                     <td th:text="${nurse.address}">Address</td>
                     <td th:text="${nurse.phoneNumber}">Phone Number</td>
                     <td th:text="${nurse.birthDate}">Birth Date</td>
-                    <td th:text="${nurse.nurseNumber}">License Number</td>
+                    <td th:text="${nurse.licenseNumber}">License Number</td>
                     <td th:text="${nurse.registerStatus}">Register Status</td>
                     <td th:class="${nurse.registerStatus.name() == 'waiting'?'':'disabled'}">
                         <a th:href="@{'/approveNurse/'+${nurse.id}}" >Approve</a>
@@ -195,7 +195,6 @@
         return document.getElementById(id);
     }
 </script>
-
 </body>
 
 </html>

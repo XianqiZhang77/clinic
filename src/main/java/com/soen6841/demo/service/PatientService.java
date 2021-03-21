@@ -1,6 +1,7 @@
 package com.soen6841.demo.service;
 
 import com.soen6841.demo.dao.PatientRepository;
+import com.soen6841.demo.domain.Appointment;
 import com.soen6841.demo.domain.Patient;
 import com.soen6841.demo.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,14 @@ public class PatientService {
 
     @Autowired
     private DoctorService doctorService;
+
+    @Autowired
+    private PatientService patientService;
+
+    @Autowired
+    private AppointmentService appointmentService;
+
+    @Autowired NoticeService noticeService;
 
     public Iterable<Patient> getAllPatients() {
         return patientRepository.findAll();
@@ -114,5 +123,23 @@ public class PatientService {
     public Iterable<Patient> findByAssignee(String assignee) {
         List<Patient> patients = (List<Patient>) patientRepository.findPatientByAssignee(assignee);
         return patients;
+    }
+
+    public void cancelAppointmentByManager(String patientId) {
+
+        //Change Appointment Status
+        Iterable<Appointment> appointments = appointmentService.getAllAssignedByPatientUserID(patientId);
+        for(Appointment appointment:appointments){
+            appointment.setAppointmentStatus(Status.cancelled);
+            appointmentService.saveAppointment(appointment);
+        }
+
+        Patient patient = patientService.getPatientByUserID(patientId);
+        patient.setReviewStatus(Status.under_review);
+        patientService.savePatient(patient);
+    }
+
+    public Iterable<Patient> getPatientByReviewers(String reviewer){
+        return patientRepository.findPatientByReviewer(reviewer);
     }
 }

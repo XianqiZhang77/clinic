@@ -81,19 +81,34 @@ public class DoctorService {
     
     public void CancelAppointment(String Id) {
     	Long number = Long.valueOf(Id);
-    	
-    	//Change Appointment Status
-    	Appointment appointment = appointmentService.getAppointmentByID(number);
-    	appointment.setAppointmentStatus(Status.cancelled);
-    	appointmentService.saveAppointment(appointment);
-    	
-    	//Change Review Status
-    	String patientUserID = appointment.getPatientUserID();
-    	Patient patient = patientService.getPatientByUserID(patientUserID);
-    	patient.setReviewStatus(Status.under_review);
-    	patientService.savePatient(patient);
-
-    	//send a notice to patient
-        noticeService.cancelAppointmentByDoctor(patientUserID, appointment.getHealthCareID());
+        Appointment appointment = appointmentService.getAppointmentByID(number);
+    	changeAppointmentAndReviewStatus(appointment);
     }
+
+    public void cancelAppointmentByManager(String doctorId) {
+        //Change Appointment Status
+        Iterable<Appointment> appointments = appointmentService.getAllAssignedByHealthCareID(doctorId);
+        for(Appointment appointment:appointments){
+            changeAppointmentAndReviewStatus(appointment);
+            //send a notice to patient
+            String patientUserID = appointment.getPatientUserID();
+            noticeService.cancelAppointmentByDoctor(patientUserID, appointment.getHealthCareID());
+        }
+    }
+
+    public void changeAppointmentAndReviewStatus(Appointment appointment){
+        //Change Appointment Status
+        appointment.setAppointmentStatus(Status.cancelled);
+        appointmentService.saveAppointment(appointment);
+
+        //Change Review Status
+        String patientUserID = appointment.getPatientUserID();
+        Patient patient = patientService.getPatientByUserID(patientUserID);
+        patient.setReviewStatus(Status.under_review);
+        patientService.savePatient(patient);
+
+
+    }
+
+
 }

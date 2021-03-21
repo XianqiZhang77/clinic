@@ -52,7 +52,7 @@ public class PatientController {
     }
 
     @RequestMapping("/selfAssessment")
-    public String selfAssessment( @RequestParam String params, HttpSession httpSession) {
+    public String selfAssessment(@RequestParam String params, HttpSession httpSession) {
         String patientId = (String) httpSession.getAttribute("userID");
 
         JSONArray jsonArray = JSON.parseArray(params);

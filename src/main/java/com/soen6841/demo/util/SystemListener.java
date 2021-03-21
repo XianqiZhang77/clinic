@@ -84,6 +84,8 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         userList.add(patient3);
         User patient4 = new User("Tom",PasswordUtil.encrypt("Tom"),"patient", (long) 4);
         userList.add(patient4);
+        User patient5 = new User("Brown",PasswordUtil.encrypt("Brown"),"patient", (long) 5);
+        userList.add(patient5);
         return userList;
     }
 
@@ -93,7 +95,7 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         doctorList.add(doctor1);
         Doctor doctor2 = new Doctor("Mike","Mike","b@gamil.com","B St,","888866666",new Date(19999999),"123", Status.accepted, new Date());
         doctorList.add(doctor2);
-        Doctor doctor3 = new Doctor("Lucy","Lucy","c@gamil.com","C St,","768676678678",new Date(19999999),"188", Status.waiting, new Date());
+        Doctor doctor3 = new Doctor("Lucy","Lucy","c@gamil.com","C St,","768676678678",new Date(19999999),"188", Status.accepted, new Date());
         doctorList.add(doctor3);
         return doctorList;
     }
@@ -102,7 +104,7 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
         List<Nurse> nurseList = new ArrayList<>();
         Nurse nurse1 = new Nurse("Linda","Linda","k@gamil.com","L St,","54768558",new Date(19999999),"1992", Status.waiting, new Date());
         nurseList.add(nurse1);
-        Nurse nurse2 = new Nurse("Bill","Bill","bikk@gamil.com","Bi St,","8888698699",new Date(288888888),"1236", Status.waiting, new Date());
+        Nurse nurse2 = new Nurse("Bill","Bill","bikk@gamil.com","Bi St,","8888698699",new Date(288888888),"1236", Status.accepted, new Date());
         nurseList.add(nurse2);
         Nurse nurse3 = new Nurse("Alice","Alice","alice@gamil.com","Ai St,","88824328699",new Date(288888888),"1237", Status.accepted, new Date());
         nurseList.add(nurse3);
@@ -112,27 +114,35 @@ public class SystemListener implements ApplicationListener<ContextRefreshedEvent
     private List<Patient> getPatientList(){
         List<Patient> patientList = new ArrayList<>();
         Patient patient1 = new Patient();
-        patient1.setUserID("Will").setFullName("Will").setEmail("ww@gmail.com").setAddress("WWD St").setPhoneNumber("19999").setBirthDate(new Date(19999999)).setRegisterStatus(Status.waiting).setReviewStatus(Status.unfinished);
+        patient1.setUserID("Will").setFullName("Will").setEmail("ww@gmail.com").setAddress("WWD St").setPhoneNumber("19999").setBirthDate(new Date(19999999)).setRegisterStatus(Status.waiting).setReviewStatus(Status.unfinished).setRegisterTime(new Date(1616283200000L));
         patientList.add(patient1);
         Patient patient2 = new Patient();
-        patient2.setUserID("Peter").setFullName("Peter").setEmail("peter@gmail.com").setAddress("WWD St").setPhoneNumber("12299991").setBirthDate(new Date(19999999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.under_review).setSelfAssessmentTime(new Date())
+        patient2.setUserID("Peter").setFullName("Peter").setEmail("peter@gmail.com").setAddress("WWD St").setPhoneNumber("12299991").setBirthDate(new Date(19999999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.under_review).setSelfAssessmentTime(new Date()).setRegisterTime(new Date(1616715200000L))
                 .setAnswerOne("Above 18 years").setAnswerTwo("Yes").setAnswerThree("No").setAnswerFour("Yes").setAnswerFive("No").setAnswerSix("Yes").setAnswerSeven("Yes");
         patientList.add(patient2);
         Patient patient3 = new Patient();
-        patient3.setUserID("Ray").setFullName("Ray").setEmail("ray77@gmail.com").setAddress("W11WD St").setPhoneNumber("122993299").setBirthDate(new Date(29999999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.assigned).setSelfAssessmentTime(new Date()).setReviewer("Alice").setAssignee("Mike")
+        patient3.setUserID("Ray").setFullName("Ray").setEmail("ray77@gmail.com").setAddress("W11WD St").setPhoneNumber("122993299").setBirthDate(new Date(29999999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.assigned).setSelfAssessmentTime(new Date()).setReviewer("Alice").setAssignee("Mike").setRegisterTime(new Date(1616790200000L))
                 .setAnswerOne("Above 18 years").setAnswerTwo("Yes").setAnswerThree("Yes").setAnswerFour("Yes").setAnswerFive("No").setAnswerSix("Yes").setAnswerSeven("Yes");
         patientList.add(patient3);
         Patient patient4 = new Patient();
-        patient4.setUserID("Tom").setFullName("Tom").setEmail("tomcat@gmail.com").setAddress("W1221WD St").setPhoneNumber("122193299").setBirthDate(new Date(29993999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.appointed).setSelfAssessmentTime(new Date())
+        patient4.setUserID("Tom").setFullName("Tom").setEmail("tomcat@gmail.com").setAddress("KEET St").setPhoneNumber("122193299").setBirthDate(new Date(29993999)).setRegisterStatus(Status.accepted).setReviewStatus(Status.appointed).setSelfAssessmentTime(new Date()).setReviewer("Bill").setAssignee("Lucy").setRegisterTime(new Date(1626790200000L))
                 .setAnswerOne("Above 18 years").setAnswerTwo("Yes").setAnswerThree("Yes").setAnswerFour("Yes").setAnswerFive("No").setAnswerSix("Yes").setAnswerSeven("Yes");
         patientList.add(patient4);
+        Patient patient5 = new Patient();
+        patient5.setUserID("Brown").setFullName("Brown").setEmail("brn@gmail.com").setAddress("Brown St").setPhoneNumber("13222122").setBirthDate(new Date(29993222)).setRegisterStatus(Status.accepted).setReviewStatus(Status.appointed).setSelfAssessmentTime(new Date()).setReviewer("Alice").setAssignee("Lucy").setRegisterTime(new Date(1607790200000L))
+                .setAnswerOne("Above 18 years").setAnswerTwo("Yes").setAnswerThree("Yes").setAnswerFour("Yes").setAnswerFive("No").setAnswerSix("Yes").setAnswerSeven("Yes");
+        patientList.add(patient5);
         return patientList;
     }
     
     private List<Appointment> getAppointmentList(){
         List<Appointment> appointmentList = new ArrayList<>();
-        Appointment appointment1 = new Appointment("Tom","Tom","Mike","Mike","Please go hospital",new Date(), Status.appointed);
+        Appointment appointment1 = new Appointment("Tom","Tom","Alice","Alice","Please go hospital",new Date(), Status.appointed);
+        Appointment appointment2 = new Appointment("Ray","Ray","Mike","Mike","Important",new Date(), Status.appointed);
+        Appointment appointment3 = new Appointment("Brown","Brown","Alice","Alice","Please stay at home",new Date(), Status.appointed);
         appointmentList.add(appointment1);
+        appointmentList.add(appointment2);
+        appointmentList.add(appointment3);
         return appointmentList;
     }
 }

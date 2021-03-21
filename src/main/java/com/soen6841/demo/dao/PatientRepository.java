@@ -20,4 +20,6 @@ public interface PatientRepository extends CrudRepository<Patient,Long> {
 
     Iterable<Patient> findPatientByAssignee(String assignee);
 
+    Iterable<Patient> findPatientByReviewer(String reviewer);
+
 }

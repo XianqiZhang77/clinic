@@ -7,6 +7,10 @@ import com.soen6841.demo.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Service
 public class ManagerService {
 
@@ -86,4 +90,19 @@ public class ManagerService {
     public Iterable<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
+
+    public List<Patient> getPatientsBetweenStartAndEnd(String start, String end, Iterable<Patient> patients) {
+
+        start = start.replaceAll("/","-");
+        end = end.replaceAll("/","-");
+        List<Patient> patientList = new ArrayList<>();
+        for(Patient patient:patients){
+            String registerTime = patient.getRegisterTime().toString();
+            if((registerTime.compareTo(start)>=0)&&(registerTime.compareTo(end)<=0)){
+                patientList.add(patient);
+            }
+        }
+        return  patientList;
+    }
+
 }
