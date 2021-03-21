@@ -94,16 +94,13 @@
                     <td th:text="${patient.birthDate}">Birth Date</td>
                     <td><button class="btn btn-info" id="result" onclick="openRe(this)">Results</button></td>
                     <td th:text="${patient.reviewStatus}">Status</td>
-                    <td th:class="${patient.reviewStatus.name()=='unfinished'
-                    || patient.reviewStatus.name() == 'rejected' || patient.reviewStatus.name() == 'assigned' ? 'disabled':''}">
+                    <td th:class="${patient.reviewStatus.name() == 'under_review' ? '' : 'disabled'}">
                         <button class="btn btn-primary" onclick="open_assign(this)">Assign</button>
                     </td>
-                    <td th:class="${patient.reviewStatus.name() == 'unfinished'
-                    || patient.reviewStatus.name() == 'rejected' ? 'disabled':''}">
+                    <td th:class="${patient.reviewStatus.name() == 'under_review' ? '' : 'disabled'}">
                         <button class="btn btn-success" onclick=" open_notice(this)">Appointment</button>
                     </td>
-                    <td th:class="${patient.reviewStatus.name() == 'unfinished'
-                    || patient.reviewStatus.name() == 'rejected' ? 'disabled':''}">
+                    <td  th:class="${patient.reviewStatus.name() == 'under_review' ? '' : 'disabled '}">
                         <a th:href="@{'/rejectPatientByNurse/'+${patient.userID}}" >Reject</a>
                     </td>
                 </tr>
