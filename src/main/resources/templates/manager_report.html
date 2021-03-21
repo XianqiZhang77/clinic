@@ -77,7 +77,7 @@
                     </span>
                     <i class="icon iconfont icon-danxian-youjiantou-copy"></i>
                 </button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Patient Number: <span id="patientNum" th:text="${session.size}"></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Patient Number: <span id="patientNum"></span>
             </div>
         </div>
     </div>
@@ -126,7 +126,12 @@
                 url: "/report",
                 type:"POST",
                 data:{params:JSON.stringify(dates)},
-                success:function(response){
+                success:function(result){
+                    for (var i = 0; i < result.length; i++) {
+                        //this is the returned patient information
+                        alert(result[i].email)
+                        alert(result[i].birthDate)
+                    }
                     $(window).attr("location","manager_report")
                 }
             });
