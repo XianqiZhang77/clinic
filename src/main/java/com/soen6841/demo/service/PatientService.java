@@ -87,9 +87,10 @@ public class PatientService {
             }
 
             if (p1.getSelfAssessmentTime().before(p2.getSelfAssessmentTime())) {
+                return 1;
+            } else {
                 return -1;
             }
-            return 0;
         });
         return patients;
     }

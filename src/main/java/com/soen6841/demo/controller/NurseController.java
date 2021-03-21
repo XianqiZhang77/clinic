@@ -2,7 +2,6 @@ package com.soen6841.demo.controller;
 
 import com.soen6841.demo.domain.*;
 import com.soen6841.demo.service.*;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,6 +91,7 @@ public class NurseController {
         Patient patient = patientService.getPatientByUserID(patientId);
         String userID = (String) httpSession.getAttribute("userID");
         patientService.setReviewStatus(patient,Status.rejected);
+        noticeService.addRejectNoticeByNurse(patient.getUserID(), userID);
         return "redirect:/nurse_patient";
     }
 }

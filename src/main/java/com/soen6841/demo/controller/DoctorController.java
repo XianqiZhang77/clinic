@@ -86,6 +86,7 @@ public class DoctorController {
         Patient patient = patientService.getPatientByUserID(patientId);
         String userID = (String) httpSession.getAttribute("userID");
         patientService.setReviewStatus(patient,Status.rejected);
+        noticeService.addRejectNoticeByDoctor(patient.getUserID(), userID);
         return "redirect:/doctor_patient";
     }
 
@@ -94,6 +95,7 @@ public class DoctorController {
         Patient patient = patientService.getPatientByUserID(patientId);
         String userID = (String) httpSession.getAttribute("userID");
         patientService.setReviewStatus(patient,Status.rejected);
+        noticeService.addRejectNoticeByDoctor(patient.getUserID(), userID);
         return "redirect:/doctor_assigned";
     }
 

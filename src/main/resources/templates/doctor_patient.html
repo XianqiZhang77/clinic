@@ -101,7 +101,7 @@
                         <button clsss="btn btn-success" onclick=" open_notice(this)">Appointment</button>
                     </td>
                     <td  th:class="${patient.reviewStatus.name() == 'under_review' ? '':'disabled'}">
-                        <a th:href="@{'/rejectPatientByNurse/'+${patient.userID}}" >Reject</a>
+                        <a th:href="@{'/rejectPatientByDoctor/'+${patient.userID}}" >Reject</a>
                     </td>
                 </tr>
                 </thead>
